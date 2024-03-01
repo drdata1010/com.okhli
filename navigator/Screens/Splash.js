@@ -1,24 +1,44 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
-import { useNavigation } from '@react-navigation/native'
+import * as React from "react";
+import { Image, StyleSheet, View } from "react-native";
+import { Border, Color } from "../../GlobalStyles";
+import { useNavigation } from "@react-navigation/native";
 
 const Splash = () => {
-  const navigation = useNavigation();
-  useEffect(() => {
-    setTimeout(() => {
-      navigation.navigate("Login");
-    }, 3000)
-  }, [])
-  return (
-    <View style={styles.mainContainer}>
-      <Image source={require('../images/playstore.png')} style={{ width: 150, height: 150, borderRadius: 70 }} />
-    </View>
-  )
-}
-
-export default Splash
+    const navigation = useNavigation();
+    React.useEffect(() => {
+        setTimeout(() => {
+            navigation.navigate("Intro");
+        }, 3000)
+    }, [])
+    //./assets/playstore.png
+    return (
+        <View style={styles.splash}>
+            <Image
+                style={styles.playstore1Icon}
+                resizeMode="cover"
+                source={require("../assets/playstore-11.png")}
+            />
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
+    playstore1Icon: {
+        position: "absolute",
+        marginTop: -58,
+        marginLeft: -65,
+        top: "50%",
+        left: "50%",
+        borderRadius: Border.br_90xl,
+        width: 129,
+        height: 116,
+    },
+    splash: {
+        backgroundColor: Color.lightColorsPrimary,
+        flex: 1,
+        width: "100%",
+        height: 844,
+    },
+});
 
-  mainContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' }
-})
+export default Splash;
