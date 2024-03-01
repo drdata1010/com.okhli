@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import Splash from "./Screens/Splash";
 import Intro from "./Screens/Intro";
 import SignIn from "./Screens/SignIn";
+import SignUp from "./Screens/SignUp";
 const Stack = createStackNavigator();
 const StackNavigator = () => {
   return (
@@ -25,12 +26,13 @@ const StackNavigator = () => {
           name="SignIn"
           component={SignIn}
         />
-        {/*         <Stack.Screen
-          options={{ headerShown: false }}
-          name="Signup"
-          component={SignupScreen}
-        />
         <Stack.Screen
+          options={{ headerShown: false }}
+          name="SignUp"
+          component={SignUp}
+        />
+
+        {/*<Stack.Screen
           options={{ headerShown: false }}
           name="OtpVer"
           component={OtpVerify}

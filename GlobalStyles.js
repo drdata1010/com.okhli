@@ -25,9 +25,20 @@ export const Color = {
     colorBlack: "#000",
     colorGainsboro: "#d9d9d9",
     colorGray: "#101010",
+    colorWhitesmoke_200: "#e8f1ee",
+    white: "#fff",
+};
+/* Paddings */
+export const Padding = {
+    p_7xs: 6,
+    p_base: 16,
+    p_29xl: 48,
+    p_11xl: 30,
 };
 /* border radiuses */
 export const Border = {
     br_xl: 20,
+    br_31xl: 50,
+    br_90xl: 109,
     br_3xs: 10,
 };

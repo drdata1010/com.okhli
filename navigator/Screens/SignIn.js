@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
+import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { FontFamily, Color, FontSize, Border } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
@@ -42,12 +42,12 @@ login to start with us`}</Text>
                 </View>
             </View>
             <View style={styles.form1}>
-                <View style={styles.button}>
+                <TouchableOpacity onPress={() => { navigation.navigate('SignUp') }} style={styles.button}>
                     <Text style={styles.dontHaveAnContainer}>
                         <Text style={styles.dontHaveAn}>{`Don’t have an account? `}</Text>
                         <Text style={[styles.signUp, styles.emailTypo]}>SIGN UP</Text>
                     </Text>
-                </View>
+                </TouchableOpacity>
             </View>
             <View style={styles.continueWith}>
                 <Text style={styles.orContinueWith}>or continue with?</Text>
