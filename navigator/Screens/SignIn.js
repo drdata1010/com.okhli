@@ -74,10 +74,10 @@ login to start with us`}</Text>
                     source={require("../assets/playstore-11.png")}
                 />
             </View>
-            <View style={[styles.rectangleParent, styles.groupInnerLayout]}>
+            <TouchableOpacity onPress={() => { navigation.navigate('Home') }} style={[styles.rectangleParent, styles.groupInnerLayout]}>
                 <View style={[styles.groupInner, styles.groupInnerLayout]} />
-                <Text style={[styles.logIn, styles.logInPosition]}>Log in</Text>
-            </View>
+                <Text style={[styles.logIn, styles.logInPosition]}>Sign in</Text>
+            </TouchableOpacity>
         </View>
     );
 };
