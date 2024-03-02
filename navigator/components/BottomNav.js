@@ -8,10 +8,10 @@ const BottomNav = () => {
 
 const styles = StyleSheet.create({
     groupChild: {
-        position: "absolute",
+        flex: 1,
         borderTopLeftRadius: Border.br_xl,
         borderTopRightRadius: Border.br_xl,
-        backgroundColor: Color.white,
+        backgroundColor: 'red',//Color.white,
         shadowColor: "rgba(0, 0, 0, 0.12)",
         shadowOffset: {
             width: 0,
@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
         shadowRadius: 20,
         elevation: 20,
         shadowOpacity: 1,
-        width: '100%',
-        height: '100%',
+        // width: '100%',
+        // height: '100%',
     },
 });
 

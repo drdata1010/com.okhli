@@ -11,7 +11,7 @@ const Home = () => {
     const navigation = useNavigation();
     return (
         <View style={[styles.home, styles.homeLayout]}>
-            <View style={styles.bestoffcontParent}>
+            {/* <View style={styles.bestoffcontParent}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     <View style={styles.bestoffcont}>
                         <Image
@@ -219,45 +219,44 @@ const Home = () => {
                 <Text style={[styles.bestSellings, styles.allProductsTypo]}>
                     Best Sellings
                 </Text>
-            </View>
+            </View> */}
             <View style={styles.navbargroup}>
-                <BottomNav />
-                <View style={[styles.navhomeParent, styles.navhomeParentLayout]}>
+                <View style={styles.navhomeIcon}>
                     <Image
-                        style={[styles.navhomeIcon, styles.iconPosition]}
-                        resizeMode="cover"
+                        style={styles.image}
+                        // resizeMode="cover"
                         source={require("../assets/navhome.png")}
                     />
-                    <Text style={[styles.home1, styles.cartTypo]}>Home</Text>
+                    <Text style={styles.text}>Home</Text>
                 </View>
-                <View style={[styles.navordersParent, styles.navordersLayout]}>
+                <View style={styles.navhomeIcon}>
                     <Image
-                        style={[styles.navordersIcon, styles.navordersLayout]}
-                        resizeMode="cover"
+                        style={styles.image}
+                        // resizeMode="cover"
                         source={require("../assets/navorders.png")}
                     />
-                    <Text style={[styles.orders, styles.cartTypo]}>Orders</Text>
+                    <Text style={styles.text}>Orders</Text>
                 </View>
-                <View style={[styles.navcartParent, styles.navcartLayout]}>
+                <View style={styles.navhomeIcon}>
                     <Image
-                        style={[styles.navcartIcon, styles.navcartLayout]}
-                        resizeMode="cover"
+                        style={styles.image}
+                        // resizeMode="cover"
                         source={require("../assets/navcart.png")}
                     />
-                    <Text style={[styles.cart, styles.cartTypo]}>Cart</Text>
+                    <Text style={styles.text}>Cart</Text>
                 </View>
-                <View style={[styles.navprofile1Parent, styles.navhomeParentLayout]}>
+                <View style={styles.navhomeIcon}>
                     <Image
-                        style={[styles.navhomeIcon, styles.iconPosition]}
-                        resizeMode="cover"
+                        style={styles.image}
+                        // resizeMode="cover"
                         source={require("../assets/navprofile-1.png")}
                     />
-                    <Text style={[styles.profile, styles.cartTypo]}>Profile</Text>
+                    <Text style={styles.text}>Profile</Text>
                 </View>
             </View>
             <View style={styles.homeheaderPosition}>
-                <View style={[styles.homeheaderChild, styles.rectPos]} />
-                <View style={[styles.goodMorningParent, styles.manIconPosition]}>
+                <View style={styles.homeheaderChild} />
+                <View style={styles.goodMorningParent}>
                     <Text style={[styles.goodMorning, styles.goodMorningTypo]}>
                         Good morning
                     </Text>
@@ -266,7 +265,7 @@ const Home = () => {
                     </Text>
                 </View>
                 <Image
-                    style={[styles.manIcon, styles.manIconPosition]}
+                    style={styles.manIcon}
                     resizeMode="cover"
                     source={require("../assets/man.png")}
                 />
@@ -276,6 +275,44 @@ const Home = () => {
 };
 
 const styles = StyleSheet.create({
+    image: {
+        height: '30%',
+        width: '30%',
+        resizeMode: 'contain'
+    },
+    navbargroup: {
+        flex: 1,
+        flexDirection: 'row',
+        // flexWrap: 'wrap',
+        top: '90%',
+        height: '10%',
+        width: '100%',
+        position: "absolute",
+        borderTopLeftRadius: Border.br_xl,
+        borderTopRightRadius: Border.br_xl,
+        backgroundColor: 'lightgray',//Color.white,
+        shadowColor: "rgba(0, 0, 0, 0.12)",
+        shadowOffset: {
+            width: 0,
+            height: -4,
+        },
+        shadowRadius: 20,
+        elevation: 20,
+        shadowOpacity: 1,
+    },
+    navhomeIcon: {
+        flex: 1,
+        aspectRatio: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: -8
+        // borderWidth: 1, // Optional: Add border for clarity
+        // borderColor: 'black', // Optional: Border color
+    },
+    text: {
+        marginTop: 0.2,
+        fontSize: 10,
+    },
     homeLayout: {
         width: "100%",
         height: '100%',
@@ -286,12 +323,7 @@ const styles = StyleSheet.create({
         height: 158,
         // position: "absolute",
     },
-    navbargroup: {
-        top: '90%',
-        height: '10%',
-        width: '100%',
-        position: "absolute",
-    },
+
     groupParentLayout1: {
         height: 214,
         width: 163,
@@ -351,38 +383,14 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         position: "absolute",
     },
-    navhomeParentLayout: {
-        width: 29,
-        position: "absolute",
-    },
-    navcartLayout: {
-        width: 24,
-        position: "absolute",
-    },
-    iconPosition: {
-        height: 24,
-        left: 0,
-        top: 0,
-    },
-    cartTypo: {
-        color: Color.colorDimgray,
-        fontFamily: FontFamily.robotoMedium,
-        fontWeight: "500",
-        fontSize: FontSize.size_5xs,
-        textAlign: "center",
-        position: "absolute",
-    },
     navordersLayout: {
+        flex: 1,
         width: 26,
         position: "absolute",
     },
     homeheaderPosition: {
         height: '10%',
         width: '100%',
-        position: "absolute",
-    },
-    manIconPosition: {
-        top: 33,
         position: "absolute",
     },
     goodMorningTypo: {
@@ -563,35 +571,61 @@ const styles = StyleSheet.create({
         width: 380,
         position: "absolute",
     },
-    navhomeIcon: {
-        width: 29,
-        position: "absolute",
+    navorderIcon: {
+        flex: 1,
+        width: 10,
+        height: 24,
     },
     home1: {
-        left: 3,
+        left: "0.5%",
         fontFamily: FontFamily.robotoMedium,
         fontWeight: "500",
         fontSize: FontSize.size_5xs,
-        top: 24,
+        top: '31%',
+        color: Color.colorDimgray,
+        fontFamily: FontFamily.robotoMedium,
+        fontWeight: "500",
+        fontSize: FontSize.size_5xs,
+        textAlign: "center",
+        position: "absolute",
     },
     navhomeParent: {
-        height: 33,
-        top: 25,
-        left: 34,
+        flex: 1,
+        // height: '100%',
+        // alignSelf: 'center',
+        top: '30%',
+        left: '10%',
+        // width: '100%',
+        // justifyContent: 'center',
+        // position: "absolute",
+        // alignItems: 'center'
     },
     navordersIcon: {
         height: 24,
         left: 0,
         top: 0,
+        flex: 1,
+        width: 26,
+        position: "absolute",
     },
     orders: {
         left: 1,
         top: 24,
+        color: Color.colorDimgray,
+        fontFamily: FontFamily.robotoMedium,
+        fontWeight: "500",
+        fontSize: FontSize.size_5xs,
+        textAlign: "center",
+        position: "absolute",
     },
     navordersParent: {
+        flex: 1,
         left: 132,
-        height: 33,
+        // height: 33,
         top: 24,
+        // width: 26,
+        position: "absolute",
+        // justifyContent: 'center',
     },
     navcartIcon: {
         height: "72.73%",
@@ -603,10 +637,19 @@ const styles = StyleSheet.create({
         maxHeight: "100%",
         position: "absolute",
         overflow: "hidden",
+        flex: 1,
+        width: 24,
+        position: "absolute",
     },
     cart: {
         left: 4,
         top: 24,
+        color: Color.colorDimgray,
+        fontFamily: FontFamily.robotoMedium,
+        fontWeight: "500",
+        fontSize: FontSize.size_5xs,
+        textAlign: "center",
+        position: "absolute",
     },
     navcartParent: {
         height: "39.29%",
@@ -616,6 +659,9 @@ const styles = StyleSheet.create({
         bottom: "30.95%",
         left: "58.97%",
         position: "absolute",
+        flex: 1,
+        width: 29,
+        position: "absolute",
     },
     profile: {
         left: 3,
@@ -623,11 +669,21 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         fontSize: FontSize.size_5xs,
         top: 25,
+        color: Color.colorDimgray,
+        fontFamily: FontFamily.robotoMedium,
+        fontWeight: "500",
+        fontSize: FontSize.size_5xs,
+        textAlign: "center",
+        position: "absolute",
     },
     navprofile1Parent: {
+        flex: 1,
         left: 327,
-        height: 34,
+        // height: 34,
         top: 24,
+        // width: 29,
+        // justifyContent: 'center',
+        position: "absolute",
     },
     homeheaderChild: {
         borderBottomRightRadius: Border.br_xl,
@@ -641,6 +697,8 @@ const styles = StyleSheet.create({
         elevation: 20,
         shadowOpacity: 1,
         backgroundColor: Color.white,
+        height: '100%',
+        width: '100%'
     },
     goodMorning: {
         fontSize: FontSize.metadata12Regular_size,
@@ -657,11 +715,15 @@ const styles = StyleSheet.create({
         left: 70,
         width: 103,
         height: 39,
+        top: 33,
+        position: "absolute",
     },
     manIcon: {
         left: 22,
         height: 36,
         width: 36,
+        top: 33,
+        position: "absolute",
     },
     home: {
         flex: 1,
@@ -676,10 +738,6 @@ const styles = StyleSheet.create({
         width: 342,
         height: 158,
     },
-    rectPos: {
-        height: '100%',
-        width: '100%'
-    }
 });
 
 export default Home;
