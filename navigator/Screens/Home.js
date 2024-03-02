@@ -1,31 +1,32 @@
 import * as React from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
+import { Image, StyleSheet, View, Text, ScrollView } from "react-native";
 import ProdOffers from "../components/ProdOffers";
 import BestSelling from "../components/BestSelling";
 import AllProds from "../components/AllProds";
 import BottomNav from "../components/BottomNav";
 import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
-import { ScrollView } from "react-native-gesture-handler";
 
 const Home = () => {
     const navigation = useNavigation();
     return (
         <View style={[styles.home, styles.homeLayout]}>
-            <View horizontal={true} style={styles.bestoffcontParent}>
-                <View style={styles.bestoffcont}>
-                    <Image
-                        style={[styles.bestoffcontChild, styles.bestoffcontLayout]}
-                        resizeMode="cover"
-                        source={require("../assets/group-36780.png")}
-                    />
-                    <Image
-                        style={[styles.bestoffcontItem, styles.bestoffcontLayout]}
-                        resizeMode="cover"
-                        source={require("../assets/group-36781.png")}
-                    />
-                    <ProdOffers />
-                </View>
+            {/* <View style={styles.bestoffcontParent}>
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                    <View style={styles.bestoffcont}>
+                        <Image
+                            style={[styles.bestoffcontChild, styles.bestoffcontLayout]}
+                            resizeMode="cover"
+                            source={require("../assets/group-36780.png")}
+                        />
+                        <Image
+                            style={[styles.bestoffcontItem, styles.bestoffcontLayout]}
+                            resizeMode="cover"
+                            source={require("../assets/group-36781.png")}
+                        />
+                        <ProdOffers />
+                    </View>
+                </ScrollView>
                 <View style={styles.bestsellcont}>
                     <View style={[styles.rectangleParent, styles.groupParentLayout1]}>
                         <View style={[styles.groupChild, styles.groupChildBg]} />
@@ -218,7 +219,7 @@ const Home = () => {
                 <Text style={[styles.bestSellings, styles.allProductsTypo]}>
                     Best Sellings
                 </Text>
-            </View>
+            </View>*/}
             <View style={styles.navbargroup}>
                 <BottomNav />
                 <View style={[styles.navhomeParent, styles.navhomeParentLayout]}>
@@ -255,7 +256,7 @@ const Home = () => {
                 </View>
             </View>
             <View style={styles.homeheaderPosition}>
-                <View style={[styles.homeheaderChild, styles.homeheaderPosition]} />
+                <View style={[styles.homeheaderChild, styles.rectPos]} />
                 <View style={[styles.goodMorningParent, styles.manIconPosition]}>
                     <Text style={[styles.goodMorning, styles.goodMorningTypo]}>
                         Good morning
@@ -282,8 +283,7 @@ const styles = StyleSheet.create({
     bestoffcontLayout: {
         width: 342,
         height: 158,
-        top: 0,
-        position: "absolute",
+        // position: "absolute",
     },
     groupParentLayout1: {
         height: 214,
@@ -366,9 +366,8 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     homeheaderPosition: {
-        height: 81,
-        width: 390,
-        left: 0,
+        height: '10%',
+        width: '100%',
         top: 0,
         position: "absolute",
     },
@@ -390,11 +389,12 @@ const styles = StyleSheet.create({
         left: 717,
     },
     bestoffcont: {
+        flexDirection: 'row',
         height: 158,
-        left: 0,
-        top: 0,
+        // left: 0,
+        // top: 0,
         width: 380,
-        position: "absolute",
+        // position: "absolute",
     },
     groupChild: {
         height: 214,
@@ -619,15 +619,6 @@ const styles = StyleSheet.create({
         height: 34,
         top: 24,
     },
-    navbargroup: {
-        marginTop: 338,
-        marginLeft: -195,
-        top: "50%",
-        left: "50%",
-        height: 84,
-        width: 390,
-        position: "absolute",
-    },
     homeheaderChild: {
         borderBottomRightRadius: Border.br_xl,
         borderBottomLeftRadius: Border.br_xl,
@@ -667,6 +658,24 @@ const styles = StyleSheet.create({
         height: 844,
         overflow: "hidden",
         backgroundColor: Color.white,
+    },
+    frameChild: {
+        position: "absolute",
+        top: 0,
+        left: 9,
+        width: 342,
+        height: 158,
+    },
+    rectPos: {
+        height: '100%',
+        width: '100%'
+    },
+    navbargroup: {
+        marginTop: '174%',
+        // marginBottom: 0,
+        height: '10%',
+        width: '100%',
+        position: "absolute",
     },
 });
 

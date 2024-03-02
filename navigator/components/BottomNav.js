@@ -9,13 +9,13 @@ const BottomNav = () => {
 const styles = StyleSheet.create({
     groupChild: {
         position: "absolute",
-        marginTop: -42,
-        marginLeft: -195,
-        top: "50%",
-        left: "50%",
+        // marginTop: '100%',
+        // marginLeft: -195,
+        // top: "90%",
+        // left: "50%",
         borderTopLeftRadius: Border.br_xl,
         borderTopRightRadius: Border.br_xl,
-        backgroundColor: Color.white,
+        backgroundColor: 'red',//Color.white,
         shadowColor: "rgba(0, 0, 0, 0.12)",
         shadowOffset: {
             width: 0,
@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
         shadowRadius: 20,
         elevation: 20,
         shadowOpacity: 1,
-        width: 390,
-        height: 84,
+        width: '100%',
+        height: '100%',
     },
 });
 
