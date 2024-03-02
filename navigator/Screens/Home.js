@@ -11,7 +11,7 @@ const Home = () => {
     const navigation = useNavigation();
     return (
         <View style={[styles.home, styles.homeLayout]}>
-            {/* <View style={styles.bestoffcontParent}>
+            <View style={styles.bestoffcontParent}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     <View style={styles.bestoffcont}>
                         <Image
@@ -219,7 +219,7 @@ const Home = () => {
                 <Text style={[styles.bestSellings, styles.allProductsTypo]}>
                     Best Sellings
                 </Text>
-            </View>*/}
+            </View>
             <View style={styles.navbargroup}>
                 <BottomNav />
                 <View style={[styles.navhomeParent, styles.navhomeParentLayout]}>
@@ -238,9 +238,9 @@ const Home = () => {
                     />
                     <Text style={[styles.orders, styles.cartTypo]}>Orders</Text>
                 </View>
-                <View style={styles.navcartParent}>
+                <View style={[styles.navcartParent, styles.navcartLayout]}>
                     <Image
-                        style={[styles.navcartIcon, styles.homeLayout]}
+                        style={[styles.navcartIcon, styles.navcartLayout]}
                         resizeMode="cover"
                         source={require("../assets/navcart.png")}
                     />
@@ -278,12 +278,19 @@ const Home = () => {
 const styles = StyleSheet.create({
     homeLayout: {
         width: "100%",
+        height: '100%',
         overflow: "hidden",
     },
     bestoffcontLayout: {
         width: 342,
         height: 158,
         // position: "absolute",
+    },
+    navbargroup: {
+        top: '90%',
+        height: '10%',
+        width: '100%',
+        position: "absolute",
     },
     groupParentLayout1: {
         height: 214,
@@ -348,6 +355,10 @@ const styles = StyleSheet.create({
         width: 29,
         position: "absolute",
     },
+    navcartLayout: {
+        width: 24,
+        position: "absolute",
+    },
     iconPosition: {
         height: 24,
         left: 0,
@@ -368,7 +379,6 @@ const styles = StyleSheet.create({
     homeheaderPosition: {
         height: '10%',
         width: '100%',
-        top: 0,
         position: "absolute",
     },
     manIconPosition: {
@@ -595,13 +605,13 @@ const styles = StyleSheet.create({
         overflow: "hidden",
     },
     cart: {
-        left: 6,
+        left: 4,
         top: 24,
     },
     navcartParent: {
         height: "39.29%",
         width: "6.72%",
-        top: "29.76%",
+        top: "33.76%",
         right: "34.31%",
         bottom: "30.95%",
         left: "58.97%",
@@ -655,7 +665,7 @@ const styles = StyleSheet.create({
     },
     home: {
         flex: 1,
-        height: 844,
+        height: '100%',
         overflow: "hidden",
         backgroundColor: Color.white,
     },
@@ -669,14 +679,7 @@ const styles = StyleSheet.create({
     rectPos: {
         height: '100%',
         width: '100%'
-    },
-    navbargroup: {
-        marginTop: '174%',
-        // marginBottom: 0,
-        height: '10%',
-        width: '100%',
-        position: "absolute",
-    },
+    }
 });
 
 export default Home;
