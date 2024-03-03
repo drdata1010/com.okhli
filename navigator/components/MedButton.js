@@ -13,8 +13,9 @@ const styles = StyleSheet.create({
         left: 0,
         borderRadius: Border.br_xl,
         backgroundColor: Color.colorForestgreen,
-        width: 210,
-        height: 50,
+        width: "60%",
+        height: "35%",
+
     },
 });
 

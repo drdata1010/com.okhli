@@ -1,10 +1,17 @@
-import * as React from "react";
-import { Image, StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { Image, StyleSheet, View, Text, TouchableOpacity, TextInput } from "react-native";
 import { FontFamily, Color, FontSize, Border } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
 const SignIn = () => {
+
     const navigation = useNavigation();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleLogin = () => {
+        // Implement your login logic here
+    };
     console.log("Reached to SignIn")
     return (
         <View style={styles.signIn}>
@@ -21,19 +28,29 @@ const SignIn = () => {
                     <Text style={[styles.welcomeLoginTo, styles.emailTypo]}>{`Welcome,
 login to start with us`}</Text>
                     <View style={[styles.groupParent, styles.fieldsSpaceBlock]}>
+
                         <View style={[styles.emailParent, styles.parentLayout]}>
                             <Text style={[styles.email, styles.emailFlexBox]}>Email</Text>
                             <View style={styles.groupChild} />
-                            <Text style={[styles.souravgmailcom, styles.emailFlexBox]}>
-                                sourav@gmail.com
-                            </Text>
+                            <TextInput
+                                style={[styles.textInput, styles.emailFlexBox, styles.input]}
+                                value={email}
+                                onChangeText={text => setEmail(text)}
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                placeholder="Enter your email"
+                            />
                         </View>
                         <View style={[styles.passwordParent, styles.parentLayout]}>
                             <Text style={[styles.email, styles.emailFlexBox]}>Password</Text>
                             <View style={styles.groupChild} />
-                            <Text style={[styles.souravgmailcom, styles.emailFlexBox]}>
-                                *****************
-                            </Text>
+                            <TextInput
+                                style={[styles.textInput, styles.emailFlexBox, styles.input]}
+                                value={password}
+                                onChangeText={text => setPassword(text)}
+                                secureTextEntry={true}
+                                placeholder="Enter your password"
+                            />
                         </View>
                     </View>
                     <View style={styles.fieldsSpaceBlock}>
@@ -171,8 +188,8 @@ const styles = StyleSheet.create({
         borderRadius: Border.br_3xs,
         position: "absolute",
     },
-    souravgmailcom: {
-        top: 43,
+    textInput: {
+        top: "40%",
         left: 14,
         color: Color.colorBlack,
         fontFamily: FontFamily.metadata12Regular,
@@ -281,10 +298,10 @@ const styles = StyleSheet.create({
         height: 52,
     },
     logo: {
-        top: 103,
-        left: 153,
+        top: "12%",
+        left: "42%",
         borderRadius: 50,
-        padding: 6,
+        padding: 2,
         backgroundColor: Color.textTextWhite,
         position: "absolute",
     },
@@ -314,6 +331,7 @@ const styles = StyleSheet.create({
         overflow: "hidden",
         width: "100%",
     },
+
 });
 
 export default SignIn;
