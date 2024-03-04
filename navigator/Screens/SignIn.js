@@ -4,6 +4,7 @@ import { FontFamily, Color, FontSize, Border } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 
 GoogleSignin.configure({
     webClientId: '259249234282-1jol54jf9i12u48l4mf17br9oakafbnr.apps.googleusercontent.com',
@@ -18,7 +19,7 @@ const SignIn = () => {
         // Implement your login logic here
     };
 
-    //Firebase connection implementation
+    //Firebase Google connection implementation
 
     async function onGoogleButtonPress() {
         try {
@@ -32,9 +33,37 @@ const SignIn = () => {
 
             // Sign-in the user with the credential
             auth().signInWithCredential(googleCredential);
-            console.log("User Sign In Successfully!")
+            console.log("User Sign In Successfully using Gmail!")
         } catch (err) {
             console.log(err);
+        }
+    }
+
+    // Firebase Facebook connection
+    async function onFacebookButtonPress() {
+        try {
+            // Attempt login with permissions
+            const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+
+            if (result.isCancelled) {
+                throw 'User cancelled the login process';
+            }
+
+            // Once signed in, get the users AccessToken
+            const data = await AccessToken.getCurrentAccessToken();
+
+            if (!data) {
+                throw 'Something went wrong obtaining access token';
+            }
+
+            // Create a Firebase credential with the AccessToken
+            const facebookCredential = auth.FacebookAuthProvider.credential(data.accessToken);
+
+            // Sign-in the user with the credential
+            auth().signInWithCredential(facebookCredential);
+            console.log("User Sign In Successfully using FB!")
+        } catch (err) {
+            console.log(err)
         }
     }
 
@@ -104,11 +133,13 @@ login to start with us`}</Text>
                     </TouchableOpacity>
                     <View style={[styles.icon1, styles.iconLayout]}>
                         <View style={[styles.rectangle, styles.iconLayout]} />
-                        <Image
-                            style={[styles.logoFbSimpleIcon, styles.logInPosition]}
-                            resizeMode="cover"
-                            source={require("../assets/logofbsimple.png")}
-                        />
+                        <TouchableOpacity onPress={onFacebookButtonPress}>
+                            <Image
+                                style={[styles.logoFbSimpleIcon, styles.logInPosition]}
+                                resizeMode="cover"
+                                source={require("../assets/logofbsimple.png")}
+                            />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
