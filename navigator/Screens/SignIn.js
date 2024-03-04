@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { Image, StyleSheet, View, Text, TouchableOpacity, TextInput } from "react-native";
 import { FontFamily, Color, FontSize, Border } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
+import auth from '@react-native-firebase/auth';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 
+GoogleSignin.configure({
+    webClientId: '259249234282-1jol54jf9i12u48l4mf17br9oakafbnr.apps.googleusercontent.com',
+});
 const SignIn = () => {
 
     const navigation = useNavigation();
@@ -12,6 +17,27 @@ const SignIn = () => {
     const handleLogin = () => {
         // Implement your login logic here
     };
+
+    //Firebase connection implementation
+
+    async function onGoogleButtonPress() {
+        try {
+            // Check if your device supports Google Play
+            await GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true });
+            // Get the users ID token
+            const { idToken } = await GoogleSignin.signIn();
+
+            // Create a Google credential with the token
+            const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+            // Sign-in the user with the credential
+            auth().signInWithCredential(googleCredential);
+            console.log("User Sign In Successfully!")
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     console.log("Reached to SignIn")
     return (
         <View style={styles.signIn}>
@@ -69,11 +95,13 @@ login to start with us`}</Text>
             <View style={styles.continueWith}>
                 <Text style={styles.orContinueWith}>or continue with?</Text>
                 <View style={[styles.social, styles.logoFlexBox]}>
-                    <Image
-                        style={styles.iconLayout}
-                        resizeMode="cover"
-                        source={require("../assets/google.png")}
-                    />
+                    <TouchableOpacity onPress={onGoogleButtonPress}>
+                        <Image
+                            style={styles.iconLayout}
+                            resizeMode="cover"
+                            source={require("../assets/google.png")}
+                        />
+                    </TouchableOpacity>
                     <View style={[styles.icon1, styles.iconLayout]}>
                         <View style={[styles.rectangle, styles.iconLayout]} />
                         <Image
