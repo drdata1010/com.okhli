@@ -13,7 +13,7 @@ const Account = () => {
     )
 
 }
-
+//What is this?
 export default Account;
 
 const styles = StyleSheet.create({
