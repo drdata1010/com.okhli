@@ -1,743 +1,344 @@
-import * as React from "react";
-import { Image, StyleSheet, View, Text, ScrollView } from "react-native";
-import ProdOffers from "../components/ProdOffers";
-import BestSelling from "../components/BestSelling";
-import AllProds from "../components/AllProds";
-import BottomNav from "../components/BottomNav";
+import React from "react";
+import { Image, StyleSheet, View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
 const Home = () => {
     const navigation = useNavigation();
+
+    // const accPress = () => {
+    //     Alert.alert('Account is opening');
+
+    //     navigation.navigate('Account');
+    // }
+
+    const { image, container, container1, container2, textStyle, BSImage } = styles;
     return (
-        <View style={[styles.home, styles.homeLayout]}>
-            {/* <View style={styles.bestoffcontParent}>
-                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    <View style={styles.bestoffcont}>
-                        <Image
-                            style={[styles.bestoffcontChild, styles.bestoffcontLayout]}
-                            resizeMode="cover"
-                            source={require("../assets/group-36780.png")}
-                        />
-                        <Image
-                            style={[styles.bestoffcontItem, styles.bestoffcontLayout]}
-                            resizeMode="cover"
-                            source={require("../assets/group-36781.png")}
-                        />
-                        <ProdOffers />
-                    </View>
-                </ScrollView>
-                <View style={styles.bestsellcont}>
-                    <View style={[styles.rectangleParent, styles.groupParentLayout1]}>
-                        <View style={[styles.groupChild, styles.groupChildBg]} />
-                        <View style={[styles.h1Parent, styles.h1GroupPosition]}>
-                            <Text style={[styles.h1, styles.h1Typo]}>Fresh Broccoli</Text>
-                            <Text style={[styles.h2, styles.h2Typo]}>1kg, 2$</Text>
-                        </View>
-                        <View style={[styles.rectangleGroup, styles.groupLayout]}>
-                            <View style={[styles.groupItem, styles.groupLayout]} />
-                            <Image
-                                style={styles.plus1Icon}
-                                resizeMode="cover"
-                                source={require("../assets/plus-1.png")}
-                            />
-                        </View>
-                        <View style={styles.groupInner} />
-                        <Image
-                            style={styles.pngkeyIcon}
-                            resizeMode="cover"
-                            source={require("../assets/pngkey.png")}
-                        />
-                    </View>
-                    <View style={[styles.rectangleContainer, styles.groupParentLayout1]}>
-                        <BestSelling />
-                        <View style={[styles.h1Group, styles.h1GroupPosition]}>
-                            <Text style={[styles.h1, styles.h1Typo]}>Arabic Ginger</Text>
-                            <Text style={[styles.h2, styles.h2Typo]}>1kg, 4$</Text>
-                        </View>
-                        <View style={[styles.rectangleGroup, styles.groupLayout]}>
-                            <View style={[styles.groupItem, styles.groupLayout]} />
-                            <Image
-                                style={styles.plus1Icon}
-                                resizeMode="cover"
-                                source={require("../assets/plus-1.png")}
-                            />
-                        </View>
-                        <View style={styles.groupInner} />
-                        <Image
-                            style={styles.pngfuel3Icon}
-                            resizeMode="cover"
-                            source={require("../assets/pngfuel-3.png")}
-                        />
-                    </View>
-                    <View style={[styles.groupParent, styles.groupParentLayout1]}>
-                        <View style={[styles.rectangleParent1, styles.groupParentLayout1]}>
-                            <View style={[styles.groupChild, styles.groupChildBg]} />
-                            <View style={styles.groupInner} />
-                            <Image
-                                style={[
-                                    styles.f1ea7dcce3b5d06cd1b1418f9b9413Icon,
-                                    styles.f1ea7dcce3b5d06cd1b1418f9b9413IconLayout,
-                                ]}
-                                resizeMode="cover"
-                                source={require("../assets/92f1ea7dcce3b5d06cd1b1418f9b9413-3.png")}
-                            />
-                            <View style={[styles.frameWrapper, styles.frameLayout]}>
-                                <View style={styles.h1Container}>
-                                    <Text style={styles.h1Typo}>Bell Pepper Red</Text>
-                                    <Text style={[styles.h22, styles.h2Typo]}>1kg, 6$</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={[styles.rectangleGroup, styles.groupLayout]}>
-                            <View style={[styles.groupItem, styles.groupLayout]} />
-                            <Image
-                                style={styles.plus1Icon}
-                                resizeMode="cover"
-                                source={require("../assets/plus-1.png")}
-                            />
-                        </View>
-                    </View>
-                </View>
-                <View style={styles.allprodscont}>
-                    <View style={[styles.groupContainer, styles.groupParentLayout]}>
-                        <View style={[styles.groupContainer, styles.groupParentLayout]}>
-                            <AllProds />
-                            <View style={styles.groupInner} />
-                            <Image
-                                style={[
-                                    styles.f1ea7dcce3b5d06cd1b1418f9b9413Icon,
-                                    styles.f1ea7dcce3b5d06cd1b1418f9b9413IconLayout,
-                                ]}
-                                resizeMode="cover"
-                                source={require("../assets/92f1ea7dcce3b5d06cd1b1418f9b9413-3.png")}
-                            />
-                            <View style={[styles.frameContainer, styles.frameLayout]}>
-                                <View style={styles.h1Container}>
-                                    <Text style={styles.h1Typo}>Bell Pepper Red</Text>
-                                    <Text style={[styles.h22, styles.h2Typo]}>1kg, 6$</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={[styles.rectangleParent4, styles.groupLayout]}>
-                            <View style={[styles.groupItem, styles.groupLayout]} />
-                            <Image
-                                style={styles.plus1Icon}
-                                resizeMode="cover"
-                                source={require("../assets/plus-1.png")}
-                            />
-                        </View>
-                    </View>
-                    <View style={[styles.groupParent1, styles.groupParentLayout]}>
-                        <View style={[styles.groupContainer, styles.groupParentLayout]}>
-                            <View style={[styles.groupChild7, styles.groupParentLayout]} />
-                            <View style={styles.groupInner} />
-                            <Image
-                                style={[
-                                    styles.f1ea7dcce3b5d06cd1b1418f9b9413Icon,
-                                    styles.f1ea7dcce3b5d06cd1b1418f9b9413IconLayout,
-                                ]}
-                                resizeMode="cover"
-                                source={require("../assets/92f1ea7dcce3b5d06cd1b1418f9b9413-3.png")}
-                            />
-                            <View style={[styles.frameContainer, styles.frameLayout]}>
-                                <View style={styles.h1Container}>
-                                    <Text style={styles.h1Typo}>Bell Pepper Red</Text>
-                                    <Text style={[styles.h22, styles.h2Typo]}>1kg, 6$</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={[styles.rectangleParent4, styles.groupLayout]}>
-                            <View style={[styles.groupItem, styles.groupLayout]} />
-                            <Image
-                                style={styles.plus1Icon}
-                                resizeMode="cover"
-                                source={require("../assets/plus-1.png")}
-                            />
-                        </View>
-                    </View>
-                    <View style={[styles.groupParent2, styles.groupParentLayout]}>
-                        <View style={[styles.groupContainer, styles.groupParentLayout]}>
-                            <View style={[styles.groupChild7, styles.groupParentLayout]} />
-                            <View style={styles.groupInner} />
-                            <Image
-                                style={[
-                                    styles.f1ea7dcce3b5d06cd1b1418f9b9413Icon3,
-                                    styles.f1ea7dcce3b5d06cd1b1418f9b9413IconLayout,
-                                ]}
-                                resizeMode="cover"
-                                source={require("../assets/92f1ea7dcce3b5d06cd1b1418f9b9413-3.png")}
-                            />
-                            <View style={[styles.frameContainer, styles.frameLayout]}>
-                                <View style={styles.h1Container}>
-                                    <Text style={styles.h1Typo}>Bell Pepper Red</Text>
-                                    <Text style={[styles.h22, styles.h2Typo]}>1kg, 6$</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={[styles.rectangleParent4, styles.groupLayout]}>
-                            <View style={[styles.groupItem, styles.groupLayout]} />
-                            <Image
-                                style={styles.plus1Icon}
-                                resizeMode="cover"
-                                source={require("../assets/plus-1.png")}
-                            />
-                        </View>
-                    </View>
-                    <View style={[styles.groupParent3, styles.groupParentLayout]}>
-                        <View style={[styles.groupContainer, styles.groupParentLayout]}>
-                            <View style={[styles.groupChild7, styles.groupParentLayout]} />
-                            <View style={styles.groupInner} />
-                            <Image
-                                style={[
-                                    styles.f1ea7dcce3b5d06cd1b1418f9b9413Icon3,
-                                    styles.f1ea7dcce3b5d06cd1b1418f9b9413IconLayout,
-                                ]}
-                                resizeMode="cover"
-                                source={require("../assets/92f1ea7dcce3b5d06cd1b1418f9b9413-3.png")}
-                            />
-                            <View style={[styles.frameContainer, styles.frameLayout]}>
-                                <View style={styles.h1Container}>
-                                    <Text style={styles.h1Typo}>Bell Pepper Red</Text>
-                                    <Text style={[styles.h22, styles.h2Typo]}>1kg, 6$</Text>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={[styles.rectangleParent4, styles.groupLayout]}>
-                            <View style={[styles.groupItem, styles.groupLayout]} />
-                            <Image
-                                style={styles.plus1Icon}
-                                resizeMode="cover"
-                                source={require("../assets/plus-1.png")}
-                            />
-                        </View>
-                    </View>
-                </View>
-                <Text style={[styles.allProducts, styles.allProductsTypo]}>
-                    All Products
-                </Text>
-                <Text style={[styles.bestSellings, styles.allProductsTypo]}>
-                    Best Sellings
-                </Text>
-            </View> */}
-            <View style={styles.navbargroup}>
-                <View style={styles.navhomeIcon}>
-                    <Image
-                        style={styles.image}
-                        // resizeMode="cover"
-                        source={require("../assets/navhome.png")}
-                    />
-                    <Text style={styles.text}>Home</Text>
-                </View>
-                <View style={styles.navhomeIcon}>
-                    <Image
-                        style={styles.image}
-                        // resizeMode="cover"
-                        source={require("../assets/navorders.png")}
-                    />
-                    <Text style={styles.text}>Orders</Text>
-                </View>
-                <View style={styles.navhomeIcon}>
-                    <Image
-                        style={styles.image}
-                        // resizeMode="cover"
-                        source={require("../assets/navcart.png")}
-                    />
-                    <Text style={styles.text}>Cart</Text>
-                </View>
-                <View style={styles.navhomeIcon}>
-                    <Image
-                        style={styles.image}
-                        // resizeMode="cover"
-                        source={require("../assets/navprofile-1.png")}
-                    />
-                    <Text style={styles.text}>Profile</Text>
-                </View>
-            </View>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
             <View style={styles.homeheaderPosition}>
-                <View style={styles.homeheaderChild} />
+                <View style={styles.manIconCont}>
+                    <Image
+                        style={styles.manIcon}
+                        resizeMode="cover"
+                        source={require("../assets/man.png")}
+                    />
+                </View>
                 <View style={styles.goodMorningParent}>
-                    <Text style={[styles.goodMorning, styles.goodMorningTypo]}>
-                        Good morning
+                    <Text style={styles.texts}>
+                        Hello,
                     </Text>
-                    <Text style={[styles.rahulSharma, styles.goodMorningTypo]}>
+                    <Text style={styles.texts}>
                         Rahul Sharma
                     </Text>
                 </View>
-                <Image
-                    style={styles.manIcon}
-                    resizeMode="cover"
-                    source={require("../assets/man.png")}
-                />
+            </View>
+
+            <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollerView}>
+                <View style={styles.headText}>
+                    <Text style={styles.offText}>Today's Offers</Text>
+                </View>
+
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.container3}>
+                    <View style={styles.offerImageContainer}>
+                        <Image
+                            style={[styles.offImage]}
+                            source={require("../assets/group-36780.png")}
+                        />
+                    </View>
+                    <View style={styles.offerImageContainer}>
+                        <Image
+                            style={[styles.offImage]}
+                            source={require("../assets/group-36780.png")}
+                        />
+                    </View>
+                    <View style={styles.offerImageContainer}>
+                        <Image
+                            style={[styles.offImage]}
+                            source={require("../assets/group-36780.png")}
+                        />
+                    </View>
+                </ScrollView>
+
+                <View style={styles.headText}>
+                    <Text style={styles.offText}>Best Selling's</Text>
+                </View>
+
+                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.container2}>
+                    <View style={styles.bestSellImageCont}>
+                        <Image
+                            style={[styles.bestSellImage]}
+                            source={require("../assets/92f1ea7dcce3b5d06cd1b1418f9b9413-3.png")}
+                        />
+                        <View style={styles.priceTag}>
+                            <View>
+                                <Text style={[styles.textFont]}>Bell Pepper Red</Text>
+                                <Text style={[styles.h2Typo, styles.textFont]}>1kg, 6$</Text>
+                            </View>
+                            <View style={styles.plus1Icon}>
+                                <Image
+                                    style={styles.plus}
+                                    // resizeMode="cover"
+                                    source={require("../assets/plus-1.png")}
+                                />
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.bestSellImageCont}>
+                        <Image
+                            style={[styles.bestSellImage]}
+                            source={require("../assets/adrak.png")}
+                        />
+                        <View style={styles.priceTag}>
+                            <View>
+                                <Text style={[styles.textFont]}>Bell Pepper Red</Text>
+                                <Text style={[styles.h2Typo, styles.textFont]}>1kg, 6$</Text>
+                            </View>
+                            <View style={styles.plus1Icon}>
+                                <Image
+                                    style={styles.plus}
+                                    // resizeMode="cover"
+                                    source={require("../assets/plus-1.png")}
+                                />
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.bestSellImageCont}>
+                        <Image
+                            style={[styles.bestSellImage]}
+                            source={require("../assets/seetafal.png")}
+                        />
+                        <View style={styles.priceTag}>
+                            <View>
+                                <Text style={[styles.textFont]}>Bell Pepper Red</Text>
+                                <Text style={[styles.h2Typo, styles.textFont]}>1kg, 6$</Text>
+                            </View>
+                            <View style={styles.plus1Icon}>
+                                <Image
+                                    style={styles.plus}
+                                    // resizeMode="cover"
+                                    source={require("../assets/plus-1.png")}
+                                />
+                            </View>
+                        </View>
+
+                    </View>
+                    <View style={styles.bestSellImageCont}>
+                        <Image
+                            style={[styles.bestSellImage]}
+                            source={require("../assets/gobhi.png")}
+                        />
+                        <View style={styles.priceTag}>
+                            <View>
+                                <Text style={[styles.textFont]}>Bell Pepper Red</Text>
+                                <Text style={[styles.h2Typo, styles.textFont]}>1kg, 6$</Text>
+                            </View>
+                            <View style={styles.plus1Icon}>
+                                <Image
+                                    style={styles.plus}
+                                    // resizeMode="cover"
+                                    source={require("../assets/plus-1.png")}
+                                />
+                            </View>
+                        </View>
+
+                    </View>
+                </ScrollView>
+
+                <View style={styles.headText}>
+                    <Text style={styles.offText}>All Products</Text>
+                </View>
+                <View style={styles.container1}>
+                </View>
+                <View style={styles.container1}>
+                </View>
+                <View style={styles.container1}>
+                </View>
+                <View style={styles.container1}>
+                </View>
+                <View style={styles.container1}>
+                </View>
+                <View style={styles.container1}>
+                </View>
+                <View style={styles.container1}>
+                </View>
+            </ScrollView>
+
+            <View style={styles.navbargroup}>
+                <View style={styles.navhomeIcon}>
+                    <Image
+                        style={styles.navImage}
+                        source={require("../assets/navhome.png")}
+                    />
+                    <Text style={styles.navText}>Home</Text>
+                </View>
+                <View style={styles.navhomeIcon}>
+                    <Image
+                        style={styles.navImage}
+                        source={require("../assets/navorders.png")}
+                    />
+                    <Text style={styles.navText}>Orders</Text>
+                </View>
+                <View style={styles.navhomeIcon}>
+                    <Image
+                        style={styles.navImage}
+                        source={require("../assets/navcart.png")}
+                    />
+                    <Text style={styles.navText}>Cart</Text>
+                </View>
+                <TouchableOpacity onPress={() => { navigation.navigate('Account') }} style={styles.navhomeIcon}>
+                    <Image
+                        style={styles.navImage}
+                        source={require("../assets/navprofile-1.png")}
+                    />
+                    <Text style={styles.navText}>Account</Text>
+                </TouchableOpacity>
             </View>
         </View>
-    );
+    )
 };
 
-const styles = StyleSheet.create({
-    image: {
-        height: '30%',
-        width: '30%',
-        resizeMode: 'contain'
-    },
-    navbargroup: {
-        flex: 1,
-        flexDirection: 'row',
-        // flexWrap: 'wrap',
-        top: '90%',
-        height: '10%',
-        width: '100%',
-        position: "absolute",
-        borderTopLeftRadius: Border.br_xl,
-        borderTopRightRadius: Border.br_xl,
-        backgroundColor: 'lightgray',//Color.white,
-        shadowColor: "rgba(0, 0, 0, 0.12)",
-        shadowOffset: {
-            width: 0,
-            height: -4,
-        },
-        shadowRadius: 20,
-        elevation: 20,
-        shadowOpacity: 1,
-    },
-    navhomeIcon: {
-        flex: 1,
-        aspectRatio: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: -8
-        // borderWidth: 1, // Optional: Add border for clarity
-        // borderColor: 'black', // Optional: Border color
-    },
-    text: {
-        marginTop: 0.2,
-        fontSize: 10,
-    },
-    homeLayout: {
-        width: "100%",
-        height: '100%',
-        overflow: "hidden",
-    },
-    bestoffcontLayout: {
-        width: 342,
-        height: 158,
-        // position: "absolute",
-    },
+export default Home;
 
-    groupParentLayout1: {
-        height: 214,
-        width: 163,
-        position: "absolute",
-    },
-    groupChildBg: {
-        backgroundColor: Color.lightColorsLightBG,
-        borderRadius: Border.br_base,
-        top: 0,
-    },
-    h1GroupPosition: {
-        height: 44,
-        left: 16,
-        top: 146,
-        position: "absolute",
-    },
-    h1Typo: {
-        textAlign: "left",
-        color: Color.fontDark,
-        fontFamily: FontFamily.heading20Bold,
-        fontWeight: "700",
-        fontSize: FontSize.paragraph14Regular_size,
-    },
-    h2Typo: {
-        color: Color.lightColorsSecondary,
-        fontSize: FontSize.subheader16Bold_size,
-        textAlign: "left",
-        fontFamily: FontFamily.heading20Bold,
-        fontWeight: "700",
-    },
-    groupLayout: {
-        height: 36,
-        width: 36,
-    },
-    f1ea7dcce3b5d06cd1b1418f9b9413IconLayout: {
-        height: 98,
-        width: 112,
-        top: 24,
-        position: "absolute",
-    },
-    frameLayout: {
-        width: 106,
-        height: 44,
-        position: "absolute",
-    },
-    groupParentLayout: {
-        height: 154,
-        width: 350,
-        left: 0,
-        position: "absolute",
-    },
-    allProductsTypo: {
-        textAlign: "center",
-        color: Color.colorBlack,
-        fontSize: FontSize.heading20Bold_size,
-        fontFamily: FontFamily.heading20Bold,
-        fontWeight: "700",
-        position: "absolute",
-    },
-    navordersLayout: {
-        flex: 1,
-        width: 26,
-        position: "absolute",
-    },
+const styles = StyleSheet.create({
     homeheaderPosition: {
+        flexDirection: 'row',
+        position: 'absolute',
         height: '10%',
         width: '100%',
-        position: "absolute",
-    },
-    goodMorningTypo: {
-        fontFamily: FontFamily.body16Medium,
-        fontWeight: "500",
-        textAlign: "center",
-        left: 0,
-        position: "absolute",
-    },
-    bestoffcontChild: {
-        left: 363,
-    },
-    bestoffcontItem: {
-        left: 717,
-    },
-    bestoffcont: {
-        flexDirection: 'row',
-        height: 158,
-        // left: 0,
-        // top: 0,
-        width: 380,
-        // position: "absolute",
-    },
-    groupChild: {
-        height: 214,
-        width: 163,
-        position: "absolute",
-        left: 0,
-    },
-    h1: {
-        left: 0,
-        top: 0,
-        position: "absolute",
-    },
-    h2: {
-        top: 23,
-        left: 0,
-        position: "absolute",
-    },
-    h1Parent: {
-        width: 97,
-    },
-    groupItem: {
-        borderRadius: Border.br_3xl,
-        backgroundColor: Color.lightColorsPrimary,
-        left: 0,
-        top: 0,
-        position: "absolute",
-    },
-    plus1Icon: {
-        top: 10,
-        left: 10,
-        width: 16,
-        height: 16,
-        position: "absolute",
-        overflow: "hidden",
-    },
-    rectangleGroup: {
-        top: 166,
-        left: 115,
-        position: "absolute",
-    },
-    groupInner: {
-        height: 99,
-        width: 112,
-        left: 26,
-        top: 24,
-        backgroundColor: Color.lightColorsLightBG,
-        position: "absolute",
-    },
-    pngkeyIcon: {
-        top: 36,
-        left: 32,
-        width: 98,
-        height: 71,
-        position: "absolute",
-    },
-    rectangleParent: {
-        left: 175,
-        top: 1,
-        width: 163,
-    },
-    h1Group: {
-        width: 93,
-    },
-    pngfuel3Icon: {
-        top: 27,
-        width: 99,
-        height: 89,
-        left: 34,
-        position: "absolute",
-    },
-    rectangleContainer: {
-        top: 1,
-        width: 163,
-        left: 0,
-    },
-    f1ea7dcce3b5d06cd1b1418f9b9413Icon: {
-        left: 26,
-        height: 98,
-    },
-    h22: {
-        marginTop: 4,
-    },
-    h1Container: {
-        left: 0,
-        top: 0,
-        position: "absolute",
-    },
-    frameWrapper: {
-        left: 16,
-        top: 146,
-        width: 106,
-    },
-    rectangleParent1: {
-        left: 0,
-        top: 0,
-    },
-    groupParent: {
-        left: 346,
-        top: 0,
-    },
-    bestsellcont: {
-        top: 215,
-        left: 9,
-        width: 362,
-        height: 215,
-        position: "absolute",
-    },
-    frameContainer: {
-        left: 184,
-        top: 24,
-    },
-    groupContainer: {
-        top: 0,
-    },
-    rectangleParent4: {
-        top: 86,
-        left: 273,
-        position: "absolute",
-    },
-    groupChild7: {
-        backgroundColor: Color.lightColorsLightBG,
-        borderRadius: Border.br_base,
-        top: 0,
-    },
-    groupParent1: {
-        top: 171,
-    },
-    f1ea7dcce3b5d06cd1b1418f9b9413Icon3: {
-        left: 138,
-    },
-    groupParent2: {
-        top: 338,
-    },
-    groupParent3: {
-        top: 517,
-    },
-    allprodscont: {
-        top: 493,
-        height: 218,
-        width: 350,
-        left: 16,
-        position: "absolute",
-    },
-    allProducts: {
-        top: 451,
-        left: 16,
-    },
-    bestSellings: {
-        top: 179,
-        left: 13,
-    },
-    bestoffcontParent: {
-        top: 126,
-        left: 5,
-        height: 615,
-        width: 380,
-        position: "absolute",
-    },
-    navorderIcon: {
-        flex: 1,
-        width: 10,
-        height: 24,
-    },
-    home1: {
-        left: "0.5%",
-        fontFamily: FontFamily.robotoMedium,
-        fontWeight: "500",
-        fontSize: FontSize.size_5xs,
-        top: '31%',
-        color: Color.colorDimgray,
-        fontFamily: FontFamily.robotoMedium,
-        fontWeight: "500",
-        fontSize: FontSize.size_5xs,
-        textAlign: "center",
-        position: "absolute",
-    },
-    navhomeParent: {
-        flex: 1,
-        // height: '100%',
-        // alignSelf: 'center',
-        top: '30%',
-        left: '10%',
-        // width: '100%',
-        // justifyContent: 'center',
-        // position: "absolute",
-        // alignItems: 'center'
-    },
-    navordersIcon: {
-        height: 24,
-        left: 0,
-        top: 0,
-        flex: 1,
-        width: 26,
-        position: "absolute",
-    },
-    orders: {
-        left: 1,
-        top: 24,
-        color: Color.colorDimgray,
-        fontFamily: FontFamily.robotoMedium,
-        fontWeight: "500",
-        fontSize: FontSize.size_5xs,
-        textAlign: "center",
-        position: "absolute",
-    },
-    navordersParent: {
-        flex: 1,
-        left: 132,
-        // height: 33,
-        top: 24,
-        // width: 26,
-        position: "absolute",
-        // justifyContent: 'center',
-    },
-    navcartIcon: {
-        height: "72.73%",
-        top: "0%",
-        right: "0%",
-        bottom: "27.27%",
-        left: "0%",
-        maxWidth: "100%",
-        maxHeight: "100%",
-        position: "absolute",
-        overflow: "hidden",
-        flex: 1,
-        width: 24,
-        position: "absolute",
-    },
-    cart: {
-        left: 4,
-        top: 24,
-        color: Color.colorDimgray,
-        fontFamily: FontFamily.robotoMedium,
-        fontWeight: "500",
-        fontSize: FontSize.size_5xs,
-        textAlign: "center",
-        position: "absolute",
-    },
-    navcartParent: {
-        height: "39.29%",
-        width: "6.72%",
-        top: "33.76%",
-        right: "34.31%",
-        bottom: "30.95%",
-        left: "58.97%",
-        position: "absolute",
-        flex: 1,
-        width: 29,
-        position: "absolute",
-    },
-    profile: {
-        left: 3,
-        fontFamily: FontFamily.robotoMedium,
-        fontWeight: "500",
-        fontSize: FontSize.size_5xs,
-        top: 25,
-        color: Color.colorDimgray,
-        fontFamily: FontFamily.robotoMedium,
-        fontWeight: "500",
-        fontSize: FontSize.size_5xs,
-        textAlign: "center",
-        position: "absolute",
-    },
-    navprofile1Parent: {
-        flex: 1,
-        left: 327,
-        // height: 34,
-        top: 24,
-        // width: 29,
-        // justifyContent: 'center',
-        position: "absolute",
-    },
-    homeheaderChild: {
-        borderBottomRightRadius: Border.br_xl,
-        borderBottomLeftRadius: Border.br_xl,
-        shadowColor: "rgba(0, 0, 0, 0.12)",
-        shadowOffset: {
-            width: 0,
-            height: -4,
-        },
-        shadowRadius: 20,
-        elevation: 20,
-        shadowOpacity: 1,
-        backgroundColor: Color.white,
-        height: '100%',
-        width: '100%'
-    },
-    goodMorning: {
-        fontSize: FontSize.metadata12Regular_size,
-        color: Color.lightFontGrey,
-        top: 0,
-    },
-    rahulSharma: {
-        top: 18,
-        color: Color.lightFontDark,
-        fontSize: FontSize.subheader16Bold_size,
-        fontFamily: FontFamily.body16Medium,
+        backgroundColor: '#FFFFFF',
+        borderBottomColor: 'gray',
+        borderBottomWidth: 1,
     },
     goodMorningParent: {
-        left: 70,
-        width: 103,
-        height: 39,
-        top: 33,
-        position: "absolute",
+        alignSelf: 'center',
+        flex: 2,
+    },
+    manIconCont: {
+        flex: 1,
     },
     manIcon: {
-        left: 22,
-        height: 36,
-        width: 36,
-        top: 33,
-        position: "absolute",
+        alignSelf: 'center',
+        top: '20%',
+        height: '60%',
+        width: '30%'
     },
-    home: {
-        flex: 1,
-        height: '100%',
-        overflow: "hidden",
-        backgroundColor: Color.white,
+    texts: {
+        fontSize: 16,
+        fontWeight: '500',
     },
-    frameChild: {
-        position: "absolute",
-        top: 0,
-        left: 9,
-        width: 342,
-        height: 158,
+    navbargroup: {
+        flexDirection: 'row',
+        position: 'absolute',
+        height: '10%',
+        width: '100%',
+        top: '90%',
+        backgroundColor: 'white',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        elevation: 5
     },
-});
+    navhomeIcon: {
+        width: '25%',
+        alignSelf: 'center',
+        alignItems: 'center',
+    },
+    navImage: {
+        top: '10%',
+        height: '32%',
+        width: '29%'
 
-export default Home;
+    },
+    navText: {
+        alignSelf: 'center',
+        fontWeight: '500',
+        marginTop: 8
+    },
+    scrollerView: {
+        flex: 1,
+        backgroundColor: 'white',
+        top: '10%'
+    },
+    container1: {
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: '#F3F5F7',
+        height: 170,
+        marginTop: '0.5%'
+    },
+    container3: {
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        height: 170,
+        marginTop: '0.5%'
+    },
+    offText: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: 'black',
+        left: '3%',
+        top: '3%'
+    },
+    container2: {
+        flex: 1,
+        backgroundColor: 'white',
+        height: 250,
+        marginTop: '0.5%',
+    },
+    headText: {
+        flex: 1,
+        backgroundColor: 'white',
+        height: 30,
+        marginTop: '.5%'
+    },
+    offerImageContainer: {
+        flex: 1,
+        top: 10,
+        width: 300,
+        height: 150,
+        marginLeft: 10,
+        marginRight: 5
+    },
+    offImage: {
+        height: 150,
+        width: 300,
+        alignSelf: 'center',
+        borderRadius: 10
+    },
+    bestSellImageCont: {
+        flex: 1,
+        backgroundColor: '#F3F5F7',
+        borderRadius: 20,
+        top: 10,
+        width: 270,
+        height: 230,
+        marginLeft: 10,
+        marginRight: 5
+    },
+    priceTag: {
+        flexDirection: 'row',
+        left: '10%',
+        top: '5%'
+    },
+    textFont: {
+        fontWeight: '600',
+        fontSize: 16
+    },
+    bestSellImage: {
+        top: '2%',
+        left: '10%',
+        height: 140,
+        width: 170
+    },
+    plus1Icon: {
+        marginLeft: '30%',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'green',
+        borderRadius: 15,
+        height: 30,
+        width: 30
+    }
+
+});

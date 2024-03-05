@@ -7,6 +7,7 @@ import Intro from "./Screens/Intro";
 import SignIn from "./Screens/SignIn";
 import SignUp from "./Screens/SignUp";
 import Home from "./Screens/Home";
+import Account from "./Screens/Account";
 const Stack = createStackNavigator();
 const StackNavigator = () => {
   return (
@@ -37,12 +38,11 @@ const StackNavigator = () => {
           name="Home"
           component={Home}
         />
-        {/*<Stack.Screen
+        <Stack.Screen
           options={{ headerShown: false }}
-          name="OtpVer"
-          component={OtpVerify}
+          name="Account"
+          component={Account}
         />
-         */}
         {/* <Stack.Screen
           options={{ headerShown: false }}
           name="{PhoneSignIn}"
