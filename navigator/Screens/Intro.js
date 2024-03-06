@@ -8,111 +8,143 @@ const Intro = () => {
     const navigation = useNavigation();
 
     return (
-        <View style={styles.intro}>
-            <Image style={[styles.icon, styles.icon1]} resizeMode="cover" source={require("../assets/kindpng-7336354-1.png")} />
-            <Image style={[styles.icon, styles.icon2]} resizeMode="cover" source={require("../assets/kindpng-7336354-3.png")} />
-
-            <View style={styles.frame}>
-                <View style={styles.playstoreContainer}>
-                    <Image style={styles.playstoreIcon} resizeMode="cover" source={require("../assets/playstore-1.png")} />
-                    <Text style={styles.text}>Okhli - An Ethnic Stop For All Ayurvedic Needs</Text>
-                </View>
+        <View style={{ flex: 1, backgroundColor: 'white' }}>
+            <View style={styles.logocont}>
+                <Image style={styles.logo} resizeMode="cover" source={require("../assets/playstore-1.png")} />
+            </View>
+            <View style={styles.titleCont}>
+                <Text style={styles.titleText}>Okhli - An Ethnic Stop For All Ayurvedic Needs</Text>
+            </View>
+            <View style={styles.buttonCont}>
                 <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.buttonContainer}>
-                    <MedButton />
-                    <Text style={styles.shopNow}>Shop now</Text>
+
+                    <Text style={styles.shopnow}>Shop now</Text>
                 </TouchableOpacity>
             </View>
+            <View style={styles.imageCont}>
+                <Image style={styles.introimage} source={require("../assets/introimage.png")} />
+                <View style={styles.introtext}>
+                    <Text style={styles.text1}>
+                        Timeless Wellness
+                    </Text>
+                    <Text style={styles.text2}>
+                        Ayurveda: Where traditions meets transformation
+                    </Text>
 
-            <View style={styles.introChild} />
-            <Image style={styles.introImage} resizeMode="cover" source={require("../assets/timeless.png")} />
+                </View>
+            </View>
         </View>
+        // <View style={styles.intro}>
+        //     <Image style={[styles.icon, styles.icon1]} resizeMode="cover" source={require("../assets/kindpng-7336354-1.png")} />
+        //     <Image style={[styles.icon, styles.icon2]} resizeMode="cover" source={require("../assets/kindpng-7336354-3.png")} />
+
+        //     <View style={styles.frame}>
+        //         <View style={styles.playstoreContainer}>
+        //             <Image style={styles.playstoreIcon} resizeMode="cover" source={require("../assets/playstore-1.png")} />
+        //             <Text style={styles.text}>Okhli - An Ethnic Stop For All Ayurvedic Needs</Text>
+        //         </View>
+        //         <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.buttonContainer}>
+        //             <MedButton />
+        //             <Text style={styles.shopNow}>Shop now</Text>
+        //         </TouchableOpacity>
+        //     </View>
+
+        //     <View style={styles.introChild} />
+        //     <Image style={styles.introImage} resizeMode="cover" source={require("../assets/timeless.png")} />
+        // </View>
+
     );
 };
 
 const styles = StyleSheet.create({
-    intro: {
+    logocont: {
         flex: 1,
-        backgroundColor: Color.colorWhite,
-        height: 844,
-        width: "100%",
-    },
-    icon: {
-        position: "absolute",
-        height: "40%",
-        width: "95%",
-    },
-    icon1: {
-        top: 31,
-        left: "30%",
-    },
-    icon2: {
-        top: 414,
-        left: 333,
-    },
-    frame: {
-        position: "absolute",
-        width: "90%",
-        height: "42%",
-        top: "15%",
-        left: "50%",
-        marginLeft: -186,
-        overflow: "hidden",
-
+        justifyContent: "center",
 
     },
-    playstoreContainer: {
-        position: "absolute",
-        top: 0,
-        left: 27,
-        alignItems: "center",
+    logo: {
+        alignSelf: 'center',
+
     },
-    playstoreIcon: {
-        width: 73,
-        height: 66,
-        borderRadius: 109,
+
+    titleCont: {
+        flex: 1,
+        justifyContent: "center",
     },
-    text: {
-        marginTop: 40,
-        width: 318,
-        color: Color.lightFontDark,
+    titleText: {
+        alignSelf: "center",
         fontFamily: FontFamily.body16Bold,
         fontSize: FontSize.heading28Bold_size,
         textAlign: "center",
         fontWeight: "700",
+        color: 'black',
     },
+
+    buttonCont: {
+        flex: 1,
+
+    },
+
     buttonContainer: {
         position: "absolute",
-        top: "65%",
-        left: 81,
-        width: "100%",
+
+        width: "50%",
         height: "40%",
+        backgroundColor: '#23AA49',
+        alignSelf: 'center',
+        borderRadius: 30,
+        top: '30%',
+        justifyContent: "center",
 
 
     },
-    shopNow: {
+    shopnow: {
         position: "absolute",
-        top: 14,
-        left: 73,
         fontSize: FontSize.body16Bold_size,
         color: Color.colorWhite,
         fontFamily: FontFamily.body16Bold,
+        alignSelf: 'center',
+        textAlign: 'center',
+        fontWeight: 'bold'
 
     },
-    introChild: {
-        backgroundColor: Color.colorForestgreen,
-        height: "40%",
-        width: "100%",
-        // left: 0,
-        top: '60%',
-        position: "absolute",
+    imageCont: {
+        flex: 2,
+        backgroundColor: '#23AA49',
     },
-    introImage: {
-        position: "absolute",
-        height: "40%",
-        width: "90%",
-        top: "60%",
+    introimage: {
+        width: '100%',
+        height: '90%',
+        flex: 2,
+    },
+    introtext: {
+        flex: 1,
+        justifyContent: 'center',
+
 
     },
+    text1: {
+
+        fontSize: 30,
+        fontWeight: "bold",
+        alignSelf: "center",
+        color: '#06161C',
+
+    },
+    text2: {
+        fontSize: 16,
+        alignSelf: "center",
+        color: '#06161C',
+    },
+
+
+
+
+
+
+
+
+
 });
 
 export default Intro;

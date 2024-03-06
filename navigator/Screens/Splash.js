@@ -10,34 +10,29 @@ const Splash = () => {
             navigation.navigate("Intro");
         }, 3000)
     }, [])
-    //./assets/playstore.png
     return (
         <View style={styles.splash}>
-            <Image
-                style={styles.playstore1Icon}
-                resizeMode="cover"
-                source={require("../assets/playstore-11.png")}
-            />
+            <View style={styles.playstore1Icon}>
+                <Image
+                    source={require("../assets/playstore-11.png")}
+                />
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     playstore1Icon: {
+        height: '20%',
+        top: "40%",
+        flex: 1,
         position: "absolute",
-        marginTop: -58,
-        marginLeft: -65,
-        top: "50%",
-        left: "50%",
-        borderRadius: Border.br_90xl,
-        width: 129,
-        height: 116,
+        alignSelf: 'center',
     },
     splash: {
         backgroundColor: Color.lightColorsPrimary,
         flex: 1,
-        width: "100%",
-        height: 844,
+
     },
 });
 
