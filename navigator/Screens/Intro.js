@@ -1,6 +1,5 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import MedButton from "../components/MedButton";
 import { FontFamily, FontSize, Color } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
@@ -34,25 +33,6 @@ const Intro = () => {
                 </View>
             </View>
         </View>
-        // <View style={styles.intro}>
-        //     <Image style={[styles.icon, styles.icon1]} resizeMode="cover" source={require("../assets/kindpng-7336354-1.png")} />
-        //     <Image style={[styles.icon, styles.icon2]} resizeMode="cover" source={require("../assets/kindpng-7336354-3.png")} />
-
-        //     <View style={styles.frame}>
-        //         <View style={styles.playstoreContainer}>
-        //             <Image style={styles.playstoreIcon} resizeMode="cover" source={require("../assets/playstore-1.png")} />
-        //             <Text style={styles.text}>Okhli - An Ethnic Stop For All Ayurvedic Needs</Text>
-        //         </View>
-        //         <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.buttonContainer}>
-        //             <MedButton />
-        //             <Text style={styles.shopNow}>Shop now</Text>
-        //         </TouchableOpacity>
-        //     </View>
-
-        //     <View style={styles.introChild} />
-        //     <Image style={styles.introImage} resizeMode="cover" source={require("../assets/timeless.png")} />
-        // </View>
-
     );
 };
 
@@ -60,13 +40,10 @@ const styles = StyleSheet.create({
     logocont: {
         flex: 1,
         justifyContent: "center",
-
     },
     logo: {
         alignSelf: 'center',
-
     },
-
     titleCont: {
         flex: 1,
         justifyContent: "center",
@@ -79,15 +56,11 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         color: 'black',
     },
-
     buttonCont: {
         flex: 1,
-
     },
-
     buttonContainer: {
         position: "absolute",
-
         width: "50%",
         height: "40%",
         backgroundColor: '#23AA49',
@@ -95,8 +68,6 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         top: '30%',
         justifyContent: "center",
-
-
     },
     shopnow: {
         position: "absolute",
@@ -106,7 +77,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center',
         fontWeight: 'bold'
-
     },
     imageCont: {
         flex: 2,
@@ -120,32 +90,18 @@ const styles = StyleSheet.create({
     introtext: {
         flex: 1,
         justifyContent: 'center',
-
-
     },
     text1: {
-
         fontSize: 30,
         fontWeight: "bold",
         alignSelf: "center",
         color: '#06161C',
-
     },
     text2: {
         fontSize: 16,
         alignSelf: "center",
         color: '#06161C',
     },
-
-
-
-
-
-
-
-
-
 });
 
 export default Intro;
-

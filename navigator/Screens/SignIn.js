@@ -69,96 +69,179 @@ const SignIn = () => {
 
     console.log("Reached to SignIn")
     return (
-        <View style={styles.signIn}>
-            <View style={styles.bg}>
-                <Image
-                    style={[styles.patternIcon, styles.shapePosition]}
-                    resizeMode="cover"
-                    source={require("../assets/pattern.png")}
-                />
-                <View style={[styles.shape, styles.shapePosition]} />
-            </View>
-            <View style={styles.content}>
-                <View style={styles.form}>
-                    <Text style={[styles.welcomeLoginTo, styles.emailTypo]}>{`Welcome,
-login to start with us`}</Text>
-                    <View style={[styles.groupParent, styles.fieldsSpaceBlock]}>
+        <View style={{ flex: 1, backgroundColor: 'red' }}>
+            <View style={styles.logoCont} >
+                <View style={styles.inner1Cont}>
 
-                        <View style={[styles.emailParent, styles.parentLayout]}>
-                            <Text style={[styles.email, styles.emailFlexBox]}>Email</Text>
-                            <View style={styles.groupChild} />
-                            <TextInput
-                                style={[styles.textInput, styles.emailFlexBox, styles.input]}
-                                value={email}
-                                onChangeText={text => setEmail(text)}
-                                keyboardType="email-address"
-                                autoCapitalize="none"
-                                placeholder="Enter your email"
-                            />
-                        </View>
-                        <View style={[styles.passwordParent, styles.parentLayout]}>
-                            <Text style={[styles.email, styles.emailFlexBox]}>Password</Text>
-                            <View style={styles.groupChild} />
-                            <TextInput
-                                style={[styles.textInput, styles.emailFlexBox, styles.input]}
-                                value={password}
-                                onChangeText={text => setPassword(text)}
-                                secureTextEntry={true}
-                                placeholder="Enter your password"
-                            />
-                        </View>
-                    </View>
-                    <View style={styles.fieldsSpaceBlock}>
-                        <Text style={styles.forgotPassword}>Forgot Password?</Text>
-                    </View>
                 </View>
-            </View>
-            <View style={styles.form1}>
-                <TouchableOpacity onPress={() => { navigation.navigate('SignUp') }} style={styles.button}>
-                    <Text style={styles.dontHaveAnContainer}>
-                        <Text style={styles.dontHaveAn}>{`Don’t have an account? `}</Text>
-                        <Text style={[styles.signUp, styles.emailTypo]}>SIGN UP</Text>
-                    </Text>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.continueWith}>
-                <Text style={styles.orContinueWith}>or continue with?</Text>
-                <View style={[styles.social, styles.logoFlexBox]}>
-                    <TouchableOpacity onPress={onGoogleButtonPress}>
+                <View style={styles.inner2Cont}>
+                    <View style={styles.logoContainer}>
                         <Image
-                            style={styles.iconLayout}
-                            resizeMode="cover"
-                            source={require("../assets/google.png")}
+                            style={styles.playstore1Icon}
+                            source={require("../assets/playstore-11.png")}
                         />
-                    </TouchableOpacity>
-                    <View style={[styles.icon1, styles.iconLayout]}>
-                        <View style={[styles.rectangle, styles.iconLayout]} />
-                        <TouchableOpacity onPress={onFacebookButtonPress}>
-                            <Image
-                                style={[styles.logoFbSimpleIcon, styles.logInPosition]}
-                                resizeMode="cover"
-                                source={require("../assets/logofbsimple.png")}
-                            />
-                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
-            <View style={[styles.logo, styles.logoFlexBox]}>
-                <Image
-                    style={styles.playstore1Icon}
-                    resizeMode="cover"
-                    source={require("../assets/playstore-11.png")}
-                />
+            <View style={styles.otherCont}>
+
             </View>
-            <TouchableOpacity onPress={() => { navigation.navigate('Home') }} style={[styles.rectangleParent, styles.groupInnerLayout]}>
-                <View style={[styles.groupInner, styles.groupInnerLayout]} />
-                <Text style={[styles.logIn, styles.logInPosition]}>Sign in</Text>
-            </TouchableOpacity>
         </View>
+
+
+
+        //         <View style={styles.signIn}>
+        //             <View style={styles.bg}>
+        //                 <Image
+        //                     style={[styles.patternIcon, styles.shapePosition]}
+        //                     resizeMode="cover"
+        //                     source={require("../assets/pattern.png")}
+        //                 />
+        //                 <View style={[styles.shape, styles.shapePosition]} />
+        //             </View>
+        //             <View style={styles.content}>
+        //                 <View style={styles.form}>
+        //                     <Text style={[styles.welcomeLoginTo, styles.emailTypo]}>{`Welcome,
+        // login to start with us`}</Text>
+        //                     <View style={[styles.groupParent, styles.fieldsSpaceBlock]}>
+
+        //                         <View style={[styles.emailParent, styles.parentLayout]}>
+        //                             <Text style={[styles.email, styles.emailFlexBox]}>Email</Text>
+        //                             <View style={styles.groupChild} />
+        //                             <TextInput
+        //                                 style={[styles.textInput, styles.emailFlexBox, styles.input]}
+        //                                 value={email}
+        //                                 onChangeText={text => setEmail(text)}
+        //                                 keyboardType="email-address"
+        //                                 autoCapitalize="none"
+        //                                 placeholder="Enter your email"
+        //                             />
+        //                         </View>
+        //                         <View style={[styles.passwordParent, styles.parentLayout]}>
+        //                             <Text style={[styles.email, styles.emailFlexBox]}>Password</Text>
+        //                             <View style={styles.groupChild} />
+        //                             <TextInput
+        //                                 style={[styles.textInput, styles.emailFlexBox, styles.input]}
+        //                                 value={password}
+        //                                 onChangeText={text => setPassword(text)}
+        //                                 secureTextEntry={true}
+        //                                 placeholder="Enter your password"
+        //                             />
+        //                         </View>
+        //                     </View>
+        //                     <View style={styles.fieldsSpaceBlock}>
+        //                         <Text style={styles.forgotPassword}>Forgot Password?</Text>
+        //                     </View>
+        //                 </View>
+        //             </View>
+        //             <View style={styles.form1}>
+        //                 <TouchableOpacity onPress={() => { navigation.navigate('SignUp') }} style={styles.button}>
+        //                     <Text style={styles.dontHaveAnContainer}>
+        //                         <Text style={styles.dontHaveAn}>{`Don’t have an account? `}</Text>
+        //                         <Text style={[styles.signUp, styles.emailTypo]}>SIGN UP</Text>
+        //                     </Text>
+        //                 </TouchableOpacity>
+        //             </View>
+        //             <View style={styles.continueWith}>
+        //                 <Text style={styles.orContinueWith}>or continue with?</Text>
+        //                 <View style={[styles.social, styles.logoFlexBox]}>
+        //                     <TouchableOpacity onPress={onGoogleButtonPress}>
+        //                         <Image
+        //                             style={styles.iconLayout}
+        //                             resizeMode="cover"
+        //                             source={require("../assets/google.png")}
+        //                         />
+        //                     </TouchableOpacity>
+        //                     <View style={[styles.icon1, styles.iconLayout]}>
+        //                         <View style={[styles.rectangle, styles.iconLayout]} />
+        //                         <TouchableOpacity onPress={onFacebookButtonPress}>
+        //                             <Image
+        //                                 style={[styles.logoFbSimpleIcon, styles.logInPosition]}
+        //                                 resizeMode="cover"
+        //                                 source={require("../assets/logofbsimple.png")}
+        //                             />
+        //                         </TouchableOpacity>
+        //                     </View>
+        //                 </View>
+        //             </View>
+        //             <View style={[styles.logo, styles.logoFlexBox]}>
+        //                 <Image
+        //                     style={styles.playstore1Icon}
+        //                     resizeMode="cover"
+        //                     source={require("../assets/playstore-11.png")}
+        //                 />
+        //             </View>
+        //             <TouchableOpacity onPress={() => { navigation.navigate('Home') }} style={[styles.rectangleParent, styles.groupInnerLayout]}>
+        //                 <View style={[styles.groupInner, styles.groupInnerLayout]} />
+        //                 <Text style={[styles.logIn, styles.logInPosition]}>Sign in</Text>
+        //             </TouchableOpacity>
+        //         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    logoCont: {
+        flex: 1,
+        backgroundColor: '#23AA49'
+    },
+    inner1Cont: {
+        flex: 1,
+        // justifyContent: 'center',
+        // alignItems: 'center'
+    },
+    inner2Cont: {
+        flex: 2,
+        backgroundColor: 'white',
+        width: '85%',
+        alignSelf: 'center',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        borderLeftWidth: .5,
+        borderRightWidth: .5,
+        borderTopWidth: .5,
+        borderLeftColor: 'black',
+        borderRightColor: 'black',
+        borderTopColor: 'black'
+    },
+    otherCont: {
+        flex: 1,
+        backgroundColor: 'white'
+    },
+    playstore1Icon: {
+        height: '80%',
+        width: '80%',
+        // top: "-15%",
+        // alignSelf: 'center',
+
+    },
+    logoContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        // flex: 1,
+        // position: 'absolute',
+        height: '36%',
+        width: '28%',
+        top: "-18%",
+        alignSelf: 'center',
+        backgroundColor: 'white',
+        borderRadius: 48
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     shapePosition: {
         bottom: "0%",
         height: "100%",
@@ -351,11 +434,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         position: "absolute",
     },
-    playstore1Icon: {
-        borderRadius: 109,
-        width: 58,
-        height: 52,
-    },
+
     logo: {
         top: "12%",
         left: "42%",
