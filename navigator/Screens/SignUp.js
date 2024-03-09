@@ -1,100 +1,371 @@
-import * as React from "react";
-import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { FontFamily, Color, Border, Padding, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
 const SignUp = () => {
     const navigation = useNavigation();
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+
+    const handleSignUp = () => {
+        // Implement your sign-up logic here
+        console.log('Full Name:', fullName);
+        console.log('Email:', email);
+        console.log('Password:', password);
+        console.log('Confirm Password:', confirmPassword);
+        console.log('Phone Number:', phoneNumber);
+    };
     return (
-        <View style={styles.signUp}>
-            <View style={styles.bg}>
-                <View style={[styles.shape, styles.shapePosition]} />
-                <Image
-                    style={[styles.patternIcon, styles.shapePosition]}
-                    resizeMode="cover"
-                    source={require("../assets/pattern.png")}
-                />
-            </View>
-            <View style={styles.content}>
-                <View style={styles.form}>
-                    <View style={styles.logo}>
-                        <Image
-                            style={styles.playstore1Icon}
-                            resizeMode="cover"
-                            source={require("../assets/playstore-1.png")}
-                        />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={{ flex: 1 }}>
+                <View style={styles.logoCont} >
+                    <View style={styles.inner1Cont}>
                     </View>
-                    <View style={styles.form1}>
-                        <Text style={[styles.helloFriend, styles.signTypo]}>
-                            Hello friend!
-                        </Text>
-                        <View style={styles.groupParent}>
-                            <View style={[styles.fullNameParent, styles.parentLayout]}>
-                                <Text style={[styles.fullName, styles.fullNameFlexBox]}>
+                    <View style={styles.inner2Cont}>
+                        <View style={styles.logoContainer}>
+                            <Image
+                                style={styles.playstore1Icon}
+                                source={require("../assets/playstore-11.png")}
+                            />
+                        </View>
+                        <View style={styles.titleView}>
+                            <Text style={styles.titleText}>
+                                Hello friend!
+                            </Text>
+                            <View style={{ flex: 1, top: '5%' }}>
+                                <Text style={styles.titleField}>
                                     Full name
                                 </Text>
-                                <View style={styles.groupChild} />
-                                <Text style={[styles.souravYadav, styles.fullNameFlexBox]}>
-                                    Sourav Yadav
-                                </Text>
+                                <View style={styles.textField}>
+                                    <TextInput
+                                        style={styles.input}
+                                        placeholder="Full Name"
+                                        value={fullName}
+                                        onChangeText={setFullName}
+                                    />
+                                </View>
                             </View>
-                            <View style={[styles.mobileNoParent, styles.parentLayout]}>
-                                <Text style={[styles.fullName, styles.fullNameFlexBox]}>
-                                    Mobile no.
-                                </Text>
-                                <View style={styles.groupChild} />
-                                <Text style={[styles.souravYadav, styles.fullNameFlexBox]}>
-                                    0987654123456
-                                </Text>
-                            </View>
-                            <View style={[styles.emailParent, styles.parentLayout]}>
-                                <Text style={[styles.fullName, styles.fullNameFlexBox]}>
+                            <View style={{ flex: 1, top: '20%' }}>
+                                <Text style={styles.titleField}>
                                     Email
                                 </Text>
-                                <View style={styles.groupChild} />
-                                <Text style={[styles.souravYadav, styles.fullNameFlexBox]}>
-                                    sourav@gmail.com
-                                </Text>
+                                <View style={styles.textField}>
+                                    <TextInput
+                                        style={[styles.input]}
+                                        value={email}
+                                        onChangeText={text => setEmail(text)}
+                                        keyboardType="email-address"
+                                        autoCapitalize="none"
+                                        placeholder="Enter your email"
+                                    />
+                                </View>
                             </View>
-                            <View style={[styles.passwordParent, styles.parentLayout]}>
-                                <Text style={[styles.fullName, styles.fullNameFlexBox]}>
+                        </View>
+                    </View>
+                    <View style={styles.otherCont}>
+                        <View style={styles.inner21Cont}>
+                            <View style={{ flex: 1, top: '5%' }}>
+                                <Text style={styles.titleField}>
                                     Password
                                 </Text>
-                                <View style={styles.groupChild} />
-                                <Text style={[styles.souravYadav, styles.fullNameFlexBox]}>
-                                    *****************
-                                </Text>
-                            </View>
-                            <View style={[styles.confirmPasswordParent, styles.parentLayout]}>
-                                <Text style={[styles.fullName, styles.fullNameFlexBox]}>
-                                    Confirm password
-                                </Text>
-                                <View style={styles.groupChild} />
-                                <Text style={[styles.souravYadav, styles.fullNameFlexBox]}>
-                                    *****************
-                                </Text>
+                                <View style={styles.textField}>
+                                    <TextInput
+                                        style={[styles.input]}
+                                        value={password}
+                                        onChangeText={text => setPassword(text)}
+                                        secureTextEntry={true}
+                                        placeholder="Enter your password"
+                                    />
+                                </View>
                             </View>
                         </View>
                     </View>
                 </View>
+                <View style={styles.otherCont}>
+
+                </View>
             </View>
-            <TouchableOpacity onPress={() => { navigation.navigate('SignIn') }} style={styles.button}>
-                <Text style={styles.alreadyHaveAnContainer}>
-                    <Text
-                        style={styles.alreadyHaveAn}
-                    >{`Already have an account? `}</Text>
-                    <Text style={[styles.signIn, styles.signTypo]}>SIGN IN</Text>
-                </Text>
-            </TouchableOpacity>
-            <View style={[styles.rectangleParent, styles.groupChild2Layout]}>
-                <View style={[styles.groupChild2, styles.groupChild2Layout]} />
-                <Text style={[styles.signUp1, styles.signTypo]}>Sign up</Text>
-            </View>
-        </View>
+        </TouchableWithoutFeedback>
+
+
+
+
+
+        // <View style={styles.signUp}>
+        //     <View style={styles.bg}>
+        //         <View style={[styles.shape, styles.shapePosition]} />
+        //         <Image
+        //             style={[styles.patternIcon, styles.shapePosition]}
+        //             resizeMode="cover"
+        //             source={require("../assets/pattern.png")}
+        //         />
+        //     </View>
+        //     <View style={styles.content}>
+        //         <View style={styles.form}>
+        //             <View style={styles.logo}>
+        //                 <Image
+        //                     style={styles.playstore1Icon}
+        //                     resizeMode="cover"
+        //                     source={require("../assets/playstore-1.png")}
+        //                 />
+        //             </View>
+        //             <View style={styles.form1}>
+        //                 <Text style={[styles.helloFriend, styles.signTypo]}>
+        //                     Hello friend!
+        //                 </Text>
+        //                 <View style={styles.groupParent}>
+        //                     <View style={[styles.fullNameParent, styles.parentLayout]}>
+        //                         <Text style={[styles.fullName, styles.fullNameFlexBox]}>
+        //                             Full name
+        //                         </Text>
+        //                         <View style={styles.groupChild} />
+        //                         <Text style={[styles.souravYadav, styles.fullNameFlexBox]}>
+        //                             Sourav Yadav
+        //                         </Text>
+        //                     </View>
+        //                     <View style={[styles.mobileNoParent, styles.parentLayout]}>
+        //                         <Text style={[styles.fullName, styles.fullNameFlexBox]}>
+        //                             Mobile no.
+        //                         </Text>
+        //                         <View style={styles.groupChild} />
+        //                         <Text style={[styles.souravYadav, styles.fullNameFlexBox]}>
+        //                             0987654123456
+        //                         </Text>
+        //                     </View>
+        //                     <View style={[styles.emailParent, styles.parentLayout]}>
+        //                         <Text style={[styles.fullName, styles.fullNameFlexBox]}>
+        //                             Email
+        //                         </Text>
+        //                         <View style={styles.groupChild} />
+        //                         <Text style={[styles.souravYadav, styles.fullNameFlexBox]}>
+        //                             sourav@gmail.com
+        //                         </Text>
+        //                     </View>
+        //                     <View style={[styles.passwordParent, styles.parentLayout]}>
+        //                         <Text style={[styles.fullName, styles.fullNameFlexBox]}>
+        //                             Password
+        //                         </Text>
+        //                         <View style={styles.groupChild} />
+        //                         <Text style={[styles.souravYadav, styles.fullNameFlexBox]}>
+        //                             *****************
+        //                         </Text>
+        //                     </View>
+        //                     <View style={[styles.confirmPasswordParent, styles.parentLayout]}>
+        //                         <Text style={[styles.fullName, styles.fullNameFlexBox]}>
+        //                             Confirm password
+        //                         </Text>
+        //                         <View style={styles.groupChild} />
+        //                         <Text style={[styles.souravYadav, styles.fullNameFlexBox]}>
+        //                             *****************
+        //                         </Text>
+        //                     </View>
+        //                 </View>
+        //             </View>
+        //         </View>
+        //     </View>
+        //     <TouchableOpacity onPress={() => { navigation.navigate('SignIn') }} style={styles.button}>
+        //         <Text style={styles.alreadyHaveAnContainer}>
+        //             <Text
+        //                 style={styles.alreadyHaveAn}
+        //             >{`Already have an account? `}</Text>
+        //             <Text style={[styles.signIn, styles.signTypo]}>SIGN IN</Text>
+        //         </Text>
+        //     </TouchableOpacity>
+        //     <View style={[styles.rectangleParent, styles.groupChild2Layout]}>
+        //         <View style={[styles.groupChild2, styles.groupChild2Layout]} />
+        //         <Text style={[styles.signUp1, styles.signTypo]}>Sign up</Text>
+        //     </View>
+        // </View>
     );
 };
 
 const styles = StyleSheet.create({
+    logoCont: {
+        flex: 1,
+        backgroundColor: '#23AA49'
+    },
+    inner1Cont: {
+        flex: 1,
+    },
+    inner2Cont: {
+        flex: 2,
+        backgroundColor: 'white',
+        width: '85%',
+        alignSelf: 'center',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        borderLeftWidth: .5,
+        borderRightWidth: .5,
+        borderTopWidth: .5,
+        borderLeftColor: 'black',
+        borderRightColor: 'black',
+        borderTopColor: 'black'
+    },
+    inner21Cont: {
+        flex: 1,
+        backgroundColor: 'white',
+        width: '85%',
+        alignSelf: 'center',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderLeftWidth: .5,
+        borderRightWidth: .5,
+        borderBottomWidth: .5,
+        borderLeftColor: 'black',
+        borderRightColor: 'black',
+        borderTopColor: 'black'
+    },
+    inner22Cont: {
+        flex: 2,
+    },
+    otherCont: {
+        flex: 1,
+        backgroundColor: "#E8F1EE",
+    },
+    playstore1Icon: {
+        height: '80%',
+        width: '80%',
+    },
+    titleText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: 'black',
+        alignSelf: 'center',
+    },
+    logoContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '36%',
+        width: '28%',
+        top: "-18%",
+        alignSelf: 'center',
+        backgroundColor: 'white',
+        borderRadius: 48
+    },
+    textField: {
+        backgroundColor: "#F6F6F7",
+        width: '88%',
+        alignSelf: 'center',
+        borderRadius: 11,
+    },
+    titleView: {
+        flex: 1,
+        top: '-15%',
+    },
+    titleField: {
+
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'black',
+        left: '6%'
+    },
+    input: {
+        marginLeft: '4%',
+    },
+
+    pass: {
+        top: '1%'
+    },
+    forgot: {
+        fontSize: 12,
+        alignSelf: 'center',
+        color: '#23AA49',
+        fontWeight: '700',
+        top: '10%'
+    },
+    LoginCont: {
+        flex: 1,
+    },
+    SocialCont: {
+        flex: 1,
+    },
+    buttonCont: {
+        flex: 1,
+    },
+    shopnow: {
+        position: "absolute",
+        fontSize: FontSize.body16Bold_size,
+        color: Color.colorWhite,
+        fontFamily: FontFamily.body16Bold,
+        alignSelf: 'center',
+        textAlign: 'center',
+        fontWeight: 'bold'
+    },
+    buttonContainer: {
+        position: "absolute",
+        width: "50%",
+        height: "80%",
+        backgroundColor: '#23AA49',
+        alignSelf: 'center',
+        borderRadius: 30,
+        bottom: '0%',
+        justifyContent: "center",
+    },
+    iconLayout: {
+        height: 44,
+        width: 44,
+        alignSelf: 'center'
+    },
+    socialLogoCont: {
+        right: '5%'
+    },
+    iconLayout2: {
+        height: 44,
+        width: 44,
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        borderRadius: 15,
+    },
+    iconLayout3: {
+        left: '5%'
+    },
+    emailTypo: {
+        fontFamily: FontFamily.subheader16Bold,
+        fontWeight: "700",
+    },
+    dontHaveAn: {
+        fontFamily: FontFamily.metadata12Regular,
+        fontSize: FontSize.paragraph14Regular_size,
+        color: Color.textTextDarkest,
+    },
+    signUp: {
+        color: Color.colorForestgreen,
+        fontSize: FontSize.subheader16Bold_size,
+    },
+    dontHaveAnContainer: {
+        textAlign: "center",
+    },
+    button: {
+        top: '10%',
+        alignItems: "center",
+    },
+    orContinueWith: {
+        fontSize: 14,
+        fontFamily: FontFamily.metadata12Regular,
+        textAlign: "center",
+        color: Color.textTextDarkest,
+    },
+    logoFbSimpleIcon: {
+        alignSelf: 'center',
+    },
+    social: {
+        flex: 4,
+        flexDirection: "row",
+        alignSelf: 'center',
+    },
+
+
+
+
+
+
+
+
+
     shapePosition: {
         bottom: "0%",
         height: "100%",

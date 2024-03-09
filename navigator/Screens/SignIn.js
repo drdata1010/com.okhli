@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView, KeyboardAvoidingView, KeyboardAvoidingViewBase, SafeAreaView } from "react-native";
+import { Image, StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView, KeyboardAvoidingView, KeyboardAvoidingViewBase, SafeAreaView, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { FontFamily, Color, FontSize, Border } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import auth from '@react-native-firebase/auth';
@@ -69,108 +69,106 @@ const SignIn = () => {
         }
     }
 
-    console.log("Reached to SignIn")
     return (
-
-        <View style={{ flex: 1 }}>
-            <View style={styles.logoCont} >
-                <View style={styles.inner1Cont}>
-
-                </View>
-                <View style={styles.inner2Cont}>
-                    <View style={styles.logoContainer}>
-                        <Image
-                            style={styles.playstore1Icon}
-                            source={require("../assets/playstore-11.png")}
-                        />
-
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={{ flex: 1 }}>
+                <View style={styles.logoCont} >
+                    <View style={styles.inner1Cont}>
                     </View>
-                    <View style={styles.titleView}>
-                        <Text style={styles.titleText}>
-                            Welcome,
-                        </Text>
-                        <Text style={styles.titleText}>
-                            login to start with us
-                        </Text>
-                    </View>
-                    <View style={{ flex: 1, top: '-5%' }}>
-                        <Text style={styles.titleField}>
-                            Email
-                        </Text>
-                        <View style={styles.textField}>
-                            <TextInput
-                                style={[styles.input]}
-                                value={email}
-                                onChangeText={text => setEmail(text)}
-                                keyboardType="email-address"
-                                autoCapitalize="none"
-                                placeholder="Enter your email"
+                    <View style={styles.inner2Cont}>
+                        <View style={styles.logoContainer}>
+                            <Image
+                                style={styles.playstore1Icon}
+                                source={require("../assets/playstore-11.png")}
                             />
                         </View>
-                    </View>
-                </View>
-            </View>
-            <View style={styles.otherCont}>
-                <View style={styles.inner21Cont}>
-                    <View style={{ flex: 1, top: '-5%' }}>
-                        <Text style={styles.titleField}>
-                            Password
-                        </Text>
-                        <View style={styles.textField}>
-                            <TextInput
-                                style={[styles.input]}
-                                value={password}
-                                onChangeText={text => setPassword(text)}
-                                secureTextEntry={true}
-                                placeholder="Enter your password"
-                            />
+                        <View style={styles.titleView}>
+                            <Text style={styles.titleText}>
+                                Welcome,
+                            </Text>
+                            <Text style={styles.titleText}>
+                                login to start with us
+                            </Text>
                         </View>
-                        <Text style={styles.forgot}>
-                            Forgot Password?
-                        </Text>
-                    </View>
-                </View>
-                <View style={styles.inner22Cont}>
-                    <View style={styles.LoginCont}>
-                        <View style={styles.buttonCont}>
-                            <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.buttonContainer}>
-                                <Text style={styles.shopnow}>Login</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ flex: 1 }}>
-                            <TouchableOpacity onPress={() => { navigation.navigate('SignUp') }} style={styles.button}>
-                                <Text style={styles.dontHaveAnContainer}>
-                                    <Text style={styles.dontHaveAn}>{`Don’t have an account? `}</Text>
-                                    <Text style={[styles.signUp, styles.emailTypo]}>SIGN UP</Text>
-                                </Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={styles.SocialCont}>
-                        <View style={{ flex: 1 }}>
-                            <Text style={styles.orContinueWith}>or continue with?</Text>
-                        </View>
-                        <View style={styles.social}>
-                            <TouchableOpacity onPress={onGoogleButtonPress} style={styles.socialLogoCont}>
-                                <Image
-                                    style={styles.iconLayout}
-                                    source={require("../assets/google.png")}
+                        <View style={{ flex: 1, top: '-5%' }}>
+                            <Text style={styles.titleField}>
+                                Email
+                            </Text>
+                            <View style={styles.textField}>
+                                <TextInput
+                                    style={[styles.input]}
+                                    value={email}
+                                    onChangeText={text => setEmail(text)}
+                                    keyboardType="email-address"
+                                    autoCapitalize="none"
+                                    placeholder="Enter your email"
                                 />
-                            </TouchableOpacity>
-                            <View style={styles.iconLayout3}>
-                                <TouchableOpacity onPress={onFacebookButtonPress} style={styles.iconLayout2}>
-                                    <Image
-                                        style={styles.logoFbSimpleIcon}
-                                        source={require("../assets/logofbsimple.png")}
-                                    />
-                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
                 </View>
-            </View>
-        </View>
+                <View style={styles.otherCont}>
+                    <View style={styles.inner21Cont}>
+                        <View style={{ flex: 1, top: '-5%' }}>
+                            <Text style={styles.titleField}>
+                                Password
+                            </Text>
+                            <View style={styles.textField}>
+                                <TextInput
+                                    style={[styles.input]}
+                                    value={password}
+                                    onChangeText={text => setPassword(text)}
+                                    secureTextEntry={true}
+                                    placeholder="Enter your password"
+                                />
+                            </View>
+                            <Text style={styles.forgot}>
+                                Forgot Password?
+                            </Text>
+                        </View>
+                    </View>
+                    <View style={styles.inner22Cont}>
+                        <View style={styles.LoginCont}>
+                            <View style={styles.buttonCont}>
+                                <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.buttonContainer}>
+                                    <Text style={styles.shopnow}>Login</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ flex: 1 }}>
+                                <TouchableOpacity onPress={() => { navigation.navigate('SignUp') }} style={styles.button}>
+                                    <Text style={styles.dontHaveAnContainer}>
+                                        <Text style={styles.dontHaveAn}>{`Don’t have an account? `}</Text>
+                                        <Text style={[styles.signUp, styles.emailTypo]}>SIGN UP</Text>
+                                    </Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={styles.SocialCont}>
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.orContinueWith}>or continue with?</Text>
+                            </View>
+                            <View style={styles.social}>
+                                <TouchableOpacity onPress={onGoogleButtonPress} style={styles.socialLogoCont}>
+                                    <Image
+                                        style={styles.iconLayout}
+                                        source={require("../assets/google.png")}
+                                    />
+                                </TouchableOpacity>
+                                <View style={styles.iconLayout3}>
+                                    <TouchableOpacity onPress={onFacebookButtonPress} style={styles.iconLayout2}>
+                                        <Image
+                                            style={styles.logoFbSimpleIcon}
+                                            source={require("../assets/logofbsimple.png")}
+                                        />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
 
+            </View>
+        </TouchableWithoutFeedback>
     );
 };
 
