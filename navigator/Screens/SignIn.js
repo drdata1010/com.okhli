@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, View, Text, TouchableOpacity, TextInput } from "react-native";
+import { Image, StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView, KeyboardAvoidingView, KeyboardAvoidingViewBase, SafeAreaView } from "react-native";
 import { FontFamily, Color, FontSize, Border } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 GoogleSignin.configure({
     webClientId: '259249234282-1jol54jf9i12u48l4mf17br9oakafbnr.apps.googleusercontent.com',
@@ -69,7 +71,8 @@ const SignIn = () => {
 
     console.log("Reached to SignIn")
     return (
-        <View style={{ flex: 1, backgroundColor: 'red' }}>
+
+        <View style={{ flex: 1 }}>
             <View style={styles.logoCont} >
                 <View style={styles.inner1Cont}>
 
@@ -80,102 +83,94 @@ const SignIn = () => {
                             style={styles.playstore1Icon}
                             source={require("../assets/playstore-11.png")}
                         />
+
+                    </View>
+                    <View style={styles.titleView}>
+                        <Text style={styles.titleText}>
+                            Welcome,
+                        </Text>
+                        <Text style={styles.titleText}>
+                            login to start with us
+                        </Text>
+                    </View>
+                    <View style={{ flex: 1, top: '-5%' }}>
+                        <Text style={styles.titleField}>
+                            Email
+                        </Text>
+                        <View style={styles.textField}>
+                            <TextInput
+                                style={[styles.input]}
+                                value={email}
+                                onChangeText={text => setEmail(text)}
+                                keyboardType="email-address"
+                                autoCapitalize="none"
+                                placeholder="Enter your email"
+                            />
+                        </View>
                     </View>
                 </View>
             </View>
             <View style={styles.otherCont}>
-
+                <View style={styles.inner21Cont}>
+                    <View style={{ flex: 1, top: '-5%' }}>
+                        <Text style={styles.titleField}>
+                            Password
+                        </Text>
+                        <View style={styles.textField}>
+                            <TextInput
+                                style={[styles.input]}
+                                value={password}
+                                onChangeText={text => setPassword(text)}
+                                secureTextEntry={true}
+                                placeholder="Enter your password"
+                            />
+                        </View>
+                        <Text style={styles.forgot}>
+                            Forgot Password?
+                        </Text>
+                    </View>
+                </View>
+                <View style={styles.inner22Cont}>
+                    <View style={styles.LoginCont}>
+                        <View style={styles.buttonCont}>
+                            <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.buttonContainer}>
+                                <Text style={styles.shopnow}>Login</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{ flex: 1 }}>
+                            <TouchableOpacity onPress={() => { navigation.navigate('SignUp') }} style={styles.button}>
+                                <Text style={styles.dontHaveAnContainer}>
+                                    <Text style={styles.dontHaveAn}>{`Don’t have an account? `}</Text>
+                                    <Text style={[styles.signUp, styles.emailTypo]}>SIGN UP</Text>
+                                </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={styles.SocialCont}>
+                        <View style={{ flex: 1 }}>
+                            <Text style={styles.orContinueWith}>or continue with?</Text>
+                        </View>
+                        <View style={styles.social}>
+                            <TouchableOpacity onPress={onGoogleButtonPress} style={styles.socialLogoCont}>
+                                <Image
+                                    style={styles.iconLayout}
+                                    source={require("../assets/google.png")}
+                                />
+                            </TouchableOpacity>
+                            <View style={styles.iconLayout3}>
+                                <TouchableOpacity onPress={onFacebookButtonPress} style={styles.iconLayout2}>
+                                    <Image
+                                        style={styles.logoFbSimpleIcon}
+                                        source={require("../assets/logofbsimple.png")}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                </View>
             </View>
         </View>
 
-
-
-        //         <View style={styles.signIn}>
-        //             <View style={styles.bg}>
-        //                 <Image
-        //                     style={[styles.patternIcon, styles.shapePosition]}
-        //                     resizeMode="cover"
-        //                     source={require("../assets/pattern.png")}
-        //                 />
-        //                 <View style={[styles.shape, styles.shapePosition]} />
-        //             </View>
-        //             <View style={styles.content}>
-        //                 <View style={styles.form}>
-        //                     <Text style={[styles.welcomeLoginTo, styles.emailTypo]}>{`Welcome,
-        // login to start with us`}</Text>
-        //                     <View style={[styles.groupParent, styles.fieldsSpaceBlock]}>
-
-        //                         <View style={[styles.emailParent, styles.parentLayout]}>
-        //                             <Text style={[styles.email, styles.emailFlexBox]}>Email</Text>
-        //                             <View style={styles.groupChild} />
-        //                             <TextInput
-        //                                 style={[styles.textInput, styles.emailFlexBox, styles.input]}
-        //                                 value={email}
-        //                                 onChangeText={text => setEmail(text)}
-        //                                 keyboardType="email-address"
-        //                                 autoCapitalize="none"
-        //                                 placeholder="Enter your email"
-        //                             />
-        //                         </View>
-        //                         <View style={[styles.passwordParent, styles.parentLayout]}>
-        //                             <Text style={[styles.email, styles.emailFlexBox]}>Password</Text>
-        //                             <View style={styles.groupChild} />
-        //                             <TextInput
-        //                                 style={[styles.textInput, styles.emailFlexBox, styles.input]}
-        //                                 value={password}
-        //                                 onChangeText={text => setPassword(text)}
-        //                                 secureTextEntry={true}
-        //                                 placeholder="Enter your password"
-        //                             />
-        //                         </View>
-        //                     </View>
-        //                     <View style={styles.fieldsSpaceBlock}>
-        //                         <Text style={styles.forgotPassword}>Forgot Password?</Text>
-        //                     </View>
-        //                 </View>
-        //             </View>
-        //             <View style={styles.form1}>
-        //                 <TouchableOpacity onPress={() => { navigation.navigate('SignUp') }} style={styles.button}>
-        //                     <Text style={styles.dontHaveAnContainer}>
-        //                         <Text style={styles.dontHaveAn}>{`Don’t have an account? `}</Text>
-        //                         <Text style={[styles.signUp, styles.emailTypo]}>SIGN UP</Text>
-        //                     </Text>
-        //                 </TouchableOpacity>
-        //             </View>
-        //             <View style={styles.continueWith}>
-        //                 <Text style={styles.orContinueWith}>or continue with?</Text>
-        //                 <View style={[styles.social, styles.logoFlexBox]}>
-        //                     <TouchableOpacity onPress={onGoogleButtonPress}>
-        //                         <Image
-        //                             style={styles.iconLayout}
-        //                             resizeMode="cover"
-        //                             source={require("../assets/google.png")}
-        //                         />
-        //                     </TouchableOpacity>
-        //                     <View style={[styles.icon1, styles.iconLayout]}>
-        //                         <View style={[styles.rectangle, styles.iconLayout]} />
-        //                         <TouchableOpacity onPress={onFacebookButtonPress}>
-        //                             <Image
-        //                                 style={[styles.logoFbSimpleIcon, styles.logInPosition]}
-        //                                 resizeMode="cover"
-        //                                 source={require("../assets/logofbsimple.png")}
-        //                             />
-        //                         </TouchableOpacity>
-        //                     </View>
-        //                 </View>
-        //             </View>
-        //             <View style={[styles.logo, styles.logoFlexBox]}>
-        //                 <Image
-        //                     style={styles.playstore1Icon}
-        //                     resizeMode="cover"
-        //                     source={require("../assets/playstore-11.png")}
-        //                 />
-        //             </View>
-        //             <TouchableOpacity onPress={() => { navigation.navigate('Home') }} style={[styles.rectangleParent, styles.groupInnerLayout]}>
-        //                 <View style={[styles.groupInner, styles.groupInnerLayout]} />
-        //                 <Text style={[styles.logIn, styles.logInPosition]}>Sign in</Text>
-        //             </TouchableOpacity>
-        //         </View>
     );
 };
 
@@ -186,8 +181,6 @@ const styles = StyleSheet.create({
     },
     inner1Cont: {
         flex: 1,
-        // justifyContent: 'center',
-        // alignItems: 'center'
     },
     inner2Cont: {
         flex: 2,
@@ -203,22 +196,40 @@ const styles = StyleSheet.create({
         borderRightColor: 'black',
         borderTopColor: 'black'
     },
+    inner21Cont: {
+        flex: 1,
+        backgroundColor: 'white',
+        width: '85%',
+        alignSelf: 'center',
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+        borderLeftWidth: .5,
+        borderRightWidth: .5,
+        borderBottomWidth: .5,
+        borderLeftColor: 'black',
+        borderRightColor: 'black',
+        borderTopColor: 'black'
+    },
+    inner22Cont: {
+        flex: 2,
+    },
     otherCont: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: "#E8F1EE",
     },
     playstore1Icon: {
         height: '80%',
         width: '80%',
-        // top: "-15%",
-        // alignSelf: 'center',
-
+    },
+    titleText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: 'black',
+        alignSelf: 'center',
     },
     logoContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        // flex: 1,
-        // position: 'absolute',
         height: '36%',
         width: '28%',
         top: "-18%",
@@ -226,159 +237,86 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 48
     },
+    textField: {
+        backgroundColor: "#F6F6F7",
+        width: '88%',
+        alignSelf: 'center',
+        borderRadius: 11,
+    },
+    titleView: {
+        flex: 1,
+        top: '-15%',
+    },
+    titleField: {
 
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: 'black',
+        left: '6%'
+    },
+    input: {
+        marginLeft: '4%',
+    },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    shapePosition: {
-        bottom: "0%",
-        height: "100%",
-        left: "0%",
-        right: "0%",
-        top: "0%",
+    pass: {
+        top: '1%'
+    },
+    forgot: {
+        fontSize: 12,
+        alignSelf: 'center',
+        color: '#23AA49',
+        fontWeight: '700',
+        top: '10%'
+    },
+    LoginCont: {
+        flex: 1,
+    },
+    SocialCont: {
+        flex: 1,
+    },
+    buttonCont: {
+        flex: 1,
+    },
+    shopnow: {
         position: "absolute",
-        width: "100%",
+        fontSize: FontSize.body16Bold_size,
+        color: Color.colorWhite,
+        fontFamily: FontFamily.body16Bold,
+        alignSelf: 'center',
+        textAlign: 'center',
+        fontWeight: 'bold'
     },
-    emailTypo: {
-        fontFamily: FontFamily.subheader16Bold,
-        fontWeight: "700",
-    },
-    fieldsSpaceBlock: {
-        marginTop: 30,
-        width: 307,
-    },
-    parentLayout: {
-        height: 77,
-        left: 0,
-        width: 307,
+    buttonContainer: {
         position: "absolute",
-    },
-    emailFlexBox: {
-        textAlign: "left",
-        position: "absolute",
-    },
-    logoFlexBox: {
-        flexDirection: "row",
-        alignItems: "center",
+        width: "50%",
+        height: "80%",
+        backgroundColor: '#23AA49',
+        alignSelf: 'center',
+        borderRadius: 30,
+        bottom: '0%',
+        justifyContent: "center",
     },
     iconLayout: {
         height: 44,
         width: 44,
+        alignSelf: 'center'
     },
-    logInPosition: {
-        top: 12,
-        position: "absolute",
+    socialLogoCont: {
+        right: '5%'
     },
-    groupInnerLayout: {
-        width: 210,
-        height: 50,
-        position: "absolute",
+    iconLayout2: {
+        height: 44,
+        width: 44,
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        borderRadius: 15,
     },
-    patternIcon: {
-        maxWidth: "100%",
-        maxHeight: "100%",
-        opacity: 0.3,
-        overflow: "hidden",
+    iconLayout3: {
+        left: '5%'
     },
-    shape: {
-        backgroundColor: Color.colorForestgreen,
-    },
-    bg: {
-        height: "36.94%",
-        bottom: "63.06%",
-        left: "0%",
-        right: "0%",
-        top: "0%",
-        position: "absolute",
-        width: "100%",
-    },
-    welcomeLoginTo: {
-        fontSize: FontSize.heading24Bold_size,
-        lineHeight: 36,
-        textAlign: "center",
-        color: Color.textTextDarkest,
-    },
-    email: {
-        color: Color.colorGray,
-        fontSize: FontSize.paragraph14Regular_size,
-        left: 0,
-        top: 0,
+    emailTypo: {
         fontFamily: FontFamily.subheader16Bold,
         fontWeight: "700",
-    },
-    groupChild: {
-        top: 27,
-        backgroundColor: Color.colorWhitesmoke_100,
-        borderStyle: "solid",
-        borderColor: Color.colorGainsboro,
-        borderWidth: 1,
-        height: 50,
-        left: 0,
-        width: 307,
-        borderRadius: Border.br_3xs,
-        position: "absolute",
-    },
-    textInput: {
-        top: "40%",
-        left: 14,
-        color: Color.colorBlack,
-        fontFamily: FontFamily.metadata12Regular,
-        fontSize: FontSize.subheader16Bold_size,
-    },
-    emailParent: {
-        top: 0,
-        height: 77,
-    },
-    passwordParent: {
-        top: 85,
-    },
-    groupParent: {
-        height: 162,
-    },
-    forgotPassword: {
-        alignSelf: "stretch",
-        lineHeight: 22,
-        color: Color.colorForestgreen,
-        fontFamily: FontFamily.metadata12Regular,
-        fontSize: FontSize.paragraph14Regular_size,
-        textAlign: "center",
-    },
-    form: {
-        shadowColor: "rgba(2, 90, 69, 0.1)",
-        shadowOffset: {
-            width: 0,
-            height: 4,
-        },
-        shadowRadius: 30,
-        elevation: 30,
-        shadowOpacity: 1,
-        paddingHorizontal: 16,
-        paddingTop: 48,
-        paddingBottom: 30,
-        backgroundColor: Color.textTextWhite,
-        borderRadius: Border.br_3xs,
-        alignItems: "center",
-    },
-    content: {
-        marginLeft: -170,
-        top: 135,
-        left: "50%",
-        width: 339,
-        height: 384,
-        alignItems: "center",
-        position: "absolute",
     },
     dontHaveAn: {
         fontFamily: FontFamily.metadata12Regular,
@@ -393,83 +331,23 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     button: {
-        zIndex: 0,
+        top: '10%',
         alignItems: "center",
-    },
-    form1: {
-        top: 625,
-        left: 83,
-        alignItems: "center",
-        position: "absolute",
     },
     orContinueWith: {
-        fontSize: FontSize.metadata12Regular_size,
-        lineHeight: 19,
+        fontSize: 14,
         fontFamily: FontFamily.metadata12Regular,
         textAlign: "center",
         color: Color.textTextDarkest,
     },
-    rectangle: {
-        borderRadius: 25,
-        left: 0,
-        top: 0,
-        backgroundColor: Color.textTextWhite,
-        position: "absolute",
-    },
     logoFbSimpleIcon: {
-        left: 12,
-        width: 20,
-        height: 20,
-        overflow: "hidden",
-    },
-    icon1: {
-        marginLeft: 10,
+        alignSelf: 'center',
     },
     social: {
-        marginTop: 12,
+        flex: 4,
+        flexDirection: "row",
+        alignSelf: 'center',
     },
-    continueWith: {
-        top: 686,
-        left: 142,
-        alignItems: "center",
-        position: "absolute",
-    },
-
-    logo: {
-        top: "12%",
-        left: "42%",
-        borderRadius: 50,
-        padding: 2,
-        backgroundColor: Color.textTextWhite,
-        position: "absolute",
-    },
-    groupInner: {
-        borderRadius: 20,
-        left: 0,
-        top: 0,
-        backgroundColor: Color.colorForestgreen,
-    },
-    logIn: {
-        left: 81,
-        lineHeight: 26,
-        color: Color.textTextWhite,
-        fontSize: FontSize.subheader16Bold_size,
-        textAlign: "center",
-        fontFamily: FontFamily.subheader16Bold,
-        fontWeight: "700",
-    },
-    rectangleParent: {
-        top: 564,
-        left: 90,
-    },
-    signIn: {
-        backgroundColor: "#e8f1ee",
-        flex: 1,
-        height: 844,
-        overflow: "hidden",
-        width: "100%",
-    },
-
 });
 
 export default SignIn;
