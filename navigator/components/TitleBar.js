@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, Text, ScrollView, TouchableOpacity } from "rea
 import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
-const TitleBar = () => {
+const TitleBar = (props) => {
     return (
         <View style={styles.homeheaderPosition}>
             <View style={styles.backButtonCont}>
@@ -13,7 +13,7 @@ const TitleBar = () => {
                 />
             </View>
             <View style={styles.pageTitleCont}>
-                <Text style={styles.titleText}> My Orders</Text>
+                <Text style={styles.titleText}> {props.text}</Text>
             </View>
         </View>
 

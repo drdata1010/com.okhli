@@ -7,7 +7,7 @@ import TitleBar from "../components/TitleBar";
 const Orders = () => {
     return (
         <View style={{ flex: 1 }}>
-            <TitleBar />
+            <TitleBar text="My Orders" />
             <ScrollView bounces={false} showsVerticalScrollIndicator={false} style={styles.scrollerView}>
                 <MyOrdersComp />
                 <MyOrdersComp />
