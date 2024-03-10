@@ -51,7 +51,7 @@ const Account = () => {
                 <AccountApi onPress={handleOrdersPress} text="My Addresses" image={require("../assets/address.png")} />
                 <AccountApi onPress={handleOrdersPress} text="My Orders" image={require("../assets/dollar.png")} />
                 <AccountApi onPress={handleOrdersPress} text="Referral" image={require("../assets/referral.png")} />
-                <AccountApi onPress={handleOrdersPress} text="Edit Profile" image={require("../assets/editprofile.png")} />
+                <AccountApi onPress={handleEditProfilePress} text="Edit Profile" image={require("../assets/editprofile.png")} />
                 <AccountApi onPress={handleLogoutPress} text="Logout" image={require("../assets/logout.png")} />
             </View>
             <View style={styles.accountAPI_2}>
