@@ -32,7 +32,7 @@ const Account = () => {
 
     const handleLogoutPress = () => {
         // Navigate to Logout page or perform logout action
-        navigation.navigate('Logout');
+        navigation.replace('SignIn');
     };
     return (
         <View style={{ flex: 1 }}>
@@ -47,11 +47,12 @@ const Account = () => {
                 <Text style={styles.email}>8249131998</Text>
             </View>
             <View style={styles.accountAPI_1}>
-                <AccountApi text="My Addresses" image={require("../assets/address.png")} />
-                <AccountApi text="My Orders" image={require("../assets/dollar.png")} />
-                <AccountApi text="Referral" image={require("../assets/referral.png")} />
-                <AccountApi text="Edit Profile" image={require("../assets/editprofile.png")} />
-                <AccountApi text="Logout" image={require("../assets/logout.png")} />
+
+                <AccountApi onPress={handleOrdersPress} text="My Addresses" image={require("../assets/address.png")} />
+                <AccountApi onPress={handleOrdersPress} text="My Orders" image={require("../assets/dollar.png")} />
+                <AccountApi onPress={handleOrdersPress} text="Referral" image={require("../assets/referral.png")} />
+                <AccountApi onPress={handleOrdersPress} text="Edit Profile" image={require("../assets/editprofile.png")} />
+                <AccountApi onPress={handleLogoutPress} text="Logout" image={require("../assets/logout.png")} />
             </View>
             <View style={styles.accountAPI_2}>
                 <View style={styles.headphone}>

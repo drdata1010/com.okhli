@@ -9,7 +9,7 @@ import MyCartComp from "../components/MyCartComp";
 const Cart = () => {
     return (
         <View style={{ flex: 1 }}>
-            <TitleBar />
+            <TitleBar text="My Cart" />
             <ScrollView bounces={false} showsVerticalScrollIndicator={false} style={styles.scrollerView}>
                 <MyCartComp />
                 <MyCartComp />

@@ -6,7 +6,8 @@ import { useNavigation } from "@react-navigation/native";
 const AccountApi = (props) => {
     const navigation = useNavigation();
     return (
-        <View style={styles.link}>
+
+        <TouchableOpacity onPress={props.onPress} style={styles.link}>
             <View style={styles.icon}>
                 <Image source={props.image} style={styles.imageStyle} />
             </View>
@@ -19,7 +20,7 @@ const AccountApi = (props) => {
                     source={require("../assets/arrow.png")}
                 />
             </View>
-        </View>
+        </TouchableOpacity>
     )
 
 }
