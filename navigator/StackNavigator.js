@@ -9,6 +9,7 @@ import SignUp from "./Screens/SignUp";
 import Home from "./Screens/Home";
 import Account from "./Screens/Account";
 import Orders from "./Screens/Orders";
+import Cart from "./Screens/Cart";
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
@@ -49,6 +50,11 @@ const StackNavigator = () => {
           options={{ headerShown: false }}
           name="Orders"
           component={Orders}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Cart"
+          component={Cart}
         />
       </Stack.Navigator>
     </NavigationContainer>

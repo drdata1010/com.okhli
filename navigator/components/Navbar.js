@@ -21,13 +21,13 @@ const Navbar = () => {
                 />
                 <Text style={styles.navText}>Orders</Text>
             </TouchableOpacity>
-            <View style={styles.navhomeIcon}>
+            <TouchableOpacity onPress={() => { navigation.navigate('Cart') }} style={styles.navhomeIcon}>
                 <Image
                     style={styles.navImage}
                     source={require("../assets/navcart.png")}
                 />
                 <Text style={styles.navText}>Cart</Text>
-            </View>
+            </TouchableOpacity>
             <TouchableOpacity onPress={() => { navigation.navigate('Account') }} style={styles.navhomeIcon}>
                 <Image
                     style={styles.navImage}

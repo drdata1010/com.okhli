@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, Text, ScrollView, TouchableOpacity } from "rea
 import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
-const MyOrdersComp = () => {
+const MyCartComp = () => {
     const navigation = useNavigation();
     return (
         <View style={styles.orderContainer}>
@@ -22,10 +22,15 @@ const MyOrdersComp = () => {
                 </Text>
 
             </View>
-            <View style={styles.arrowCont}>
+            <View style={styles.plusMinusCont}>
                 <Image
-                    style={[styles.arrow]}
-                    source={require("../assets/arrow.png")}
+                    style={[styles.minus]}
+                    source={require("../assets/minus.png")}
+                />
+                <Text style={styles.text}>1</Text>
+                <Image
+                    style={[styles.plus]}
+                    source={require("../assets/plus.png")}
                 />
             </View>
         </View>
@@ -33,7 +38,7 @@ const MyOrdersComp = () => {
 
 }
 
-export default MyOrdersComp;
+export default MyCartComp;
 
 const styles = StyleSheet.create({
     orderContainer: {
@@ -51,18 +56,20 @@ const styles = StyleSheet.create({
         // backgroundColor: 'red'
     },
     prTitle: {
-        flex: 4,
+        flex: 3,
         // backgroundColor: 'green'
     },
-    arrowCont: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+    plusMinusCont: {
+        flex: 3,
+        // justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row'
         // backgroundColor: 'blue'
     },
-    arrow: {
-        height: '40%',
-        width: '40%'
+    minus: {
+        height: '20%',
+        width: '20%',
+        left: '20%'
     },
     bestSellImage: {
         height: '70%',
@@ -81,6 +88,18 @@ const styles = StyleSheet.create({
         fontWeight: '800',
         top: '30%',
         left: '2%'
+    },
+    text: {
+        fontSize: 20,
+        fontWeight: '800',
+        left: '40%',
+        color: 'black'
+
+    },
+    plus: {
+        height: '20%',
+        width: '20%',
+        left: '60%'
     }
 
 });
