@@ -130,7 +130,7 @@ const SignIn = () => {
                     <View style={styles.inner22Cont}>
                         <View style={styles.LoginCont}>
                             <View style={styles.buttonCont}>
-                                <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.buttonContainer}>
+                                <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.buttonContainer}>
                                     <Text style={styles.shopnow}>Login</Text>
                                 </TouchableOpacity>
                             </View>

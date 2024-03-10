@@ -2,18 +2,17 @@ import React from "react";
 import { Image, StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
+import Navbar from "../components/Navbar";
 
 const Account = () => {
     return (
         <View style={{ flex: 1, backgroundColor: 'red' }}>
-            <View style={styles.titleContainer}>
-
-            </View>
+            <Navbar />
         </View>
     )
 
 }
-//What is this?
+
 export default Account;
 
 const styles = StyleSheet.create({

@@ -2,37 +2,15 @@ import React from "react";
 import { Image, StyleSheet, View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
+import TitleComp from "../components/TitleComp";
+import Navbar from "../components/Navbar";
 
 const Home = () => {
     const navigation = useNavigation();
-
-    // const accPress = () => {
-    //     Alert.alert('Account is opening');
-
-    //     navigation.navigate('Account');
-    // }
-
     const { image, container, container1, container2, textStyle, BSImage } = styles;
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
-            <View style={styles.homeheaderPosition}>
-                <View style={styles.manIconCont}>
-                    <Image
-                        style={styles.manIcon}
-                        resizeMode="cover"
-                        source={require("../assets/man.png")}
-                    />
-                </View>
-                <View style={styles.goodMorningParent}>
-                    <Text style={styles.texts}>
-                        Hello,
-                    </Text>
-                    <Text style={styles.texts}>
-                        Rahul Sharma
-                    </Text>
-                </View>
-            </View>
-
+            <TitleComp />
             <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollerView}>
                 <View style={styles.headText}>
                     <Text style={styles.offText}>Today's Offers</Text>
@@ -77,7 +55,6 @@ const Home = () => {
                             <View style={styles.plus1Icon}>
                                 <Image
                                     style={styles.plus}
-                                    // resizeMode="cover"
                                     source={require("../assets/plus-1.png")}
                                 />
                             </View>
@@ -96,7 +73,6 @@ const Home = () => {
                             <View style={styles.plus1Icon}>
                                 <Image
                                     style={styles.plus}
-                                    // resizeMode="cover"
                                     source={require("../assets/plus-1.png")}
                                 />
                             </View>
@@ -115,7 +91,6 @@ const Home = () => {
                             <View style={styles.plus1Icon}>
                                 <Image
                                     style={styles.plus}
-                                    // resizeMode="cover"
                                     source={require("../assets/plus-1.png")}
                                 />
                             </View>
@@ -135,7 +110,6 @@ const Home = () => {
                             <View style={styles.plus1Icon}>
                                 <Image
                                     style={styles.plus}
-                                    // resizeMode="cover"
                                     source={require("../assets/plus-1.png")}
                                 />
                             </View>
@@ -162,37 +136,7 @@ const Home = () => {
                 <View style={styles.container1}>
                 </View>
             </ScrollView>
-
-            <View style={styles.navbargroup}>
-                <View style={styles.navhomeIcon}>
-                    <Image
-                        style={styles.navImage}
-                        source={require("../assets/navhome.png")}
-                    />
-                    <Text style={styles.navText}>Home</Text>
-                </View>
-                <View style={styles.navhomeIcon}>
-                    <Image
-                        style={styles.navImage}
-                        source={require("../assets/navorders.png")}
-                    />
-                    <Text style={styles.navText}>Orders</Text>
-                </View>
-                <View style={styles.navhomeIcon}>
-                    <Image
-                        style={styles.navImage}
-                        source={require("../assets/navcart.png")}
-                    />
-                    <Text style={styles.navText}>Cart</Text>
-                </View>
-                <TouchableOpacity onPress={() => { navigation.navigate('Account') }} style={styles.navhomeIcon}>
-                    <Image
-                        style={styles.navImage}
-                        source={require("../assets/navprofile-1.png")}
-                    />
-                    <Text style={styles.navText}>Account</Text>
-                </TouchableOpacity>
-            </View>
+            <Navbar />
         </View>
     )
 };
@@ -200,58 +144,9 @@ const Home = () => {
 export default Home;
 
 const styles = StyleSheet.create({
-    homeheaderPosition: {
-        flexDirection: 'row',
-        position: 'absolute',
-        height: '10%',
-        width: '100%',
-        backgroundColor: '#FFFFFF',
-        borderBottomColor: 'gray',
-        borderBottomWidth: 1,
-    },
-    goodMorningParent: {
-        alignSelf: 'center',
-        flex: 2,
-    },
-    manIconCont: {
-        flex: 1,
-    },
-    manIcon: {
-        alignSelf: 'center',
-        top: '20%',
-        height: '60%',
-        width: '30%'
-    },
     texts: {
         fontSize: 16,
         fontWeight: '500',
-    },
-    navbargroup: {
-        flexDirection: 'row',
-        position: 'absolute',
-        height: '10%',
-        width: '100%',
-        top: '90%',
-        backgroundColor: 'white',
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
-        elevation: 5
-    },
-    navhomeIcon: {
-        width: '25%',
-        alignSelf: 'center',
-        alignItems: 'center',
-    },
-    navImage: {
-        top: '10%',
-        height: '32%',
-        width: '29%'
-
-    },
-    navText: {
-        alignSelf: 'center',
-        fontWeight: '500',
-        marginTop: 8
     },
     scrollerView: {
         flex: 1,

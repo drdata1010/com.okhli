@@ -8,6 +8,8 @@ import SignIn from "./Screens/SignIn";
 import SignUp from "./Screens/SignUp";
 import Home from "./Screens/Home";
 import Account from "./Screens/Account";
+import Orders from "./Screens/Orders";
+
 const Stack = createStackNavigator();
 const StackNavigator = () => {
   return (
@@ -43,11 +45,11 @@ const StackNavigator = () => {
           name="Account"
           component={Account}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           options={{ headerShown: false }}
-          name="{PhoneSignIn}"
-          component={PhoneSignIn}
-        /> */}
+          name="Orders"
+          component={Orders}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
