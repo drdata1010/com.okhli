@@ -3,8 +3,10 @@ import { Image, StyleSheet, View, Text, ScrollView, TouchableOpacity } from "rea
 import { FontFamily, FontSize, Color } from "../../GlobalStyles";
 import TitleBar from "../components/TitleBar";
 import AddressComp from "../components/AddressComp";
+import { useNavigation } from "@react-navigation/native";
 
 const Address = () => {
+    const navigation = useNavigation();
     return (
         <View style={{ flex: 1 }}>
             <TitleBar text="My Address" />
@@ -14,9 +16,9 @@ const Address = () => {
                 <AddressComp />
                 <AddressComp />
                 <View style={styles.buttonCont}>
-                    <View style={styles.button}>
+                    <TouchableOpacity onPress={() => navigation.navigate('Editaddresses')} style={styles.button}>
                         <Text style={styles.buttonText}>Add address</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
         </View>

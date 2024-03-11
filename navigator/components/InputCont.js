@@ -33,11 +33,4 @@ const styles = StyleSheet.create({
         fontSize: 18,
         left: '10%'
     },
-    ageGen: {
-        flex: 1,
-    },
-    save: {
-        flex: 4,
-    },
-
 });

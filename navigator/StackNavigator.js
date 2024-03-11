@@ -12,6 +12,8 @@ import Orders from "./Screens/Orders";
 import Cart from "./Screens/Cart";
 import Userprofile from "./Screens/EditProfile";
 import Address from "./Screens/MyAddress";
+import EditAddresses from "./Screens/EditAddress";
+import Editaddresses from "./Screens/EditAddress";
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
@@ -67,6 +69,11 @@ const StackNavigator = () => {
           options={{ headerShown: false }}
           name="Address"
           component={Address}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Editaddresses"
+          component={Editaddresses}
         />
       </Stack.Navigator>
     </NavigationContainer>
