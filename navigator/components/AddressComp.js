@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     customerName: {
         fontSize: 18,
         fontWeight: 'bold',
+        color: 'black'
     },
     addLine1: {
         fontSize: 15,

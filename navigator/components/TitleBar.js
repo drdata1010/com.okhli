@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     },
     backImage: {
         height: '50%',
-        width: '50%'
+        width: '61%'
     },
     titleText: {
         fontSize: 24,

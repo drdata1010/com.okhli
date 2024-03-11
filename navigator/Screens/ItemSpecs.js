@@ -5,8 +5,10 @@ import TitleBar from "../components/TitleBar";
 import AddressComp from "../components/AddressComp";
 import Navbar from "../components/Navbar";
 import MyCartComp from "../components/MyCartComp";
+import { useNavigation } from "@react-navigation/native";
 
 const Itemspecs = () => {
+    const navigation = useNavigation();
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
             <TitleBar text="Item Name" />
@@ -62,7 +64,7 @@ const Itemspecs = () => {
                     </View> */}
                 </View>
                 <View style={styles.buttonCont}>
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity onPress={() => { navigation.navigate('Checkout') }} style={styles.button}>
                         <Text style={styles.textStyle}>Buy now</Text>
                     </TouchableOpacity>
 

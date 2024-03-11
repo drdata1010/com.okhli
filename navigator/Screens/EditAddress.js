@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
         backgroundColor: "white",
         alignSelf: 'center',
         borderRadius: 20,
+
         marginLeft: '5%'
 
     },
