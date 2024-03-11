@@ -11,9 +11,9 @@ const Home = () => {
         <View style={{ flex: 1, backgroundColor: 'white' }}>
             <TitleComp />
             <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollerView}>
-                <View style={styles.headText}>
+                <TouchableOpacity onPress={() => { navigation.navigate('ItemSpecs') }} style={styles.headText}>
                     <Text style={styles.offText}>Today's Offers</Text>
-                </View>
+                </TouchableOpacity>
 
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.container3}>
                     <View style={styles.offerImageContainer}>
@@ -134,6 +134,8 @@ const Home = () => {
                 </View>
                 <View style={styles.container1}>
                 </View>
+                <View style={styles.fixed}>
+                </View>
             </ScrollView>
             <Navbar />
         </View>
@@ -143,6 +145,9 @@ const Home = () => {
 export default Home;
 
 const styles = StyleSheet.create({
+    fixed: {
+        height: 200,
+    },
     texts: {
         fontSize: 16,
         fontWeight: '500',
@@ -150,7 +155,7 @@ const styles = StyleSheet.create({
     scrollerView: {
         flex: 1,
         backgroundColor: 'white',
-        top: '10%'
+        top: '10%',
     },
     container1: {
         flex: 1,

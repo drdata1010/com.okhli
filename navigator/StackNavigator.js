@@ -14,6 +14,7 @@ import Userprofile from "./Screens/EditProfile";
 import Address from "./Screens/MyAddress";
 import EditAddresses from "./Screens/EditAddress";
 import Editaddresses from "./Screens/EditAddress";
+import Itemspecs from "./Screens/ItemSpecs";
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
@@ -74,6 +75,11 @@ const StackNavigator = () => {
           options={{ headerShown: false }}
           name="Editaddresses"
           component={Editaddresses}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="ItemSpecs"
+          component={Itemspecs}
         />
       </Stack.Navigator>
     </NavigationContainer>
