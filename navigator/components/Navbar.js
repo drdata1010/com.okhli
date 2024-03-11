@@ -1,6 +1,5 @@
 import React from "react";
 import { Image, StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
-import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
 const Navbar = () => {

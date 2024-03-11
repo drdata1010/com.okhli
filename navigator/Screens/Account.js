@@ -1,10 +1,8 @@
 import React from "react";
 import { Image, StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
-import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import Navbar from "../components/Navbar";
 import TitleBar from "../components/TitleBar";
-import TitleComp from "../components/TitleComp";
 import AccountApi from "../components/AccountApi";
 
 const Account = () => {
@@ -48,7 +46,7 @@ const Account = () => {
             </View>
             <View style={styles.accountAPI_1}>
 
-                <AccountApi onPress={handleOrdersPress} text="My Addresses" image={require("../assets/address.png")} />
+                <AccountApi onPress={handleAddressPress} text="My Addresses" image={require("../assets/address.png")} />
                 <AccountApi onPress={handleOrdersPress} text="My Orders" image={require("../assets/dollar.png")} />
                 <AccountApi onPress={handleOrdersPress} text="Referral" image={require("../assets/referral.png")} />
                 <AccountApi onPress={handleEditProfilePress} text="Edit Profile" image={require("../assets/editprofile.png")} />
@@ -71,13 +69,10 @@ const Account = () => {
                 </View>
             </View>
             <Navbar />
-
-
         </View>
     )
 
 }
-
 
 export default Account;
 

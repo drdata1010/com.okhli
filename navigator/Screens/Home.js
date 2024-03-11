@@ -1,6 +1,5 @@
 import React from "react";
 import { Image, StyleSheet, View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
-import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import TitleComp from "../components/TitleComp";
 import Navbar from "../components/Navbar";

@@ -10,9 +10,8 @@ import Home from "./Screens/Home";
 import Account from "./Screens/Account";
 import Orders from "./Screens/Orders";
 import Cart from "./Screens/Cart";
-import EditProfile from "./Screens/EditProfile";
-import { Profile } from "react-native-fbsdk-next";
 import Userprofile from "./Screens/EditProfile";
+import Address from "./Screens/MyAddress";
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
@@ -63,6 +62,11 @@ const StackNavigator = () => {
           options={{ headerShown: false }}
           name="EditProfile"
           component={Userprofile}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Address"
+          component={Address}
         />
       </Stack.Navigator>
     </NavigationContainer>

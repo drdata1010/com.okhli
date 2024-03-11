@@ -1,6 +1,5 @@
 import React from "react";
 import { Image, StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
-import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
 const MyCartComp = () => {
@@ -53,18 +52,14 @@ const styles = StyleSheet.create({
         flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
-        // backgroundColor: 'red'
     },
     prTitle: {
         flex: 3,
-        // backgroundColor: 'green'
     },
     plusMinusCont: {
         flex: 3,
-        // justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row'
-        // backgroundColor: 'blue'
     },
     minus: {
         height: '20%',
