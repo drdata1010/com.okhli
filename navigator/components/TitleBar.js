@@ -4,14 +4,19 @@ import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
 const TitleBar = (props) => {
+    const navigation = useNavigation();
+
+    const handlePress = () => {
+        navigation.goBack();
+    };
     return (
         <View style={styles.homeheaderPosition}>
-            <View style={styles.backButtonCont}>
+            <TouchableOpacity onPress={handlePress} style={styles.backButtonCont}>
                 <Image
                     style={styles.backImage}
                     source={require("../assets/backArrow.png")}
                 />
-            </View>
+            </TouchableOpacity>
             <View style={styles.pageTitleCont}>
                 <Text style={styles.titleText}> {props.text}</Text>
             </View>
