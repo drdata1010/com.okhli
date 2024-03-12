@@ -32,6 +32,7 @@ app.listen(port, () => {
 
 const User = require("./models/user");
 const Order = require("./models/order");
+const Product = require("./models/product");
 
 const transporter = nodemailer.createTransport({
     //configure the email service
