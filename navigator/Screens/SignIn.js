@@ -5,7 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 
 GoogleSignin.configure({
@@ -16,13 +15,57 @@ const SignIn = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [badEmail, setBadEmail] = useState(false);
+    const [badPassword, setBadPassword] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
 
-    const handleLogin = () => {
+    const validate = () => {
+        console.log("Validate call : ", email);
+
+
+        if (email == "") {
+            setModalVisible(false);
+            setBadEmail(true);
+        } else {
+            if (password == "") {
+                setModalVisible(false);
+                setBadEmail(false);
+                setBadPassword(true);
+            } else {
+                setModalVisible(true);
+                setBadEmail(false);
+                handleLogin();
+            }
+        }
+    };
+
+    const handleLogin = async () => {
         // Implement your login logic here
+        console.log("in handle login");
+        try {
+            const response = await fetch("http://10.0.2.2:8000/login", {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+            if (response.ok) {
+                console.log('response data :', response.data)
+
+                console.log('response status :', response.status)
+
+                console.log('response is :', response)
+                console.log('Signin Successfull');
+            } else {
+                console.log('Signin failed');
+            }
+        } catch (error) {
+            console.error('Error  : ', error);
+        }
     };
 
     //Firebase Google connection implementation
-
     async function onGoogleButtonPress() {
         try {
             // Check if your device supports Google Play
@@ -104,6 +147,11 @@ const SignIn = () => {
                                     placeholder="Enter your email"
                                 />
                             </View>
+                            {badEmail === true && (
+                                <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
+                                    Please Enter Email ID
+                                </Text>
+                            )}
                         </View>
                     </View>
                 </View>
@@ -122,6 +170,11 @@ const SignIn = () => {
                                     placeholder="Enter your password"
                                 />
                             </View>
+                            {badPassword === true && (
+                                <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
+                                    Please Enter Password
+                                </Text>
+                            )}
                             <Text style={styles.forgot}>
                                 Forgot Password?
                             </Text>
@@ -130,7 +183,7 @@ const SignIn = () => {
                     <View style={styles.inner22Cont}>
                         <View style={styles.LoginCont}>
                             <View style={styles.buttonCont}>
-                                <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.buttonContainer}>
+                                <TouchableOpacity onPress={() => validate()} style={styles.buttonContainer}>
                                     <Text style={styles.shopnow}>Login</Text>
                                 </TouchableOpacity>
                             </View>
