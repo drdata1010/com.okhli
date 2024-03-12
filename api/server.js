@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
-mongoose.connect("mongodb+srv://okhli:okhli@okhli-cluster.1mxwtim.mongodb.net/", {
+mongoose.connect("mongodb+srv://ayurvedaokhli:Okhli321@okhli-cluster.4g4jvvt.mongodb.net/", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
