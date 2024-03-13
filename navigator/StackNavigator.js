@@ -12,7 +12,6 @@ import Orders from "./Screens/Orders";
 import Cart from "./Screens/Cart";
 import Userprofile from "./Screens/EditProfile";
 import Address from "./Screens/MyAddress";
-import EditAddresses from "./Screens/EditAddress";
 import Editaddresses from "./Screens/EditAddress";
 import Itemspecs from "./Screens/ItemSpecs";
 import Checkout from "./Screens/Checkout";

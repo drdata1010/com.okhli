@@ -2,9 +2,7 @@ import React from "react";
 import { Image, StyleSheet, View, Text, ScrollView, TouchableOpacity } from "react-native";
 import { FontFamily, FontSize, Color } from "../../GlobalStyles";
 import TitleBar from "../components/TitleBar";
-import AddressComp from "../components/AddressComp";
 import Navbar from "../components/Navbar";
-import MyCartComp from "../components/MyCartComp";
 import { useNavigation } from "@react-navigation/native";
 
 const Itemspecs = () => {
@@ -56,12 +54,6 @@ const Itemspecs = () => {
 
                 </View>
                 <View style={styles.ratingCont}>
-                    {/* <View style={styles.organic}>
-
-                    </View>
-                    <View style={styles.expire}>
-
-                    </View> */}
                 </View>
                 <View style={styles.buttonCont}>
                     <TouchableOpacity onPress={() => { navigation.navigate('Checkout') }} style={styles.button}>

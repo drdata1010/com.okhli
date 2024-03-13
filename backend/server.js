@@ -1,10 +1,7 @@
-//Server.js
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const crypto = require("crypto");
-const nodemailer = require("nodemailer");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const app = express();
@@ -30,80 +27,15 @@ app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
-
 //Routes
 const loginRoutes = require('./routes/loginRoutes');
+const signupRoutes = require('./routes/signupRoutes');
 
 app.post('/login', loginRoutes);
+app.post('/signup', signupRoutes);
 
-
-
-
-const User = require("./models/user");
-const Order = require("./models/order");
-
-const transporter = nodemailer.createTransport({
-    //configure the email service
-    service: "gmail",
-    auth: {
-        user: "okhlitest@gmail.com",
-        pass: "tigj ottk kvui koev"
-    }
-});
-
-//endpoint to register in the app
-
-app.post("/register", async (req, res) => {
-    try {
-        console.log("API ke registre me hoon");
-        const { name, phNo, email, password, cnfPassword } = req.body;
-
-        //check if the Email is already registered
-        const existingEmail = await User.findOne({ email });
-        if (existingEmail) {
-            return res.status(401).json({ message: "Email already Registered!" });
-        }
-
-        //check if the Mobile No is already registered
-        const existingPhNo = await User.findOne({ phNo });
-        if (existingPhNo) {
-            return res.status(402).json({ message: "Mobile No. already Registered!" });
-        }
-
-        //generate OTP
-        const otp = Math.floor(100000 + Math.random() * 900000);
-        console.log("6 digit OTP is ", otp);
-
-        //compose the email message
-        const mailOptions = {
-            from: "okhlitest@gmail.com",
-            to: email,
-            subject: "OTP for Email Verification",
-            text: `Your OTP is: ${otp}`,
-        };
-
-        //send the email
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error('Error sending email:', error);
-                return res.status(500).json({ message: 'Error sending OTP email.' });
-            }
-            console.log('Email sent:', info.response);
-            res.status(200).json({ userId: newUser.id, message: 'Email sent successfully.' });
-        });
-
-        //Create a new User
-        const newUser = new User({ name, email, phNo, password, cnfPassword, otp, verified: false });
-        //save user to the database
-        await newUser.save();
-    } catch (error) {
-        console.log("error registering new User", error);
-        res.status(500).json({ message: "Registration failed" });
-    }
-});
 
 //endpoint to verify OTP the mail
-
 app.post('/verify-otp', async (req, res) => {
     try {
         const enteredOTP = req.body.otp;
@@ -133,9 +65,7 @@ app.post('/verify-otp', async (req, res) => {
 });
 
 
-
 //Endpoint for Auth token authentication
-
 app.post('/auth', async (req, res) => {
     try {
         const authToken = req.body;

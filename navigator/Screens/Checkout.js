@@ -1,10 +1,6 @@
 import { View, Text, StyleSheet, ScrollView, Image } from 'react-native'
 import React, { useState } from 'react'
 import TitleBar from '../components/TitleBar';
-import InputFieldComp from '../components/InputCont';
-import { TextInput } from 'react-native-gesture-handler';
-import StatePicker from '../components/StatePicker';
-import Button from '../components/Button';
 import AddressComp from '../components/AddressComp';
 
 const Checkout = () => {
@@ -12,7 +8,6 @@ const Checkout = () => {
         <View style={{ flex: 1 }}>
             <TitleBar text="Checkout" />
             <ScrollView bounces={false} showsVerticalScrollIndicator={false} style={styles.checkoutView}>
-                {/* <AddressComp /> */}
                 <View style={styles.addressCont}>
                     <AddressComp />
                 </View>

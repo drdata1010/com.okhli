@@ -41,8 +41,6 @@ const SignIn = () => {
     };
 
     const handleLogin = async () => {
-        // Implement your login logic here
-        console.log("in handle login");
         try {
             const response = await fetch("http://10.0.2.2:8000/login", {
                 method: 'POST',

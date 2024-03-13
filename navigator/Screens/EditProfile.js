@@ -62,31 +62,9 @@ const styles = StyleSheet.create({
     profile: {
         flex: 1,
         backgroundColor: '#F3F5F7',
-
     },
-
-    name: {
-        flex: 1,
-        borderBottomWidth: 1,
-    },
-    email: {
-        flex: 1,
-        borderBottomWidth: 1,
-    },
-    phone: {
-        flex: 1,
-        borderBottomWidth: 1,
-    },
-    ageGen: {
-        flex: 1,
-    },
-    save: {
-        flex: 4,
-    },
-
     genCont: {
         flex: 1,
-        // backgroundColor: 'red',
         justifyContent: 'center'
     },
     genInnerCont: {
@@ -97,7 +75,6 @@ const styles = StyleSheet.create({
         height: '55%',
         justifyContent: 'center'
     },
-
     ageInnerCont: {
         backgroundColor: 'white',
         borderRadius: 20,
@@ -110,7 +87,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flex: 1,
         right: '-20%'
-        // backgroundColor: 'red'
     },
     input: {
         left: '10%',

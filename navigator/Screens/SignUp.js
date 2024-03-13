@@ -1,23 +1,105 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import { FontFamily, Color, Border, Padding, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
 const SignUp = () => {
     const navigation = useNavigation();
-    const [fullName, setFullName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [name, setName] = useState("");
+    const [badName, setBadName] = useState(false);
+    const [email, setEmail] = useState("");
+    const [badEmail, setBadEmail] = useState(false);
+    const [mobile, setMobile] = useState("");
+    const [badMobile, setBadMobile] = useState(false);
+    const [password, setPassword] = useState("");
+    const [badPassword, setBadPassword] = useState(false);
+    const [cnfPassword, setCnfPassword] = useState("");
+    const [badCnfPassword, setBadCnfPassword] = useState(false);
 
-    const handleSignUp = () => {
-        // Implement your sign-up logic here
-        console.log('Full Name:', fullName);
-        console.log('Email:', email);
-        console.log('Password:', password);
-        console.log('Confirm Password:', confirmPassword);
-        console.log('Phone Number:', phoneNumber);
+    const validate = () => {
+        if (name == "") {
+            setBadName(true);
+        } else {
+            setBadName(false);
+        }
+        if (email == "") {
+            setBadEmail(true);
+        } else {
+            setBadEmail(false);
+        }
+        if (mobile == "") {
+            setBadMobile(true);
+        } else if (mobile.length < 10) {
+            setBadMobile(true);
+        } else {
+            setBadMobile(false);
+        }
+        if (password == "") {
+            setBadPassword(true);
+        } else {
+            setBadPassword(false);
+        }
+        if (cnfPassword == "") {
+            setBadCnfPassword(true);
+        } else if (cnfPassword !== password) {
+            setBadCnfPassword(true);
+        } else {
+            setBadCnfPassword(false);
+        }
+
+        if (
+            badEmail == false &&
+            badName == false &&
+            badMobile == false &&
+            badPassword == false &&
+            badCnfPassword == false
+        ) {
+            handleSignUp();
+        }
+    };
+
+
+
+    const handleSignUp = async () => {
+        console.log("in handele signup");
+
+        const user = {
+            name: name,
+            phNo: mobile,
+            email: email,
+            password: password,
+            cnfPassword: cnfPassword,
+        };
+
+        try {
+            const response = await fetch("http://10.0.2.2:8000/signup", {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ user: user })
+            });
+            if (response.ok) {
+                const data = await response.json()
+                if (data.code === '203') {
+                    Alert.alert(data.message);
+                }
+                if (data.code === '204') {
+                    Alert.alert(data.message);
+                }
+                if (data.code === '205') {
+                    await AsyncStorage.setItem("authToken", data.authToken);
+                    navigation.replace('Home');
+                }
+                console.log('response data :', data.authToken)
+
+
+            } else {
+                console.log('Signin failed');
+            }
+        } catch (error) {
+            console.error('Error  : ', error);
+        }
     };
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -45,10 +127,15 @@ const SignUp = () => {
                                         <TextInput
                                             style={styles.input}
                                             placeholder="Full Name"
-                                            value={fullName}
-                                            onChangeText={setFullName}
+                                            value={name}
+                                            onChangeText={setName}
                                         />
                                     </View>
+                                    {badName === true && (
+                                        <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
+                                            Please Enter Name
+                                        </Text>
+                                    )}
                                 </View>
                                 <View style={{ flex: 1, top: '15%' }}>
                                     <Text style={styles.titleField}>
@@ -63,8 +150,12 @@ const SignUp = () => {
                                             autoCapitalize="none"
                                             placeholder="Enter your email"
                                         />
-
                                     </View>
+                                    {badEmail === true && (
+                                        <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
+                                            Please Enter Email ID
+                                        </Text>
+                                    )}
                                     <Text style={styles.titleFieldPass}>
                                         Password
                                     </Text>
@@ -85,6 +176,11 @@ const SignUp = () => {
                                         placeholder="Enter your password"
                                     />
                                 </View>
+                                {badPassword === true && (
+                                    <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
+                                        Please Enter Password
+                                    </Text>
+                                )}
                             </View>
                             <View style={{ flex: 1, top: '-10%' }}>
                                 <Text style={styles.titleField}>
@@ -93,12 +189,17 @@ const SignUp = () => {
                                 <View style={styles.textField}>
                                     <TextInput
                                         style={[styles.input]}
-                                        value={password}
-                                        onChangeText={text => setPassword(text)}
+                                        value={cnfPassword}
+                                        onChangeText={text => setCnfPassword(text)}
                                         secureTextEntry={true}
                                         placeholder="Enter your password"
                                     />
                                 </View>
+                                {badCnfPassword === true && (
+                                    <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
+                                        Password not Matched
+                                    </Text>
+                                )}
                             </View>
                             <View style={{ flex: 1, top: '-10%' }}>
                                 <Text style={styles.titleField}>
@@ -109,14 +210,19 @@ const SignUp = () => {
                                         style={styles.input}
                                         placeholder="Mobile Number"
                                         keyboardType="phone-pad"
-                                        value={phoneNumber}
-                                        onChangeText={setPhoneNumber}
+                                        value={mobile}
+                                        onChangeText={setMobile}
                                     />
                                 </View>
+                                {badMobile === true && (
+                                    <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
+                                        Please Enter Mobile No.
+                                    </Text>
+                                )}
                             </View>
                         </View>
                         <View style={styles.inner22Cont}>
-                            <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.buttonContainer}>
+                            <TouchableOpacity onPress={() => validate()} style={styles.buttonContainer}>
                                 <Text style={styles.shopnow}>Sign Up</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { navigation.navigate('SignIn') }} style={styles.button}>
@@ -266,15 +372,7 @@ const styles = StyleSheet.create({
     },
     alreadyHaveAnContainer: {
         textAlign: "center",
-    },
-
-    // signUp: {
-    //     backgroundColor: Color.colorWhitesmoke_200,
-    //     flex: 1,
-    //     height: 844,
-    //     overflow: "hidden",
-    //     width: "100%",
-    // },
+    }
 });
 
 export default SignUp;
