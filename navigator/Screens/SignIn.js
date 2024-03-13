@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView, KeyboardAvoidingView, KeyboardAvoidingViewBase, SafeAreaView, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { Image, StyleSheet, View, Text, TouchableOpacity, TextInput, ScrollView, KeyboardAvoidingView, KeyboardAvoidingViewBase, SafeAreaView, TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import { FontFamily, Color, FontSize, Border } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 GoogleSignin.configure({
@@ -51,12 +52,20 @@ const SignIn = () => {
                 body: JSON.stringify({ email, password })
             });
             if (response.ok) {
-                console.log('response data :', response.data)
+                const data = await response.json()
+                if (data.code === '203') {
+                    Alert.alert(data.message);
+                }
+                if (data.code === '204') {
+                    Alert.alert(data.message);
+                }
+                if (data.code === '205') {
+                    await AsyncStorage.setItem("authToken", data.authToken);
+                    navigation.replace('Home');
+                }
+                console.log('response data :', data.authToken)
 
-                console.log('response status :', response.status)
 
-                console.log('response is :', response)
-                console.log('Signin Successfull');
             } else {
                 console.log('Signin failed');
             }

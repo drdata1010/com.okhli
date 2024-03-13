@@ -132,41 +132,7 @@ app.post('/verify-otp', async (req, res) => {
     }
 });
 
-// To create auth Key
-const generateSecretKey = () => {
-    const secretKey = crypto.randomBytes(32).toString("hex");
-    return secretKey;
-}
 
-const secretKey = generateSecretKey();
-
-// endpoint to login the user
-// app.post('/login', async (req, res) => {
-//     console.log("in Login API")
-
-//     try {
-//         const { email, password } = req.body;
-
-//         //check if the user exists
-//         const user = await User.findOne({ email });
-
-//         if (!user) {
-//             return res.json({ code: 401, message: 'Invalid Email' });
-//         }
-
-//         //check if password is correct or not
-//         if (user.password !== password) {
-//             return res.json({ code: 402, message: "Invalid password" });
-//         }
-//         //generate a token
-//         const token = jwt.sign({ userId: user._id }, secretKey);
-//         res.json({ token });
-
-//     } catch (error) {
-//         console.error('Error in logging in:', error);
-//         return res.status(500).json({ message: 'Login Failed' });
-//     }
-// });
 
 //Endpoint for Auth token authentication
 

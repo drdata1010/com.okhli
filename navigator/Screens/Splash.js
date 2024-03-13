@@ -2,12 +2,23 @@ import * as React from "react";
 import { Image, StyleSheet, View } from "react-native";
 import { Border, Color } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Splash = () => {
+    const handleSplash = async () => {
+        const token = await AsyncStorage.getItem("authToken");
+        console.log("This is token", token)
+        if (token !== null) {
+            navigation.replace("Home");
+        }
+        else {
+            navigation.navigate("Intro");
+        }
+    }
     const navigation = useNavigation();
     React.useEffect(() => {
         setTimeout(() => {
-            navigation.navigate("Intro");
+            handleSplash();
         }, 3000)
     }, [])
     return (
