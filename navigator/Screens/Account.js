@@ -34,7 +34,7 @@ const Account = () => {
     };
     return (
         <View style={{ flex: 1 }}>
-            <TitleBar text="My Account" />
+            <TitleBar title="My Account" />
             <View style={styles.profile}>
                 <Image
                     style={styles.manIcon}

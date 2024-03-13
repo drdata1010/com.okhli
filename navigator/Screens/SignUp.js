@@ -2,63 +2,70 @@ import React, { useState } from "react";
 import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
 import { FontFamily, Color, Border, Padding, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
+import validator from 'validator';
+
 
 const SignUp = () => {
     const navigation = useNavigation();
     const [name, setName] = useState("");
-    const [badName, setBadName] = useState(false);
     const [email, setEmail] = useState("");
-    const [badEmail, setBadEmail] = useState(false);
     const [mobile, setMobile] = useState("");
-    const [badMobile, setBadMobile] = useState(false);
     const [password, setPassword] = useState("");
-    const [badPassword, setBadPassword] = useState(false);
     const [cnfPassword, setCnfPassword] = useState("");
-    const [badCnfPassword, setBadCnfPassword] = useState(false);
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [mobileError, setMobileError] = useState('');
+    const [nameError, setNameError] = useState('');
+    const [cnfPasswordError, setCnfPasswordError] = useState('');
 
-    const validate = () => {
-        if (name == "") {
-            setBadName(true);
-        } else {
-            setBadName(false);
-        }
-        if (email == "") {
-            setBadEmail(true);
-        } else {
-            setBadEmail(false);
-        }
-        if (mobile == "") {
-            setBadMobile(true);
-        } else if (mobile.length < 10) {
-            setBadMobile(true);
-        } else {
-            setBadMobile(false);
-        }
-        if (password == "") {
-            setBadPassword(true);
-        } else {
-            setBadPassword(false);
-        }
-        if (cnfPassword == "") {
-            setBadCnfPassword(true);
-        } else if (cnfPassword !== password) {
-            setBadCnfPassword(true);
-        } else {
-            setBadCnfPassword(false);
-        }
+    const isAlphabeticWithSpacesOnly = (input) => {
+        // Regular expression to match alphabetic characters and spaces only
+        const alphabeticWithSpacesRegex = /^[a-zA-Z\s]+$/;
 
-        if (
-            badEmail == false &&
-            badName == false &&
-            badMobile == false &&
-            badPassword == false &&
-            badCnfPassword == false
-        ) {
-            handleSignUp();
+        return alphabeticWithSpacesRegex.test(input);
+    };
+    const handleFullnameChange = (text) => {
+        setName(text);
+        if (!isAlphabeticWithSpacesOnly(text)) {
+            setNameError('Name must contain only alphabets and spaces');
+        } else {
+            setNameError('');
         }
     };
 
-
+    const handleEmailChange = (text) => {
+        setEmail(text);
+        if (!validator.isEmail(text)) {
+            setEmailError('Invalid email address');
+        } else {
+            setEmailError('');
+        }
+    };
+    const handlePasswordChange = (text) => {
+        setPassword(text);
+        if (!validator.isLength(text, { min: 8 })) {
+            setPasswordError('Password must be at least 8 characters long');
+        } else {
+            setPasswordError('');
+        }
+    };
+    const handleCnfPasswordChange = async (text) => {
+        setCnfPassword(text);
+        if (password === text) {
+            setCnfPasswordError('');
+        } else {
+            setCnfPasswordError('Password should be same');
+        }
+    };
+    const handleMobileChange = (text) => {
+        setMobile(text);
+        if (!validator.isLength(text, { min: 10, max: 10 }) || !validator.isNumeric(text)) {
+            setMobileError('Please enter a valid mobile number');
+        }
+        else {
+            setMobileError('');
+        }
+    };
 
     const handleSignUp = async () => {
         console.log("in handele signup");
@@ -109,17 +116,21 @@ const SignUp = () => {
                         <View style={styles.inner1Cont}>
                         </View>
                         <View style={styles.inner2Cont}>
-                            <View style={styles.logoContainer}>
-                                <Image
-                                    style={styles.playstore1Icon}
-                                    source={require("../assets/playstore-11.png")}
-                                />
+                            <View style={{ flex: 1 }}>
+                                <View style={styles.logoContainer}>
+                                    <Image
+                                        style={styles.playstore1Icon}
+                                        source={require("../assets/playstore-11.png")}
+                                    />
+                                </View>
                             </View>
-                            <View style={styles.titleView}>
-                                <Text style={styles.titleText}>
-                                    Hello friend!
-                                </Text>
-                                <View style={{ flex: 1, top: '15%' }}>
+                            <View style={styles.dataCont}>
+                                <View style={styles.titleView}>
+                                    <Text style={styles.titleText}>
+                                        Hello friend!
+                                    </Text>
+                                </View>
+                                <View style={{ flex: 1 }}>
                                     <Text style={styles.titleField}>
                                         Full name
                                     </Text>
@@ -128,16 +139,12 @@ const SignUp = () => {
                                             style={styles.input}
                                             placeholder="Full Name"
                                             value={name}
-                                            onChangeText={setName}
+                                            onChangeText={handleFullnameChange}
                                         />
                                     </View>
-                                    {badName === true && (
-                                        <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
-                                            Please Enter Name
-                                        </Text>
-                                    )}
+                                    {nameError ? <Text style={{ marginLeft: '8%', color: 'red', fontSize: 11 }}>{nameError}</Text> : null}
                                 </View>
-                                <View style={{ flex: 1, top: '15%' }}>
+                                <View style={{ flex: 1 }}>
                                     <Text style={styles.titleField}>
                                         Email
                                     </Text>
@@ -145,20 +152,13 @@ const SignUp = () => {
                                         <TextInput
                                             style={[styles.input]}
                                             value={email}
-                                            onChangeText={text => setEmail(text)}
+                                            onChangeText={handleEmailChange}
                                             keyboardType="email-address"
                                             autoCapitalize="none"
                                             placeholder="Enter your email"
                                         />
                                     </View>
-                                    {badEmail === true && (
-                                        <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
-                                            Please Enter Email ID
-                                        </Text>
-                                    )}
-                                    <Text style={styles.titleFieldPass}>
-                                        Password
-                                    </Text>
+                                    {emailError ? <Text style={{ marginLeft: '8%', color: 'red', fontSize: 11 }}>{emailError}</Text> : null}
                                 </View>
                             </View>
                         </View>
@@ -166,42 +166,7 @@ const SignUp = () => {
 
                     <View style={styles.otherCont}>
                         <View style={styles.inner21Cont}>
-                            <View style={{ flex: 1, top: '-3%' }}>
-                                <View style={styles.textField}>
-                                    <TextInput
-                                        style={[styles.input]}
-                                        value={password}
-                                        onChangeText={text => setPassword(text)}
-                                        secureTextEntry={true}
-                                        placeholder="Enter your password"
-                                    />
-                                </View>
-                                {badPassword === true && (
-                                    <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
-                                        Please Enter Password
-                                    </Text>
-                                )}
-                            </View>
-                            <View style={{ flex: 1, top: '-10%' }}>
-                                <Text style={styles.titleField}>
-                                    Confirm Password
-                                </Text>
-                                <View style={styles.textField}>
-                                    <TextInput
-                                        style={[styles.input]}
-                                        value={cnfPassword}
-                                        onChangeText={text => setCnfPassword(text)}
-                                        secureTextEntry={true}
-                                        placeholder="Enter your password"
-                                    />
-                                </View>
-                                {badCnfPassword === true && (
-                                    <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
-                                        Password not Matched
-                                    </Text>
-                                )}
-                            </View>
-                            <View style={{ flex: 1, top: '-10%' }}>
+                            <View style={{ flex: 1 }}>
                                 <Text style={styles.titleField}>
                                     Mobile No.
                                 </Text>
@@ -211,18 +176,48 @@ const SignUp = () => {
                                         placeholder="Mobile Number"
                                         keyboardType="phone-pad"
                                         value={mobile}
-                                        onChangeText={setMobile}
+                                        onChangeText={handleMobileChange}
                                     />
                                 </View>
-                                {badMobile === true && (
-                                    <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
-                                        Please Enter Mobile No.
-                                    </Text>
-                                )}
+                                {mobileError ? <Text style={{ marginLeft: '8%', color: 'red', fontSize: 11 }}>{mobileError}</Text> : null}
+                            </View>
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.titleField}>
+                                    Password
+                                </Text>
+                                <View style={styles.textField}>
+                                    <TextInput
+                                        style={[styles.input]}
+                                        value={password}
+                                        onChangeText={handlePasswordChange}
+                                        secureTextEntry={true}
+                                        placeholder="Enter your password"
+                                    />
+                                </View>
+                                {passwordError ? (
+                                    <Text style={{ marginLeft: '8%', color: 'red', fontSize: 11 }}>{passwordError}</Text>
+                                ) : null}
+                            </View>
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.titleField}>
+                                    Confirm Password
+                                </Text>
+                                <View style={styles.textField}>
+                                    <TextInput
+                                        style={[styles.input]}
+                                        value={cnfPassword}
+                                        onChangeText={handleCnfPasswordChange}
+                                        secureTextEntry={true}
+                                        placeholder="Confirm your password"
+                                    />
+                                </View>
+                                {cnfPasswordError ? (
+                                    <Text style={{ marginLeft: '8%', color: 'red', fontSize: 11 }}>{cnfPasswordError}</Text>
+                                ) : null}
                             </View>
                         </View>
                         <View style={styles.inner22Cont}>
-                            <TouchableOpacity onPress={() => validate()} style={styles.buttonContainer}>
+                            <TouchableOpacity onPress={() => handleSignUp()} style={styles.buttonContainer}>
                                 <Text style={styles.shopnow}>Sign Up</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { navigation.navigate('SignIn') }} style={styles.button}>
@@ -267,7 +262,6 @@ const styles = StyleSheet.create({
         flex: 2,
         backgroundColor: 'white',
         width: '85%',
-        alignSelf: 'center',
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
         borderLeftWidth: .5,
@@ -275,7 +269,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: .5,
         borderLeftColor: 'black',
         borderRightColor: 'black',
-        borderTopColor: 'black'
+        borderTopColor: 'black',
     },
     inner22Cont: {
         flex: 1,
@@ -283,6 +277,7 @@ const styles = StyleSheet.create({
     otherCont: {
         flex: 1,
         backgroundColor: "#E8F1EE",
+        alignItems: 'center'
     },
     playstore1Icon: {
         height: '80%',
@@ -297,9 +292,9 @@ const styles = StyleSheet.create({
     logoContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: '36%',
-        width: '28%',
-        top: "-13.33%",
+        height: '100%',
+        width: '20%',
+        top: "-45%",
         alignSelf: 'center',
         backgroundColor: 'white',
         borderRadius: 48
@@ -313,7 +308,6 @@ const styles = StyleSheet.create({
     },
     titleView: {
         flex: 1,
-        top: '-15%',
     },
     titleField: {
         height: '20%',
@@ -323,12 +317,9 @@ const styles = StyleSheet.create({
         left: '6%'
     },
     titleFieldPass: {
-        bottom: '0%',
         fontSize: 14,
         fontWeight: 'bold',
         color: 'black',
-        left: '6%',
-        top: '22%'
     },
     input: {
         marginLeft: '4%',
@@ -372,6 +363,16 @@ const styles = StyleSheet.create({
     },
     alreadyHaveAnContainer: {
         textAlign: "center",
+    },
+    flexTest: {
+        backgroundColor: "#F6F6F7",
+        width: '88%',
+        alignSelf: 'center',
+        borderRadius: 11,
+        // height: "50%"
+    },
+    dataCont: {
+        flex: 4
     }
 });
 

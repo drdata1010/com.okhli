@@ -6,7 +6,7 @@ import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import validator from 'validator';
 
 GoogleSignin.configure({
     webClientId: '259249234282-1jol54jf9i12u48l4mf17br9oakafbnr.apps.googleusercontent.com',
@@ -16,30 +16,25 @@ const SignIn = () => {
     const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [badEmail, setBadEmail] = useState(false);
-    const [badPassword, setBadPassword] = useState(false);
-    const [modalVisible, setModalVisible] = useState(false);
+    const [emailError, setEmailError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
-    const validate = () => {
-        console.log("Validate call : ", email);
-
-
-        if (email == "") {
-            setModalVisible(false);
-            setBadEmail(true);
+    const handleEmailChange = (text) => {
+        setEmail(text);
+        if (!validator.isEmail(text)) {
+            setEmailError('Invalid email address');
         } else {
-            if (password == "") {
-                setModalVisible(false);
-                setBadEmail(false);
-                setBadPassword(true);
-            } else {
-                setModalVisible(true);
-                setBadEmail(false);
-                handleLogin();
-            }
+            setEmailError('');
         }
     };
-
+    const handlePasswordChange = (text) => {
+        setPassword(text);
+        if (!validator.isLength(text, { min: 8 })) {
+            setPasswordError('Password must be at least 8 characters long');
+        } else {
+            setPasswordError('');
+        }
+    };
     const handleLogin = async () => {
         try {
             const response = await fetch("http://10.0.2.2:8000/login", {
@@ -148,17 +143,13 @@ const SignIn = () => {
                                 <TextInput
                                     style={[styles.input]}
                                     value={email}
-                                    onChangeText={text => setEmail(text)}
+                                    onChangeText={handleEmailChange}
                                     keyboardType="email-address"
                                     autoCapitalize="none"
                                     placeholder="Enter your email"
                                 />
                             </View>
-                            {badEmail === true && (
-                                <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
-                                    Please Enter Email ID
-                                </Text>
-                            )}
+                            {emailError ? <Text style={{ marginLeft: '8%', color: 'red', fontSize: 11 }}>{emailError}</Text> : null}
                         </View>
                     </View>
                 </View>
@@ -172,16 +163,14 @@ const SignIn = () => {
                                 <TextInput
                                     style={[styles.input]}
                                     value={password}
-                                    onChangeText={text => setPassword(text)}
+                                    onChangeText={handlePasswordChange}
                                     secureTextEntry={true}
                                     placeholder="Enter your password"
                                 />
                             </View>
-                            {badPassword === true && (
-                                <Text style={{ marginTop: 10, marginLeft: 35, color: "red" }}>
-                                    Please Enter Password
-                                </Text>
-                            )}
+                            {passwordError ? (
+                                <Text style={{ marginLeft: '8%', color: 'red', fontSize: 11 }}>{passwordError}</Text>
+                            ) : null}
                             <Text style={styles.forgot}>
                                 Forgot Password?
                             </Text>
@@ -190,7 +179,7 @@ const SignIn = () => {
                     <View style={styles.inner22Cont}>
                         <View style={styles.LoginCont}>
                             <View style={styles.buttonCont}>
-                                <TouchableOpacity onPress={() => validate()} style={styles.buttonContainer}>
+                                <TouchableOpacity onPress={() => handleLogin()} style={styles.buttonContainer}>
                                     <Text style={styles.shopnow}>Login</Text>
                                 </TouchableOpacity>
                             </View>

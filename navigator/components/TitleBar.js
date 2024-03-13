@@ -3,7 +3,7 @@ import { Image, StyleSheet, View, Text, ScrollView, TouchableOpacity } from "rea
 import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 
-const TitleBar = (props) => {
+const TitleBar = ({ title }) => {
     const navigation = useNavigation();
 
     const handlePress = () => {
@@ -18,7 +18,7 @@ const TitleBar = (props) => {
                 />
             </TouchableOpacity>
             <View style={styles.pageTitleCont}>
-                <Text style={styles.titleText}> {props.text}</Text>
+                <Text style={styles.titleText}> {title}</Text>
             </View>
         </View>
 

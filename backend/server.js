@@ -30,10 +30,11 @@ app.listen(port, () => {
 //Routes
 const loginRoutes = require('./routes/loginRoutes');
 const signupRoutes = require('./routes/signupRoutes');
+const addressRoutes = require('/routes/addressRoutes')
 
 app.post('/login', loginRoutes);
 app.post('/signup', signupRoutes);
-
+app.post('/address', addressRoutes);
 
 //endpoint to verify OTP the mail
 app.post('/verify-otp', async (req, res) => {

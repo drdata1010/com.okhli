@@ -7,16 +7,20 @@ import { useNavigation } from "@react-navigation/native";
 
 const Address = () => {
     const navigation = useNavigation();
+    const handleEditAddress = () => {
+        // Navigate to the "Edit Address" page and pass the parameter
+        navigation.navigate('Editaddresses', { isComingFromAddAddress: true });
+    };
     return (
         <View style={{ flex: 1 }}>
-            <TitleBar text="My Address" />
+            <TitleBar title="My Address" />
             <View style={styles.addressView}>
                 <AddressComp />
                 <AddressComp />
                 <AddressComp />
                 <AddressComp />
                 <View style={styles.buttonCont}>
-                    <TouchableOpacity onPress={() => navigation.navigate('Editaddresses')} style={styles.button}>
+                    <TouchableOpacity onPress={handleEditAddress} style={styles.button}>
                         <Text style={styles.buttonText}>Add address</Text>
                     </TouchableOpacity>
                 </View>

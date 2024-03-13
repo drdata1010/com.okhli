@@ -15,7 +15,6 @@ class signupController {
             //check if the Email is already registered
             const existingEmail = await User.findOne({ email });
             if (existingEmail) {
-                console.log()
                 return res.json({ code: '203', message: "Email already Registered!" });
             }
 
@@ -50,10 +49,10 @@ class signupController {
             transporter.sendMail(mailOptions, (error, info) => {
                 if (error) {
                     console.error('Error sending email:', error);
-                    return res.status(500).json({ message: 'Error sending OTP email.' });
+                    return res.json({ code: "205", message: 'Error sending OTP email.' });
                 }
                 console.log('Email sent:', info.response);
-                res.status(200).json({ userId: newUser.id, message: 'Email sent successfully.' });
+                res.json({ code: "206", userId: newUser.id, message: 'Email sent successfully.' });
             });
 
             //Create a new User

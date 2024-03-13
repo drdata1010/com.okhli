@@ -6,11 +6,13 @@ import { TextInput } from 'react-native-gesture-handler';
 import StatePicker from '../components/StatePicker';
 import Button from '../components/Button';
 
-const Editaddresses = () => {
+const Editaddresses = ({ navigation, route }) => {
     const [phoneNumber, setPhoneNumber] = useState('');
+    const isComingFromAddAddress = route.params?.isComingFromAddAddress || false;
+    console.log(isComingFromAddAddress)
     return (
         <View style={{ flex: 1 }}>
-            <TitleBar text="Edit Address" />
+            <TitleBar title={isComingFromAddAddress ? "Add Address" : "Edit Address"} />
             <View style={styles.form}>
                 <View style={styles.editaddressview}>
                     <View style={styles.buildingCont}>

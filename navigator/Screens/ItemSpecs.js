@@ -9,7 +9,7 @@ const Itemspecs = () => {
     const navigation = useNavigation();
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
-            <TitleBar text="Item Name" />
+            <TitleBar title="Item Name" />
             <ScrollView style={styles.container}>
                 <View style={styles.imageCont}>
                     <Image

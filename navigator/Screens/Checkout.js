@@ -6,7 +6,7 @@ import AddressComp from '../components/AddressComp';
 const Checkout = () => {
     return (
         <View style={{ flex: 1 }}>
-            <TitleBar text="Checkout" />
+            <TitleBar title="Checkout" />
             <ScrollView bounces={false} showsVerticalScrollIndicator={false} style={styles.checkoutView}>
                 <View style={styles.addressCont}>
                     <AddressComp />

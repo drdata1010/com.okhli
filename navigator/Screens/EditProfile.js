@@ -10,7 +10,7 @@ const Userprofile = () => {
 
     return (
         <View style={styles.profile}>
-            <TitleBar text="Edit Profile" />
+            <TitleBar title="Edit Profile" />
             <View style={styles.form}>
                 <InputFieldComp place="Full Name" />
                 <InputFieldComp place="Email" />
