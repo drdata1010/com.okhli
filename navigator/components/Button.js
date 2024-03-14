@@ -1,11 +1,14 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const Button = (props) => {
     return (
+
         <View style={styles.buttonCont}>
             <Text style={styles.textStyle}>Submit</Text>
         </View>
+
     )
 }
 

@@ -18,32 +18,35 @@ const StatePicker = () => {
     };
 
     return (
-        <View style={styles.picker}>
-            <View style={styles.pickerStyle}>
-                <Picker
-                    selectedValue={selectedState}
-                    onValueChange={(itemValue, itemIndex) => handleStateChange(itemValue)}
-                >
-                    {states.map((state, index) => (
-                        <Picker.Item key={index} label={state} value={state} />
-                    ))}
-                </Picker>
-            </View>
+        // <View style={styles.picker}>
+        <View style={styles.pickerStyle}>
+            <Picker
+                selectedValue={selectedState}
+                onValueChange={(itemValue, itemIndex) => handleStateChange(itemValue)}
+            >
+                {states.map((state, index) => (
+                    <Picker.Item key={index} label={state} value={state} />
+                ))}
+            </Picker>
         </View>
+        // </View>
     );
 };
 export default StatePicker;
 const styles = StyleSheet.create({
     picker: {
-        flex: 1,
-        justifyContent: 'center'
+        // flex: 1,
+        backgroundColor: 'red',
+        width: '85%',
+        height: '55%',
+        justifyContent: 'center',
+        borderRadius: 20,
     },
     pickerStyle: {
         backgroundColor: 'white',
         borderRadius: 20,
-        width: '80%',
-        alignSelf: 'center',
+        width: '85%',
         height: '55%',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
 });

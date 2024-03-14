@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 const cors = require("cors");
-const jwt = require("jsonwebtoken");
 const app = express();
 const port = 8000;
 
@@ -30,7 +29,7 @@ app.listen(port, () => {
 //Routes
 const loginRoutes = require('./routes/loginRoutes');
 const signupRoutes = require('./routes/signupRoutes');
-const addressRoutes = require('/routes/addressRoutes')
+const addressRoutes = require('./routes/addressRoutes');
 
 app.post('/login', loginRoutes);
 app.post('/signup', signupRoutes);

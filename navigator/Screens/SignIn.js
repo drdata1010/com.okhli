@@ -54,6 +54,7 @@ const SignIn = () => {
                 }
                 if (data.code === '205') {
                     await AsyncStorage.setItem("authToken", data.authToken);
+                    await AsyncStorage.setItem("scKi", data.scKi);
                     navigation.replace('Home');
                 }
                 console.log('response data :', data.authToken)

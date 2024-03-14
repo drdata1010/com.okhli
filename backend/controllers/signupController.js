@@ -1,9 +1,11 @@
+const { useState } = require("react");
 const User = require('../models/user');
 const nodemailer = require("nodemailer");
 
 
 class signupController {
     static async signup(req, res) {
+        const [userID, setUserID] = useState('');
         try {
             const { user } = req.body;
             const name = user.name;
@@ -58,7 +60,8 @@ class signupController {
             //Create a new User
             const newUser = new User({ name, email, phNo, password, cnfPassword, otp, verified: false });
             //save user to the database
-            await newUser.save();
+            const data = await newUser.save();
+
 
         } catch (error) {
             console.log("error registering new User", error);

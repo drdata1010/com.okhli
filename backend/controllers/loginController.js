@@ -28,7 +28,8 @@ class loginController {
 
             //generate a token
             const token = jwt.sign({ userId: user._id }, secretKey);
-            res.json({ code: '205', authToken: token });
+            res.json({ code: '205', authToken: token, scKi: secretKey });
+
 
         } catch (error) {
             console.error('Error in logging in:', error);

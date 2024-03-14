@@ -30,12 +30,11 @@ const userSchema = new mongoose.Schema({
         {
             name: String,
             mobileNo: String,
-            houseno: String,
-            street: String,
-            landmark: String,
-            city: String,
-            country: String,
-            postalcode: String,
+            buildApart: String,
+            addressLine1: String,
+            addressLine2: String,
+            state: String,
+            pincode: String,
             currentAdd: Boolean,
         }
     ],

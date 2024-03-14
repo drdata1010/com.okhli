@@ -3,6 +3,7 @@ import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, TouchableWi
 import { FontFamily, Color, Border, Padding, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import validator from 'validator';
+import validation from '../common/validation'
 
 
 const SignUp = () => {
@@ -41,6 +42,7 @@ const SignUp = () => {
             setEmailError('');
         }
     };
+
     const handlePasswordChange = (text) => {
         setPassword(text);
         if (!validator.isLength(text, { min: 8 })) {

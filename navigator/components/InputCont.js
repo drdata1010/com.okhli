@@ -1,15 +1,19 @@
 import { View, Text, StyleSheet, TextInput } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 
 const InputFieldComp = (props) => {
+
     return (
         <View style={styles.profile}>
             <View style={styles.inputCont}>
                 <TextInput
                     style={styles.input}
                     placeholder={props.place}
+                    value={props.value}
+                    onChangeText={props.onChangeText}
                 />
             </View>
+
         </View>
     )
 }
