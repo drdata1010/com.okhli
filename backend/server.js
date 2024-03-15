@@ -31,11 +31,13 @@ const loginRoutes = require('./routes/loginRoutes');
 const signupRoutes = require('./routes/signupRoutes');
 const addressRoutes = require('./routes/addressRoutes');
 const myAddressRoutes = require('./routes/myAddressRoutes');
+const editProfileRoutes = require('./routes/editProfile');
 
 app.post('/login', loginRoutes);
 app.post('/signup', signupRoutes);
 app.post('/address', addressRoutes);
 app.post('/myAddress', myAddressRoutes);
+app.post('/editProfile', editProfileRoutes);
 
 // //endpoint to verify OTP the mail
 // app.post('/verify-otp', async (req, res) => {
