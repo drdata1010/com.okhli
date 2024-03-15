@@ -11,8 +11,6 @@ const Address = () => {
     const [address, setAddress] = useState('');
     const [fetched, setFetched] = useState(false)
 
-    console.log("in my sddress");
-
     const fetchAddress = async () => {
         const token = await AsyncStorage.getItem('authToken');
         const scKi = await AsyncStorage.getItem('scKi');
@@ -27,7 +25,7 @@ const Address = () => {
             });
             if (response.ok) {
                 const data = await response.json()
-                console.log('data is    :    ', data[0])
+                console.log('data is    :    ', data[0].buildApart)
                 setAddress(data);
 
             } else {
@@ -42,7 +40,6 @@ const Address = () => {
         setFetched(true);
     }
 
-
     const handleEditAddress = () => {
         // Navigate to the "Edit Address" page and pass the parameter
         navigation.navigate('Editaddresses', { isComingFromAddAddress: true });
@@ -50,17 +47,15 @@ const Address = () => {
     return (
         <View style={{ flex: 1 }}>
             <TitleBar title="My Address" />
-            <View style={styles.addressView}>
-                <AddressComp />
-                <AddressComp />
-                <AddressComp />
-                <AddressComp />
-                <View style={styles.buttonCont}>
-                    <TouchableOpacity onPress={handleEditAddress} style={styles.button}>
-                        <Text style={styles.buttonText}>Add address</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+            <ScrollView style={styles.addressView}>
+                <AddressComp name={address[0].name} buildApart={address[0].buildApart} addLine1={address[0].addLine1} addLine2={address[0].addLine2} pinCode={address[0].pinCode} mobile={address[0].mobile} />
+                <AddressComp name={address[1].name} buildApart={address[1].buildApart} addLine1={address[1].addLine1} addLine2={address[1].addLine2} pinCode={address[1].pinCode} mobile={address[1].mobile} />
+                <AddressComp name={address[2].name} buildApart={address[2].buildApart} addLine1={address[2].addLine1} addLine2={address[2].addLine2} pinCode={address[2].pinCode} mobile={address[2].mobile} />
+                <AddressComp name={address[3].name} buildApart={address[3].buildApart} addLine1={address[3].addLine1} addLine2={address[3].addLine2} pinCode={address[3].pinCode} mobile={address[3].mobile} />
+                <TouchableOpacity onPress={handleEditAddress} style={styles.buttonCont}>
+                    <Text style={styles.buttonText}>Add address</Text>
+                </TouchableOpacity>
+            </ScrollView>
         </View>
     )
 };
@@ -69,8 +64,7 @@ export default Address;
 
 const styles = StyleSheet.create({
     addressView: {
-        flex: 1,
-        top: '10%',
+        marginTop: '20.3%',
     },
     button: {
         backgroundColor: '#23A449',
@@ -82,8 +76,15 @@ const styles = StyleSheet.create({
         top: '20%'
     },
     buttonCont: {
-        flex: 2,
+        backgroundColor: '#23A449',
+        height: 60,
+        width: '70%',
+        justifyContent: 'center',
         alignItems: 'center',
+        alignSelf: 'center',
+        borderRadius: 20,
+        marginTop: 30,
+        marginBottom: '15%'
 
     },
     buttonText: {
