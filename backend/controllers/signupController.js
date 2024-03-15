@@ -1,18 +1,15 @@
-const { useState } = require("react");
 const User = require('../models/user');
 const nodemailer = require("nodemailer");
 
-
 class signupController {
     static async signup(req, res) {
-        const [userID, setUserID] = useState('');
         try {
             const { user } = req.body;
             const name = user.name;
             const email = user.email;
             const phNo = user.phNo;
-            const password = user.name;
-            const cnfPassword = user.email;
+            const password = user.password;
+            const cnfPassword = user.cnfPassword;
 
             //check if the Email is already registered
             const existingEmail = await User.findOne({ email });
@@ -61,6 +58,8 @@ class signupController {
             const newUser = new User({ name, email, phNo, password, cnfPassword, otp, verified: false });
             //save user to the database
             const data = await newUser.save();
+
+            return res.json({ code: "210", message: 'User Registered' });
 
 
         } catch (error) {

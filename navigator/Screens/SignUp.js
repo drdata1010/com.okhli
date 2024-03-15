@@ -3,7 +3,6 @@ import { StyleSheet, View, Image, Text, TouchableOpacity, TextInput, TouchableWi
 import { FontFamily, Color, Border, Padding, FontSize } from "../../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import validator from 'validator';
-import validation from '../common/validation'
 
 
 const SignUp = () => {
@@ -96,13 +95,10 @@ const SignUp = () => {
                 if (data.code === '204') {
                     Alert.alert(data.message);
                 }
-                if (data.code === '205') {
-                    await AsyncStorage.setItem("authToken", data.authToken);
-                    navigation.replace('Home');
+                if (data.code === '210') {
+                    Alert.alert(data.message);
+                    navigation.replace('SignIn');
                 }
-                console.log('response data :', data.authToken)
-
-
             } else {
                 console.log('Signin failed');
             }

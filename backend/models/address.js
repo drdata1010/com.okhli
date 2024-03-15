@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
 const addressSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-        require: true
-    },
     name: {
         type: String,
         required: true
@@ -22,10 +17,6 @@ const addressSchema = new mongoose.Schema({
         type: String,
         require: true
     },
-    addLine3: {
-        type: String,
-        require: true
-    },
     mobile: {
         type: String,
         required: true
@@ -34,10 +25,9 @@ const addressSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    type: {
+    adType: {
         type: String,
         require: true,
-        unique: true
     },
     state: {
         type: String,
@@ -46,8 +36,7 @@ const addressSchema = new mongoose.Schema({
     ctAdd: {
         type: Boolean,
         default: false
-    },
-
+    }
 });
 
 const Address = mongoose.model("Address", addressSchema);

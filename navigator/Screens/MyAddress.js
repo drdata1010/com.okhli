@@ -15,6 +15,8 @@ const Address = () => {
         const token = await AsyncStorage.getItem('authToken');
         const scKi = await AsyncStorage.getItem('scKi');
 
+        console.log('First attempt');
+
         try {
             const response = await fetch("http://10.0.2.2:8000/myAddress", {
                 method: 'POST',
@@ -24,8 +26,7 @@ const Address = () => {
                 body: JSON.stringify({ token: token, scKi: scKi })
             });
             if (response.ok) {
-                const data = await response.json()
-                console.log('data is    :    ', data[0].buildApart)
+                const data = await response.json();
                 setAddress(data);
 
             } else {
@@ -35,6 +36,11 @@ const Address = () => {
             console.error('Error  : ', error);
         }
     };
+
+    // useEffect(() => {
+    //     fetchData();
+    // }, []);
+
     if (!fetched) {
         fetchAddress();
         setFetched(true);
@@ -48,10 +54,27 @@ const Address = () => {
         <View style={{ flex: 1 }}>
             <TitleBar title="My Address" />
             <ScrollView style={styles.addressView}>
-                <AddressComp name={address[0].name} buildApart={address[0].buildApart} addLine1={address[0].addLine1} addLine2={address[0].addLine2} pinCode={address[0].pinCode} mobile={address[0].mobile} />
-                <AddressComp name={address[1].name} buildApart={address[1].buildApart} addLine1={address[1].addLine1} addLine2={address[1].addLine2} pinCode={address[1].pinCode} mobile={address[1].mobile} />
-                <AddressComp name={address[2].name} buildApart={address[2].buildApart} addLine1={address[2].addLine1} addLine2={address[2].addLine2} pinCode={address[2].pinCode} mobile={address[2].mobile} />
-                <AddressComp name={address[3].name} buildApart={address[3].buildApart} addLine1={address[3].addLine1} addLine2={address[3].addLine2} pinCode={address[3].pinCode} mobile={address[3].mobile} />
+                {/* {(!address) ? <Text style={{ marginLeft: '8%', color: 'red', fontSize: 11 }}>loading...</Text> :
+                    <AddressComp name={address[0].name} buildApart={address[0].buildApart} addLine1={address[0].addLine1} addLine2={address[0].addLine2} pinCode={address[0].pinCode} mobile={address[0].mobile} state={address[0].state} />} */}
+
+
+                {(address) && address.length === 1 && <AddressComp name={address[0].name} buildApart={address[0].buildApart} addLine1={address[0].addLine1} addLine2={address[0].addLine2} pinCode={address[0].pinCode} mobile={address[0].mobile} state={address[0].state} />}
+                {(address) && address.length === 2 && (<View>
+                    <AddressComp name={address[0].name} buildApart={address[0].buildApart} addLine1={address[0].addLine1} addLine2={address[0].addLine2} pinCode={address[0].pinCode} mobile={address[0].mobile} state={address[0].state} />
+                    <AddressComp name={address[1].name} buildApart={address[1].buildApart} addLine1={address[1].addLine1} addLine2={address[1].addLine2} pinCode={address[1].pinCode} mobile={address[1].mobile} state={address[1].state} />
+                </View>)}
+                {(address) && address.length === 3 && (<View>
+                    <AddressComp name={address[0].name} buildApart={address[0].buildApart} addLine1={address[0].addLine1} addLine2={address[0].addLine2} pinCode={address[0].pinCode} mobile={address[0].mobile} state={address[0].state} />
+                    <AddressComp name={address[1].name} buildApart={address[1].buildApart} addLine1={address[1].addLine1} addLine2={address[1].addLine2} pinCode={address[1].pinCode} mobile={address[1].mobile} state={address[1].state} />
+                    <AddressComp name={address[2].name} buildApart={address[2].buildApart} addLine1={address[2].addLine1} addLine2={address[2].addLine2} pinCode={address[2].pinCode} mobile={address[2].mobile} state={address[2].state} />
+                </View>)}
+                {(address) && address.length === 4 && (<View>
+                    <AddressComp name={address[0].name} buildApart={address[0].buildApart} addLine1={address[0].addLine1} addLine2={address[0].addLine2} pinCode={address[0].pinCode} mobile={address[0].mobile} state={address[0].state} />
+                    <AddressComp name={address[1].name} buildApart={address[1].buildApart} addLine1={address[1].addLine1} addLine2={address[1].addLine2} pinCode={address[1].pinCode} mobile={address[1].mobile} state={address[1].state} />
+                    <AddressComp name={address[2].name} buildApart={address[2].buildApart} addLine1={address[2].addLine1} addLine2={address[2].addLine2} pinCode={address[2].pinCode} mobile={address[2].mobile} state={address[2].state} />
+                    <AddressComp name={address[3].name} buildApart={address[3].buildApart} addLine1={address[3].addLine1} addLine2={address[3].addLine2} pinCode={address[3].pinCode} mobile={address[3].mobile} state={address[3].state} />
+                </View>)}
+                {(address) && address.length === 0 && <View></View>}
                 <TouchableOpacity onPress={handleEditAddress} style={styles.buttonCont}>
                     <Text style={styles.buttonText}>Add address</Text>
                 </TouchableOpacity>

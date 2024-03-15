@@ -28,7 +28,7 @@ const Account = () => {
 
     const handleEditProfilePress = () => {
         // Navigate to Edit Profile page
-        navigation.navigate('EditProfile');
+        navigation.navigate('Editaddresses');
     };
 
     const handleLogoutPress = () => {
