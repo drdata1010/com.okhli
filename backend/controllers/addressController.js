@@ -12,7 +12,15 @@ class addressController {
             const userID = jwt.verify(token, scKi);
             const user = await User.findById(userID.userId);
             const NewUser = user;
-
+            //To check if addresses is having same type of address or not
+            const newAddressType = address.type; // Type of the new address to be added
+            const existingAddressTypes = NewUser.addresses.map(addr => addr.type);
+            console.log('This is newtyp', newAddressType);
+            console.log('This is oldtypes', existingAddressTypes);
+            if (existingAddressTypes.includes(newAddressType)) {
+                console.log("Inside checking existing type")
+                return res.status(400).json({ error: 'Address type already exists for this user' });
+            }
             NewUser.addresses.push({
                 name: address.name,
                 mobile: address.mobile,
