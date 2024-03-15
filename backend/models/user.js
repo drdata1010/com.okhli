@@ -1,4 +1,47 @@
 const mongoose = require("mongoose");
+
+const addressSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    buildApart: {
+        type: String,
+        required: true
+    },
+    addLine1: {
+        type: String,
+        require: true,
+    },
+    addLine2: {
+        type: String,
+        require: true
+    },
+    mobile: {
+        type: String,
+        required: true
+    },
+    pinCode: {
+        type: String,
+        required: true
+    },
+    type: {
+        type: String,
+        require: true,
+        unique: true
+    },
+    state: {
+        type: String,
+        require: true
+    },
+    ctAdd: {
+        type: Boolean,
+        default: false
+    }
+});
+
+
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -26,18 +69,7 @@ const userSchema = new mongoose.Schema({
         default: false
     },
     otp: String,
-    addresses: [
-        {
-            name: String,
-            mobileNo: String,
-            buildApart: String,
-            addressLine1: String,
-            addressLine2: String,
-            state: String,
-            pincode: String,
-            currentAdd: Boolean,
-        }
-    ],
+    addresses: [addressSchema],
     order: [
         {
             type: mongoose.SchemaTypes.ObjectId,
