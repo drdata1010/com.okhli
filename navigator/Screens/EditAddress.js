@@ -34,7 +34,7 @@ const Editaddresses = ({ navigation, route }) => {
         setName(text);
         console.log('This is current name', text)
         if (!isAlphabeticWithSpacesOnly(text)) {
-            setNameError('Name must contain only alphabets and spaces');
+            setNameError('Contains only alphabets and spaces');
         } else {
             setNameError('');
         }
@@ -42,7 +42,7 @@ const Editaddresses = ({ navigation, route }) => {
     const handleBuildingChange = (text) => {
         setBuildApart(text);
         if (!isAlphabeticWithSpacesOnly(text)) {
-            setBuildApartError('Building must contain only alphabets and spaces');
+            setBuildApartError('Contains only alphabets and spaces');
         } else {
             setBuildApartError('');
         }
@@ -50,38 +50,42 @@ const Editaddresses = ({ navigation, route }) => {
     const handleAddress1Change = (text) => {
         setAddressLine1(text);
         if (!isAlphabeticWithSpacesOnly(text)) {
-            setAddressLine1Error('Address must contain only alphabets and spaces');
+            setAddressLine1Error('Contains only alphabets and spaces');
         } else {
             setAddressLine1Error('');
         }
     };
     const handleAddress2Change = (text) => {
-        setName(text);
+        setAddressLine2(text);
         if (!isAlphabeticWithSpacesOnly(text)) {
-            setNameError('Address must contain only alphabets and spaces');
+            setAddressLine2Error('Contains only alphabets and spaces');
         } else {
-            setNameError('');
+            setAddressLine2Error('');
         }
     };
 
     const handleMobileChange = (text) => {
-        setMobile(text);
+        setPhoneNumber(text);
         if (!validator.isLength(text, { min: 10, max: 10 }) || !validator.isNumeric(text)) {
-            setMobileError('Please enter a valid mobile number');
+            setPhoneNumberError('Please enter a valid mobile number');
         }
         else {
-            setMobileError('');
+            setPhoneNumberError('');
         }
     };
     const handlePincodeChange = (text) => {
-        setMobile(text);
+        setPincode(text);
         if (!validator.isLength(text, { min: 6, max: 6 }) || !validator.isNumeric(text)) {
-            setMobileError('Please enter a valid Pincode');
+            setPinCodeError('Please enter a valid Pincode');
         }
         else {
-            setMobileError('');
+            setPinCodeError('');
         }
     };
+    const handleTypeChange = (text) => {
+        setType(text);
+
+    }
     const isAlphabeticWithSpacesOnly = (input) => {
         // Regular expression to match alphabetic characters and spaces only
         const alphabeticWithSpacesRegex = /^[a-zA-Z\s]+$/;
@@ -92,12 +96,13 @@ const Editaddresses = ({ navigation, route }) => {
         console.log("reached address add");
         const address = {
             name: name,
-            phNo: phoneNumber,
+            mobile: phoneNumber,
             buildApart: buildApart,
-            addressLine1: addressLine1,
-            addressLine2: addressLine2,
-            pincode: pincode,
+            addLine1: addressLine1,
+            addLine2: addressLine2,
+            pinCode: pincode,
             state: state,
+            type: type,
         };
         const token = await AsyncStorage.getItem('authToken');
         const scKi = await AsyncStorage.getItem('scKi');
@@ -148,20 +153,20 @@ const Editaddresses = ({ navigation, route }) => {
                     </View>
                     {buildApartError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{buildApartError}</Text> : null}
                     <View style={styles.address1Cont}>
-                        <InputFieldComp place="Address Line 1" value={name}
-                            onChangeText={handleFullnameChange} />
+                        <InputFieldComp place="Address Line 1" value={addressLine1}
+                            onChangeText={handleAddress1Change} />
                     </View>
-                    {nameError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{nameError}</Text> : null}
+                    {addressLine1Error ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{addressLine1Error}</Text> : null}
                     <View style={styles.address2Cont}>
-                        <InputFieldComp place="Address Line 2" value={name}
-                            onChangeText={handleFullnameChange} />
+                        <InputFieldComp place="Address Line 2" value={addressLine2}
+                            onChangeText={handleAddress2Change} />
                     </View>
-                    {nameError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{nameError}</Text> : null}
+                    {addressLine2Error ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{addressLine2Error}</Text> : null}
                     <View style={styles.phoneCont}>
-                        <InputFieldComp place="Mobile Number" value={name}
-                            onChangeText={handleFullnameChange} />
+                        <InputFieldComp place="Mobile Number" value={phoneNumber}
+                            onChangeText={handleMobileChange} />
                     </View>
-                    {nameError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{nameError}</Text> : null}
+                    {phoneNumberError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{phoneNumberError}</Text> : null}
 
                     <View style={styles.pinStateCont}>
                         <View style={styles.pinCont}>
@@ -170,17 +175,18 @@ const Editaddresses = ({ navigation, route }) => {
                                     style={styles.input}
                                     placeholder="Pin Code"
                                     keyboardType="phone-pad"
-                                    value={phoneNumber}
-                                    onChangeText={setPhoneNumber}
+                                    value={pincode}
+                                    onChangeText={handlePincodeChange}
                                 />
                             </View>
+
                         </View>
                         <View style={styles.type}>
                             <View style={styles.typeCont}>
                                 <RNPickerSelect style={styles.gender}
                                     placeholder={{ label: 'Type', value: null }}
                                     placeholderTextColor="#23AA49"
-                                    onValueChange={(value) => console.log(value)}
+                                    onValueChange={handleTypeChange}
                                     items={[
                                         { label: 'Home', value: 'h' },
                                         { label: 'Office', value: 'o' },
@@ -192,13 +198,18 @@ const Editaddresses = ({ navigation, route }) => {
                             </View>
                         </View>
                         <View style={styles.stateCont}>
-                            <StatePicker />
+                            <StatePicker onSelectState={setState} />
                         </View>
                     </View>
-                    <TouchableOpacity style={styles.saveCont} onPress={handleAddress}>
+                    <View style={styles.saveCont} >
+                        <TouchableOpacity style={styles.buttonCont} onPress={handleAddress}>
+                            <Button />
+                        </TouchableOpacity>
 
-                        <Button />
-                    </TouchableOpacity>
+                    </View>
+                    <View style={styles.saveCont} >
+
+                    </View>
                 </View>
             </View>
         </View>
@@ -251,8 +262,17 @@ const styles = StyleSheet.create({
 
     },
     saveCont: {
-        flex: 4,
-
+        flex: 2,
+        justifyContent: 'space-evenly',
+        alignItems: 'center'
+    },
+    buttonCont: {
+        height: "26%",
+        width: '70%',
+        backgroundColor: '#23AA49',
+        borderRadius: 20,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     pinCont: {
         flex: 3,

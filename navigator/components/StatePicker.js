@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
-const StatePicker = () => {
+const StatePicker = ({ onSelectState }) => {
     const [selectedState, setSelectedState] = useState('');
 
     const states = [
@@ -15,6 +15,7 @@ const StatePicker = () => {
 
     const handleStateChange = (state) => {
         setSelectedState(state);
+        onSelectState(state); // Pass selected state to parent component
     };
 
     return (
