@@ -11,7 +11,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const Userprofile = () => {
-    const [selectedValue, setSelectedValue] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [mobile, setMobile] = useState('');
@@ -23,10 +22,10 @@ const Userprofile = () => {
     const [emailError, setEmailError] = useState('');
     const [genderError, setGenderError] = useState('');
     const [ageError, setAgeError] = useState('');
-    const token = AsyncStorage.getItem('authToken');
-    const scKi = AsyncStorage.getItem('scKi');
 
     const handleEditProfile = async () => {
+        const token = await AsyncStorage.getItem('authToken');
+        const scKi = await AsyncStorage.getItem('scKi');
         try {
             const response = await fetch("http://10.0.2.2:8000/editProfile", {
                 method: 'POST',
@@ -44,13 +43,8 @@ const Userprofile = () => {
                     Alert.alert(data.message);
                 }
                 if (data.code === '205') {
-                    await AsyncStorage.setItem("authToken", data.authToken);
-                    await AsyncStorage.setItem("scKi", data.scKi);
-                    navigation.replace('Home');
+
                 }
-                console.log('response data :', data.authToken)
-
-
             } else {
                 console.log('Signin failed');
             }
@@ -60,15 +54,12 @@ const Userprofile = () => {
     }
 
     const isAlphabeticWithSpacesOnly = (input) => {
-        // Regular expression to match alphabetic characters and spaces only
         const alphabeticWithSpacesRegex = /^[a-zA-Z\s]+$/;
-
         return alphabeticWithSpacesRegex.test(input);
     };
 
     const handleNameChange = (text) => {
         setName(text);
-        console.log('This is current name', text)
         if (!isAlphabeticWithSpacesOnly(text)) {
             setNameError('Contains only alphabets and spaces');
         } else {
@@ -95,6 +86,26 @@ const Userprofile = () => {
         }
     };
 
+    const handleGenderChange = (text) => {
+        console.log("gender is :  ", text);
+        setGender(text);
+        if (!text) {
+            setGenderError('please choose any!');
+        } else {
+            setGenderError('');
+        }
+    };
+
+    const handleAgeChange = (text) => {
+        console.log("age is :  ", text);
+        setAge(text);
+        if (!text) {
+            setAgeError('between 18 to 60!');
+        } else {
+            setAgeError('');
+        }
+    };
+
     return (
         <View style={styles.profile}>
             <TitleBar title="Edit Profile" />
@@ -113,21 +124,22 @@ const Userprofile = () => {
                         <View style={styles.genInnerCont}>
                             <RNPickerSelect style={styles.gender}
                                 placeholder={{ label: 'Gender', value: null }}
-                                placeholderTextColor="#23AA49"
-                                onValueChange={(value) => console.log(value)}
                                 items={[
-                                    { label: 'Male', value: 'm' },
-                                    { label: 'Female', value: 'f' },
-
+                                    { label: 'Male', value: 'Male' },
+                                    { label: 'Female', value: 'Female' },
                                 ]}
+                                onValueChange={handleGenderChange}
                             />
                         </View>
+                        {genderError ? <Text style={{ marginLeft: '15%', color: 'red', fontSize: 11 }}>{genderError}</Text> : null}
                     </View>
                     <View style={styles.age}>
                         <View style={styles.ageInnerCont}>
                             <TextInput style={styles.input}
-                                placeholder="Age" />
+                                placeholder="Age" value={age}
+                                onChangeText={handleAgeChange} />
                         </View>
+                        {ageError ? <Text style={{ marginLeft: '25%', color: 'red', fontSize: 11 }}>{ageError}</Text> : null}
                     </View>
                 </View>
                 <View style={styles.buttonCont}>
@@ -181,7 +193,7 @@ const styles = StyleSheet.create({
     age: {
         justifyContent: 'center',
         flex: 1,
-        right: '-20%'
+        right: '-20%',
     },
     input: {
         left: '10%',

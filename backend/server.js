@@ -31,7 +31,7 @@ const loginRoutes = require('./routes/loginRoutes');
 const signupRoutes = require('./routes/signupRoutes');
 const addressRoutes = require('./routes/addressRoutes');
 const myAddressRoutes = require('./routes/myAddressRoutes');
-const editProfileRoutes = require('./routes/editProfile');
+const editProfileRoutes = require('./routes/editProfileRoutes');
 
 app.post('/login', loginRoutes);
 app.post('/signup', signupRoutes);

@@ -4,9 +4,10 @@ import { useNavigation } from "@react-navigation/native";
 import Navbar from "../components/Navbar";
 import TitleBar from "../components/TitleBar";
 import AccountApi from "../components/AccountApi";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Account = () => {
+    r
     const navigation = useNavigation();
 
     const handleAddressPress = async () => {

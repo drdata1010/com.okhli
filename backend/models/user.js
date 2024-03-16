@@ -40,7 +40,6 @@ const addressSchema = new mongoose.Schema({
 });
 
 
-
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -61,7 +60,15 @@ const userSchema = new mongoose.Schema({
     },
     cnfPassword: {
         type: String,
-        require: true
+        require: false
+    },
+    gender: {
+        type: String,
+        require: false
+    },
+    age: {
+        type: String,
+        required: false
     },
     verified: {
         type: Boolean,
