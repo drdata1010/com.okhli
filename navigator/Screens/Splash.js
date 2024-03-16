@@ -7,7 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Splash = () => {
     const handleSplash = async () => {
         const token = await AsyncStorage.getItem("authToken");
-        console.log("This is token", token)
+
         if (token !== null) {
             navigation.replace("Home");
         }

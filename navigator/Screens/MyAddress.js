@@ -18,7 +18,7 @@ const Address = () => {
         console.log('First attempt');
 
         try {
-            const response = await fetch("http://10.0.2.2:8000/myAddress", {
+            const response = await fetch("http://192.168.1.35:8000/myAddress", {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
