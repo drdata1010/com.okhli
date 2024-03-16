@@ -35,6 +35,7 @@ const SignIn = () => {
             setPasswordError('');
         }
     };
+
     const handleLogin = async () => {
         try {
             const response = await fetch("http://192.168.1.35:8000/login", {
@@ -57,9 +58,6 @@ const SignIn = () => {
                     await AsyncStorage.setItem("scKi", data.scKi);
                     navigation.replace('Home');
                 }
-                console.log('response data :', data.authToken)
-
-
             } else {
                 console.log('Signin failed');
             }
@@ -304,6 +302,7 @@ const styles = StyleSheet.create({
     },
     input: {
         marginLeft: '4%',
+        // color: 'black'
     },
 
     pass: {

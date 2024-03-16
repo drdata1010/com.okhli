@@ -4,7 +4,6 @@ import TitleBar from '../components/TitleBar'
 import InputFieldComp from '../components/InputCont'
 import RNPickerSelect from 'react-native-picker-select';
 import { TextInput } from 'react-native-gesture-handler';
-import Button from '../components/Button';
 import validator from 'validator';
 import { Color, Border, FontFamily, FontSize } from "../../GlobalStyles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -22,6 +21,37 @@ const Userprofile = () => {
     const [emailError, setEmailError] = useState('');
     const [genderError, setGenderError] = useState('');
     const [ageError, setAgeError] = useState('');
+    const [fetched, setFetched] = useState(false);
+    const [user, setUser] = useState('');
+
+
+    const fetchProfileData = async () => {
+        const token = await AsyncStorage.getItem('authToken');
+        const scKi = await AsyncStorage.getItem('scKi');
+        try {
+            const response = await fetch("http://192.168.1.35:8000/fetchProfile", {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ token, scKi })
+            });
+            if (response.ok) {
+                const data = await response.json();
+                setUser(data);
+
+            } else {
+                console.log('Signin failed');
+            }
+        } catch (error) {
+            console.error('Error  : ', error);
+        }
+    }
+
+    if (!fetched) {
+        fetchProfileData();
+        setFetched(true);
+    }
 
     const handleEditProfile = async () => {
         const token = await AsyncStorage.getItem('authToken');
@@ -87,7 +117,6 @@ const Userprofile = () => {
     };
 
     const handleGenderChange = (text) => {
-        console.log("gender is :  ", text);
         setGender(text);
         if (!text) {
             setGenderError('please choose any!');
@@ -110,20 +139,20 @@ const Userprofile = () => {
         <View style={styles.profile}>
             <TitleBar title="Edit Profile" />
             <View style={styles.form}>
-                <InputFieldComp place="Full Name" value={name}
+                <InputFieldComp place={user.name} value={name}
                     onChangeText={handleNameChange} />
                 {nameError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{nameError}</Text> : null}
-                <InputFieldComp place="Email" value={email}
+                <InputFieldComp place={user.email} value={email}
                     onChangeText={handleEmailChange} />
                 {emailError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{emailError}</Text> : null}
-                <InputFieldComp place="Mobile Number" value={mobile}
+                <InputFieldComp place={user.phNo} value={mobile}
                     onChangeText={handleMobileChange} />
                 {mobileError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{mobileError}</Text> : null}
                 <View style={styles.agegenCont}>
                     <View style={styles.genCont}>
                         <View style={styles.genInnerCont}>
                             <RNPickerSelect style={styles.gender}
-                                placeholder={{ label: 'Gender', value: null }}
+                                placeholder={{ label: (!user.gender) ? 'Gender' : user.gender, value: user.gender }}
                                 items={[
                                     { label: 'Male', value: 'Male' },
                                     { label: 'Female', value: 'Female' },
@@ -136,7 +165,7 @@ const Userprofile = () => {
                     <View style={styles.age}>
                         <View style={styles.ageInnerCont}>
                             <TextInput style={styles.input}
-                                placeholder="Age" value={age}
+                                placeholder={(!user.age) ? 'Age' : user.age} value={age}
                                 onChangeText={handleAgeChange} />
                         </View>
                         {ageError ? <Text style={{ marginLeft: '25%', color: 'red', fontSize: 11 }}>{ageError}</Text> : null}
@@ -180,7 +209,9 @@ const styles = StyleSheet.create({
         width: '80%',
         alignSelf: 'center',
         height: '55%',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderWidth: .7,
+        borderColor: 'grey'
     },
     ageInnerCont: {
         backgroundColor: 'white',
@@ -188,7 +219,9 @@ const styles = StyleSheet.create({
         width: '60%',
         alignSelf: 'center',
         height: '55%',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderWidth: .7,
+        borderColor: 'grey'
     },
     age: {
         justifyContent: 'center',

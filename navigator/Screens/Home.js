@@ -6,7 +6,7 @@ import Navbar from "../components/Navbar";
 
 const Home = () => {
     const navigation = useNavigation();
-    const { image, container, container1, container2, textStyle, BSImage } = styles;
+    // const { image, container, container1, container2, textStyle, BSImage } = styles;
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
             <TitleComp />

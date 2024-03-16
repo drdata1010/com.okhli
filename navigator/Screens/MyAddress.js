@@ -9,13 +9,11 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Address = () => {
     const navigation = useNavigation();
     const [address, setAddress] = useState('');
-    const [fetched, setFetched] = useState(false)
+    const [fetched, setFetched] = useState(false);
 
     const fetchAddress = async () => {
         const token = await AsyncStorage.getItem('authToken');
         const scKi = await AsyncStorage.getItem('scKi');
-
-        console.log('First attempt');
 
         try {
             const response = await fetch("http://10.0.2.2:8000/myAddress", {
@@ -37,10 +35,6 @@ const Address = () => {
         }
     };
 
-    // useEffect(() => {
-    //     fetchData();
-    // }, []);
-
     if (!fetched) {
         fetchAddress();
         setFetched(true);
@@ -55,10 +49,6 @@ const Address = () => {
         <View style={{ flex: 1 }}>
             <TitleBar title="My Address" />
             <ScrollView style={styles.addressView}>
-                {/* {(!address) ? <Text style={{ marginLeft: '8%', color: 'red', fontSize: 11 }}>loading...</Text> :
-                    <AddressComp name={address[0].name} buildApart={address[0].buildApart} addLine1={address[0].addLine1} addLine2={address[0].addLine2} pinCode={address[0].pinCode} mobile={address[0].mobile} state={address[0].state} />} */}
-
-
                 {(address) && address.length === 1 && <AddressComp name={address[0].name} buildApart={address[0].buildApart} addLine1={address[0].addLine1} addLine2={address[0].addLine2} pinCode={address[0].pinCode} mobile={address[0].mobile} state={address[0].state} />}
                 {(address) && address.length === 2 && (<View>
                     <AddressComp name={address[0].name} buildApart={address[0].buildApart} addLine1={address[0].addLine1} addLine2={address[0].addLine2} pinCode={address[0].pinCode} mobile={address[0].mobile} state={address[0].state} />

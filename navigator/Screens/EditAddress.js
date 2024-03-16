@@ -110,7 +110,7 @@ const Editaddresses = ({ navigation, route }) => {
         const token = await AsyncStorage.getItem('authToken');
         const scKi = await AsyncStorage.getItem('scKi');
         try {
-            const response = await fetch("http://10.0.2.2:8000/address", {
+            const response = await fetch("http://192.168.1.35:8000/address", {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'

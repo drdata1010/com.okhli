@@ -70,7 +70,7 @@ const SignUp = () => {
 
     const handleSignUp = async () => {
         // navigation.navigate('Home');
-        console.log("in handele signup");
+        // console.log("in handele signup");
 
         const user = {
             name: name,

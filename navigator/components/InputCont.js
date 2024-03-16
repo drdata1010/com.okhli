@@ -32,6 +32,9 @@ const styles = StyleSheet.create({
         width: '90%',
         backgroundColor: 'white',
         borderRadius: 20,
+        borderWidth: .7,
+        borderColor: 'grey'
+
     },
     input: {
         fontSize: 18,
