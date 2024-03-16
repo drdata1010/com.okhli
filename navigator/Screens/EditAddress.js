@@ -41,24 +41,24 @@ const Editaddresses = ({ navigation, route }) => {
     };
     const handleBuildingChange = (text) => {
         setBuildApart(text);
-        if (!isAlphabeticWithSpacesOnly(text)) {
-            setBuildApartError('Contains only alphabets and spaces');
+        if (!validator.isLength(text, { max: 26 })) {
+            setBuildApartError('Maximum length exceeded. Please limit input to 26 characters.');
         } else {
             setBuildApartError('');
         }
     };
     const handleAddress1Change = (text) => {
         setAddressLine1(text);
-        if (!isAlphabeticWithSpacesOnly(text)) {
-            setAddressLine1Error('Contains only alphabets and spaces');
+        if (!validator.isLength(text, { max: 26 })) {
+            setAddressLine1Error('Maximum length exceeded. Please limit input to 26 characters.');
         } else {
             setAddressLine1Error('');
         }
     };
     const handleAddress2Change = (text) => {
         setAddressLine2(text);
-        if (!isAlphabeticWithSpacesOnly(text)) {
-            setAddressLine2Error('Contains only alphabets and spaces');
+        if (!validator.isLength(text, { max: 26 })) {
+            setAddressLine2Error('Maximum length exceeded. Please limit input to 26 characters.');
         } else {
             setAddressLine2Error('');
         }
@@ -74,12 +74,15 @@ const Editaddresses = ({ navigation, route }) => {
         }
     };
     const handlePincodeChange = (text) => {
-        setPincode(text);
-        if (!validator.isLength(text, { min: 6, max: 6 }) || !validator.isNumeric(text)) {
-            setPinCodeError('Please enter a valid Pincode');
-        }
-        else {
-            setPinCodeError('');
+        if (text === null) {
+            setPinCodeError('Pincode is required');
+        } else {
+            setPincode(text);
+            if (!validator.isLength(text, { min: 6, max: 6 }) || !validator.isNumeric(text)) {
+                setPinCodeError('Please enter a valid Pincode');
+            } else {
+                setPinCodeError('');
+            }
         }
     };
     const handleTypeChange = (text) => {
@@ -107,7 +110,7 @@ const Editaddresses = ({ navigation, route }) => {
         const token = await AsyncStorage.getItem('authToken');
         const scKi = await AsyncStorage.getItem('scKi');
         try {
-            const response = await fetch("http://192.168.1.35:8000/address", {
+            const response = await fetch("http://10.0.2.2:8000/address", {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
@@ -147,17 +150,17 @@ const Editaddresses = ({ navigation, route }) => {
                             onChangeText={handleFullnameChange} />
                     </View>
                     {nameError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{nameError}</Text> : null}
-                    <View style={styles.buildingCont}>
+                    <View style={styles.phoneCont}>
                         <InputFieldComp place="Building/Apartment" value={buildApart}
                             onChangeText={handleBuildingChange} />
                     </View>
                     {buildApartError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{buildApartError}</Text> : null}
-                    <View style={styles.address1Cont}>
+                    <View style={styles.phoneCont}>
                         <InputFieldComp place="Address Line 1" value={addressLine1}
                             onChangeText={handleAddress1Change} />
                     </View>
                     {addressLine1Error ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{addressLine1Error}</Text> : null}
-                    <View style={styles.address2Cont}>
+                    <View style={styles.phoneCont}>
                         <InputFieldComp place="Address Line 2" value={addressLine2}
                             onChangeText={handleAddress2Change} />
                     </View>
@@ -167,7 +170,6 @@ const Editaddresses = ({ navigation, route }) => {
                             onChangeText={handleMobileChange} />
                     </View>
                     {phoneNumberError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{phoneNumberError}</Text> : null}
-
                     <View style={styles.pinStateCont}>
                         <View style={styles.pinCont}>
                             <View style={styles.pinView}>
@@ -179,7 +181,6 @@ const Editaddresses = ({ navigation, route }) => {
                                     onChangeText={handlePincodeChange}
                                 />
                             </View>
-
                         </View>
                         <View style={styles.type}>
                             <View style={styles.typeCont}>
@@ -201,6 +202,7 @@ const Editaddresses = ({ navigation, route }) => {
                             <StatePicker onSelectState={setState} />
                         </View>
                     </View>
+                    {pincodeError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{pincodeError}</Text> : null}
                     <View style={styles.saveCont} >
                         <TouchableOpacity style={styles.buttonCont} onPress={handleAddress}>
                             <Button />
@@ -241,7 +243,6 @@ const styles = StyleSheet.create({
     },
     type: {
         flex: 4,
-        // backgroundColor: 'red',
         alignItems: 'flex-end',
         justifyContent: 'center'
     },
@@ -259,7 +260,6 @@ const styles = StyleSheet.create({
     pinStateCont: {
         flex: 1,
         flexDirection: 'row',
-
     },
     saveCont: {
         flex: 2,
@@ -285,14 +285,12 @@ const styles = StyleSheet.create({
     },
     stateCont: {
         flex: 5,
-        // backgroundColor: 'blue',
         alignItems: 'center',
         justifyContent: 'center',
     },
     pinView: {
-        backgroundColor: 'white',
         borderRadius: 20,
-        width: '80%',
+        width: '100%',
         alignSelf: 'center',
         height: '55%',
         justifyContent: 'center'
