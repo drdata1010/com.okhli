@@ -18,7 +18,7 @@ const Address = () => {
         console.log('First attempt');
 
         try {
-            const response = await fetch("http://192.168.1.35:8000/myAddress", {
+            const response = await fetch("http://10.0.2.2:8000/myAddress", {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
@@ -37,12 +37,17 @@ const Address = () => {
         }
     };
 
+    // useEffect(() => {
+    //     fetchData();
+    // }, []);
+
     if (!fetched) {
         fetchAddress();
         setFetched(true);
     }
 
     const handleEditAddress = () => {
+
         // Navigate to the "Edit Address" page and pass the parameter
         navigation.navigate('Editaddresses', { isComingFromAddAddress: true });
     };
@@ -50,6 +55,10 @@ const Address = () => {
         <View style={{ flex: 1 }}>
             <TitleBar title="My Address" />
             <ScrollView style={styles.addressView}>
+                {/* {(!address) ? <Text style={{ marginLeft: '8%', color: 'red', fontSize: 11 }}>loading...</Text> :
+                    <AddressComp name={address[0].name} buildApart={address[0].buildApart} addLine1={address[0].addLine1} addLine2={address[0].addLine2} pinCode={address[0].pinCode} mobile={address[0].mobile} state={address[0].state} />} */}
+
+
                 {(address) && address.length === 1 && <AddressComp name={address[0].name} buildApart={address[0].buildApart} addLine1={address[0].addLine1} addLine2={address[0].addLine2} pinCode={address[0].pinCode} mobile={address[0].mobile} state={address[0].state} />}
                 {(address) && address.length === 2 && (<View>
                     <AddressComp name={address[0].name} buildApart={address[0].buildApart} addLine1={address[0].addLine1} addLine2={address[0].addLine2} pinCode={address[0].pinCode} mobile={address[0].mobile} state={address[0].state} />
@@ -67,7 +76,7 @@ const Address = () => {
                     <AddressComp name={address[3].name} buildApart={address[3].buildApart} addLine1={address[3].addLine1} addLine2={address[3].addLine2} pinCode={address[3].pinCode} mobile={address[3].mobile} state={address[3].state} />
                 </View>)}
                 {(address) && address.length === 0 && <View></View>}
-                <TouchableOpacity onPress={handleEditAddress} style={styles.buttonCont}>
+                <TouchableOpacity onPress={handleEditAddress} disabled={address.length >= 4} style={styles.buttonCont}>
                     <Text style={styles.buttonText}>Add address</Text>
                 </TouchableOpacity>
             </ScrollView>
