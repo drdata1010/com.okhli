@@ -15,6 +15,7 @@ import Address from "./Screens/MyAddress";
 import Editaddresses from "./Screens/EditAddress";
 import Itemspecs from "./Screens/ItemSpecs";
 import Checkout from "./Screens/Checkout";
+import Otpscreen from "./Screens/Otpscreen";
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
@@ -85,6 +86,11 @@ const StackNavigator = () => {
           options={{ headerShown: false }}
           name="Checkout"
           component={Checkout}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Otpscreen"
+          component={Otpscreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

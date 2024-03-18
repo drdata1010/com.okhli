@@ -15,7 +15,7 @@ const Intro = () => {
                 <Text style={styles.titleText}>Okhli - An Ethnic Stop For All Ayurvedic Needs</Text>
             </View>
             <View style={styles.buttonCont}>
-                <TouchableOpacity onPress={() => navigation.navigate('SignIn')} style={styles.buttonContainer}>
+                <TouchableOpacity onPress={() => navigation.navigate('Otpscreen')} style={styles.buttonContainer}>
 
                     <Text style={styles.shopnow}>Shop now</Text>
                 </TouchableOpacity>
