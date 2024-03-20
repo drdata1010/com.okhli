@@ -5,6 +5,7 @@ const InputFieldComp = (props) => {
 
     return (
         <View style={styles.profile}>
+            <Text style={styles.inputTiltle}>{props.inputTitle}</Text>
             <View style={styles.inputCont}>
                 <TextInput
                     style={styles.input}
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
     profile: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        // alignItems: 'center'
     },
     inputCont: {
         justifyContent: 'center',
@@ -33,11 +34,18 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 20,
         borderWidth: .7,
-        borderColor: 'grey'
+        borderColor: 'grey',
+        alignSelf: 'center'
 
     },
     input: {
         fontSize: 18,
         left: '10%'
     },
+    inputTiltle: {
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 18,
+        left: '7%'
+    }
 });

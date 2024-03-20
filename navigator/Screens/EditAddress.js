@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
 import TitleBar from '../components/TitleBar';
 import InputFieldComp from '../components/InputCont';
@@ -29,10 +29,8 @@ const Editaddresses = ({ navigation, route }) => {
     const [typeError, setTypeError] = useState('');
 
     const isComingFromAddAddress = route.params?.isComingFromAddAddress || false;
-    console.log(isComingFromAddAddress);
     const handleFullnameChange = (text) => {
         setName(text);
-        console.log('This is current name', text)
         if (!isAlphabeticWithSpacesOnly(text)) {
             setNameError('Contains only alphabets and spaces');
         } else {
@@ -96,7 +94,6 @@ const Editaddresses = ({ navigation, route }) => {
         return alphabeticWithSpacesRegex.test(input);
     };
     const handleAddress = async () => {
-        console.log("reached address add");
         const address = {
             name: name,
             mobile: phoneNumber,
@@ -119,21 +116,14 @@ const Editaddresses = ({ navigation, route }) => {
             });
             if (response.ok) {
                 const data = await response.json()
-                if (data.code === '203') {
+                if (data.code === '200') {
+                    Alert.alert(data.message);
+                    navigation.replace('Address');
+                } else if (data.code === '201') {
                     Alert.alert(data.message);
                 }
-                if (data.code === '204') {
-                    Alert.alert(data.message);
-                }
-                if (data.code === '205') {
-                    await AsyncStorage.setItem("authToken", data.authToken);
-                    navigation.replace('Home');
-                }
-                console.log('response data :', data.authToken)
-
-
             } else {
-                console.log('Signin failed');
+                console.log('Something went wrong! in addres adding');
             }
         } catch (error) {
             console.error('Error  : ', error);

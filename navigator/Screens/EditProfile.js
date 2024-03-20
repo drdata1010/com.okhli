@@ -139,13 +139,14 @@ const Userprofile = () => {
         <View style={styles.profile}>
             <TitleBar title="Edit Profile" />
             <View style={styles.form}>
-                <InputFieldComp place={user.name} value={name}
+
+                <InputFieldComp inputTitle='Name' place={user.name} value={name}
                     onChangeText={handleNameChange} />
                 {nameError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{nameError}</Text> : null}
-                <InputFieldComp place={user.email} value={email}
+                <InputFieldComp inputTitle='Email' place={user.email} value={email}
                     onChangeText={handleEmailChange} />
                 {emailError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{emailError}</Text> : null}
-                <InputFieldComp place={user.phNo} value={mobile}
+                <InputFieldComp inputTitle='Mobile' place={user.phNo} value={mobile}
                     onChangeText={handleMobileChange} />
                 {mobileError ? <Text style={{ marginTop: '-3%', marginLeft: '8%', color: 'red', fontSize: 11 }}>{mobileError}</Text> : null}
                 <View style={styles.agegenCont}>
@@ -247,6 +248,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 20,
         top: '10%'
+    },
+    inputTiltle: {
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 18
     }
 
 

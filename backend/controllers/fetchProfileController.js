@@ -6,11 +6,9 @@ class fetchProfileController {
 
         console.log('In fetch profile');
         const { token, scKi } = req.body;
-
         const userID = jwt.verify(token, scKi);
         const user = await User.findById(userID.userId);
 
-        console.log('user is :  ', user);
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
