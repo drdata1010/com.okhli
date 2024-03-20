@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, Image } from 'react-native';
 
 const Otpscreen = ({ navigation }) => {
     const [otpDigits, setOtpDigits] = useState(['', '', '', '', '', '']);
@@ -27,18 +27,9 @@ const Otpscreen = ({ navigation }) => {
             console.log("Next Ind", nextInd);
             //Find the next input box then focus on it
             const nextInput = inputsRef.current[nextInd];
-
             //focus is a function of useRef hook to focus on comp
             nextInput.focus();
         }
-        // else if (!value && index >= 5) { //If current is null, move focus to prev box
-        //     const prevInd = index - 1;
-        //     console.log("Prev Ind", prevInd);
-        //     const prevInput = inputsRef.current[prevInd];
-        //     prevInput.focus();
-
-        // }
-
     };
 
     // Function to handle OTP submission
@@ -53,31 +44,42 @@ const Otpscreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.header}>Please enter the OTP received in your email</Text>
-            <View style={styles.otpContainer}>
-                {otpDigits.map((digit, index) => (
-                    <TextInput
-                        key={index}
-                        style={styles.otpInput}
-                        placeholder="-"
-                        maxLength={1}
-                        keyboardType="numeric"
-                        value={digit}
-                        onChangeText={(value) => handleOtpInputChange(index, value)}
-                        ref={(input) => (inputsRef.current[index] = input)}
-                    />
-                ))}
+            <View style={styles.iconView}>
+                <Image style={styles.imageStyle}
+                    source={require("../assets/playstore-11.png")}
+                />
             </View>
-            <TextInput
-                style={styles.input}
-                placeholder="Enter Referral Code (optional)"
-                value={referralCode}
-                onChangeText={setReferralCode}
+            <View style={styles.inputView}>
+                <Text style={styles.header}>Please enter the OTP received in your email</Text>
+                <View style={styles.otpContainer}>
+                    {otpDigits.map((digit, index) => (
+                        <TextInput
+                            key={index}
+                            style={styles.otpInput}
+                            placeholder="-"
+                            maxLength={1}
+                            keyboardType="numeric"
+                            value={digit}
+                            onChangeText={(value) => handleOtpInputChange(index, value)}
+                            ref={(input) => (inputsRef.current[index] = input)}
+                        />
+                    ))}
+                </View>
+                <View style={styles.refView}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Enter Referral Code (optional)"
+                        value={referralCode}
+                        onChangeText={setReferralCode}
 
-            />
-            <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Submit</Text>
-            </TouchableOpacity>
+                    />
+                </View>
+            </View>
+            <View style={styles.buttonView}>
+                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                    <Text style={styles.buttonText}>Submit</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
@@ -85,9 +87,23 @@ const Otpscreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'white'
+    },
+    iconView: {
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 20,
+    },
+    imageStyle: {
+        height: '44%',
+        width: '20%',
+    },
+    inputView: {
+        flex: 1,
+    },
+    buttonView: {
+        flex: 2,
+        alignItems: 'center'
     },
     header: {
         fontSize: 18,
@@ -97,35 +113,44 @@ const styles = StyleSheet.create({
     otpContainer: {
         flexDirection: 'row',
         marginBottom: 20,
+        justifyContent: 'center'
     },
     otpInput: {
         height: 40,
         width: 40,
         borderColor: 'gray',
         borderWidth: 1,
-        // elevation: .5,
         marginRight: 10,
         textAlign: 'center',
         borderRadius: 7
     },
     input: {
         height: 40,
-        width: '100%',
+        width: '80%',
         borderColor: 'gray',
         borderWidth: 1,
-        marginBottom: 10,
         paddingHorizontal: 10,
+        borderRadius: 10,
+
+    },
+    refView: {
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     button: {
         backgroundColor: '#23AA49',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 5,
+        width: '60%',
+        borderRadius: 20,
+        height: '10%',
+        justifyContent: 'center',
+
     },
     buttonText: {
         color: 'white',
         fontSize: 16,
         textAlign: 'center',
+        fontWeight: 'bold'
+
     },
 });
 
