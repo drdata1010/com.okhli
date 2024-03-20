@@ -82,6 +82,14 @@ const userSchema = new mongoose.Schema({
             ref: "Order"
         }
     ],
+    referralCode: {
+        type: String,
+        require: true
+    },
+    refPoint: {
+        type: String,
+        require: false
+    },
     createdAt: {
         type: Date,
         default: Date.now

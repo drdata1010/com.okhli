@@ -33,6 +33,7 @@ const addressRoutes = require('./routes/addressRoutes');
 const myAddressRoutes = require('./routes/myAddressRoutes');
 const editProfileRoutes = require('./routes/editProfileRoutes');
 const fetchProfileRoutes = require('./routes/fetchProfileRoutes');
+const otpScreenRoutes = require('./routes/otpScreenRoutes');
 
 app.post('/login', loginRoutes);
 app.post('/signup', signupRoutes);
@@ -40,34 +41,35 @@ app.post('/address', addressRoutes);
 app.post('/myAddress', myAddressRoutes);
 app.post('/editProfile', editProfileRoutes);
 app.post('/fetchProfile', fetchProfileRoutes);
+app.post('/otpScreen', otpScreenRoutes);
 
 // //endpoint to verify OTP the mail
 // app.post('/verify-otp', async (req, res) => {
-//     try {
-//         const enteredOTP = req.body.otp;
-//         if (enteredOTP == '') {
-//             return res.json({ message: 'Invalid OTP' });
-//         }
-
-//         const user = await User.findOne({ otp: enteredOTP });
-//         if (!user) {
-//             return res.json({ message: 'Invalid OTP' });
-//         }
-
-//         if (enteredOTP === user.otp) {
-//             user.verified = true;
-//             user.otp = "";
-//             await user.save();
-//             console.log("success verification");
-//             return res.status(200).json({ message: 'OTP verification successful' });
-//         } else {
-//             return res.status(400).json({ message: 'Invalid OTP' });
-//         }
-
-//     } catch (error) {
-//         console.error('Error verifying user:', error);
-//         return res.status(500).json({ message: 'Internal server error' });
+// try {
+//     const enteredOTP = req.body.otp;
+//     if (enteredOTP == '') {
+//         return res.json({ message: 'Invalid OTP' });
 //     }
+
+//     const user = await User.findOne({ otp: enteredOTP });
+//     if (!user) {
+//         return res.json({ message: 'Invalid OTP' });
+//     }
+
+//     if (enteredOTP === user.otp) {
+//         user.verified = true;
+//         user.otp = "";
+//         await user.save();
+//         console.log("success verification");
+//         return res.status(200).json({ message: 'OTP verification successful' });
+//     } else {
+//         return res.status(400).json({ message: 'Invalid OTP' });
+//     }
+
+// } catch (error) {
+//     console.error('Error verifying user:', error);
+//     return res.status(500).json({ message: 'Internal server error' });
+// }
 // });
 
 

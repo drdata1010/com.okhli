@@ -98,7 +98,7 @@ const SignUp = () => {
                 }
                 if (data.code === '210') {
                     Alert.alert(data.message);
-                    navigation.replace('SignIn');
+                    navigation.replace('Otpscreen');
                 }
             } else {
                 console.log('Signin failed');

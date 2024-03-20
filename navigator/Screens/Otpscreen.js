@@ -13,10 +13,7 @@ const Otpscreen = ({ navigation }) => {
 
         newOtpDigits[index] = value;
         for (let i = index + 1; i < 6; i++) {
-
             newOtpDigits[i] = '';
-
-
         }
         setOtpDigits(newOtpDigits);
 
@@ -33,13 +30,32 @@ const Otpscreen = ({ navigation }) => {
     };
 
     // Function to handle OTP submission
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const otp = otpDigits.join('');
         console.log('User OTP', otp);
-        console.log('User Referral Code', referralCode);
-        // Now 'otp' contains the complete OTP entered by the user
-        // Send 'otp' to your backend for validation
-        // Handle navigation or display appropriate message based on validation result
+        // console.log('User Referral Code', referralCode);
+        try {
+            const response = await fetch("http://10.0.2.2:8000/otpScreen", {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ otp: otp, referralCode: referralCode })
+            });
+            if (response.ok) {
+                const data = await response.json()
+                if (data.code === '200') {
+                    Alert.alert(data.message);
+                    navigation.replace('SignIn');
+                } else {
+                    Alert.alert(data.message);
+                }
+            } else {
+                console.log('Signin failed');
+            }
+        } catch (error) {
+            console.error('Error  : ', error);
+        }
     };
 
     return (

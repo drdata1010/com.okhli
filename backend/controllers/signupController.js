@@ -3,6 +3,24 @@ const nodemailer = require("nodemailer");
 
 class signupController {
     static async signup(req, res) {
+
+        function generateReferralCode() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let referralCode = '';
+            for (let i = 0; i < 8; i++) {
+                referralCode += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return referralCode;
+        };
+
+        function checkVerified(user) {
+            if (user.verified) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         try {
             const { user } = req.body;
             const name = user.name;
@@ -13,14 +31,23 @@ class signupController {
 
             //check if the Email is already registered
             const existingEmail = await User.findOne({ email });
+            console.log("existing Email is:    ", existingEmail);
             if (existingEmail) {
-                return res.json({ code: '203', message: "Email already Registered!" });
+                const check = await checkVerified(existingEmail);
+
+                if (check) {
+                    return res.json({ code: '203', message: "Email already Registered!" });
+                }
             }
 
             //check if the Mobile No is already registered
             const existingPhNo = await User.findOne({ phNo });
             if (existingPhNo) {
-                return res.json({ code: '204', message: "Mobile No. already Registered!" });
+                const check = await checkVerified(existingPhNo);
+
+                if (check) {
+                    return res.json({ code: '204', message: "Mobile No. already Registered!" });
+                }
             }
 
             //generate OTP
@@ -54,12 +81,17 @@ class signupController {
                 res.json({ code: "206", userId: newUser.id, message: 'Email sent successfully.' });
             });
 
+            const refCode = await generateReferralCode();
+            console.log("refferrral code i s::    ", refCode);
+
             //Create a new User
-            const newUser = new User({ name, email, phNo, password, cnfPassword, otp, verified: false });
+            const newUser = new User({ name, email, phNo, password, cnfPassword, otp, verified: false, referralCode: refCode });
             //save user to the database
+
+
             const data = await newUser.save();
 
-            return res.json({ code: "210", message: 'User Registered' });
+            return res.json({ code: "210", message: 'Please enter your OTP sent to your email' });
 
 
         } catch (error) {
