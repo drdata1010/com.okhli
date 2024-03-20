@@ -69,7 +69,7 @@ const SignUp = () => {
     };
 
     const handleSignUp = async () => {
-        // navigation.navigate('Home');
+        // navigation.navigate('Changepass');
         // console.log("in handele signup");
 
         const user = {
@@ -81,7 +81,7 @@ const SignUp = () => {
         };
 
         try {
-            const response = await fetch("http://192.168.1.35:8000/signup", {
+            const response = await fetch("http://10.0.2.2:8000/signup", {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'

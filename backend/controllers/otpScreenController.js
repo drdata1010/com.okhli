@@ -28,11 +28,10 @@ class otpScreenController {
                     if (refUser.refPoint == '') {
                         refUser[refPoint] = '1';
                     } else {
-
-                        console.log("in else")
                         let fieldValue = parseInt(refUser.refPoint, 10);
                         fieldValue++;
                         refUser.refPoint = fieldValue.toString();
+                        await refUser.save()
                     }
                 } else {
                     return res.json({ message: 'Invalid code, If you do not have leave it empty' });

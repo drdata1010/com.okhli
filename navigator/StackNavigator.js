@@ -16,6 +16,7 @@ import Editaddresses from "./Screens/EditAddress";
 import Itemspecs from "./Screens/ItemSpecs";
 import Checkout from "./Screens/Checkout";
 import Otpscreen from "./Screens/Otpscreen";
+import ChangePass from "./Screens/ChangePass";
 
 const Stack = createStackNavigator();
 const StackNavigator = () => {
@@ -91,6 +92,11 @@ const StackNavigator = () => {
           options={{ headerShown: false }}
           name="Otpscreen"
           component={Otpscreen}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Changepass"
+          component={ChangePass}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -38,7 +38,7 @@ const SignIn = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await fetch("http://192.168.1.35:8000/login", {
+            const response = await fetch("http://10.0.2.2:8000/login", {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
@@ -170,9 +170,11 @@ const SignIn = () => {
                             {passwordError ? (
                                 <Text style={{ marginLeft: '8%', color: 'red', fontSize: 11 }}>{passwordError}</Text>
                             ) : null}
-                            <Text style={styles.forgot}>
-                                Forgot Password?
-                            </Text>
+                            <TouchableOpacity onPress={() => navigation.navigate('Changepass')}>
+                                <Text style={styles.forgot} >
+                                    Forgot Password?
+                                </Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     <View style={styles.inner22Cont}>
