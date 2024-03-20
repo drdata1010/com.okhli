@@ -88,7 +88,7 @@ const userSchema = new mongoose.Schema({
     },
     refPoint: {
         type: String,
-        require: false
+        require: true
     },
     createdAt: {
         type: Date,

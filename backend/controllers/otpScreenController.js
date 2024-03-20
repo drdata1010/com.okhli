@@ -3,12 +3,18 @@ const jwt = require("jsonwebtoken");
 
 class otpScreenController {
     static async verify(req, res) {
-
-        console.log("OTP verification page");
         const { otp, referralCode } = req.body;
         try {
             if (otp == '') {
                 return res.json({ message: 'Invalid OTP' });
+            }
+
+            if (referralCode == null) {
+                console.log("is null ");
+            }
+
+            if (referralCode == '') {
+                console.log("is empty ");
             }
 
             const user = await User.findOne({ otp: otp });
@@ -16,9 +22,23 @@ class otpScreenController {
             if (!user) {
                 return res.json({ message: 'Invalid OTP' });
             }
-            if (!user) {
-                return res.json({ message: 'Invalid Refferal code!' });
+
+            if (referralCode != '') {
+                if (refUser) {
+                    if (refUser.refPoint == '') {
+                        refUser[refPoint] = '1';
+                    } else {
+
+                        console.log("in else")
+                        let fieldValue = parseInt(refUser.refPoint, 10);
+                        fieldValue++;
+                        refUser.refPoint = fieldValue.toString();
+                    }
+                } else {
+                    return res.json({ message: 'Invalid code, If you do not have leave it empty' });
+                }
             }
+
 
             user.verified = true;
             user.otp = "";

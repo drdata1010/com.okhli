@@ -28,25 +28,37 @@ class signupController {
             const phNo = user.phNo;
             const password = user.password;
             const cnfPassword = user.cnfPassword;
+            let check = false;
+
 
             //check if the Email is already registered
             const existingEmail = await User.findOne({ email });
-            console.log("existing Email is:    ", existingEmail);
             if (existingEmail) {
-                const check = await checkVerified(existingEmail);
-
+                check = await checkVerified(existingEmail);
                 if (check) {
                     return res.json({ code: '203', message: "Email already Registered!" });
+                } else {
+                    if (existingEmail.phNo !== phNo) {
+                        const temp = await User.findOne({ phNo });
+                        if (temp) {
+                            return res.json({ code: '204', message: "Mobile No. already Registered!" });
+                        }
+                    }
                 }
-            }
+            } else {
+                //check if the Mobile No is already registered
+                const existingPhNo = await User.findOne({ phNo });
+                if (existingPhNo) {
+                    const tp = await checkVerified(existingPhNo);
 
-            //check if the Mobile No is already registered
-            const existingPhNo = await User.findOne({ phNo });
-            if (existingPhNo) {
-                const check = await checkVerified(existingPhNo);
-
-                if (check) {
-                    return res.json({ code: '204', message: "Mobile No. already Registered!" });
+                    if (tp) {
+                        return res.json({ code: '204', message: "Mobile No. already Registered!" });
+                    } else {
+                        await User.findByIdAndDelete(existingPhNo._id);
+                        check = true;
+                    }
+                } else {
+                    check = true;
                 }
             }
 
@@ -82,14 +94,18 @@ class signupController {
             });
 
             const refCode = await generateReferralCode();
-            console.log("refferrral code i s::    ", refCode);
 
             //Create a new User
-            const newUser = new User({ name, email, phNo, password, cnfPassword, otp, verified: false, referralCode: refCode });
+            const newUser = new User({ name, email, phNo, password, cnfPassword, otp, verified: false, referralCode: refCode, refPoint: '0' });
+
+            console.log("New user is :  ", newUser);
             //save user to the database
-
-
-            const data = await newUser.save();
+            if (check) {
+                const data = await newUser.save();
+            } else {
+                const oldUser = { name, email, phNo, password, cnfPassword, otp, verified: false, referralCode: refCode, refPoint: '0' };
+                const result = await User.updateOne({ _id: existingEmail._id }, { $set: oldUser });
+            }
 
             return res.json({ code: "210", message: 'Please enter your OTP sent to your email' });
 
